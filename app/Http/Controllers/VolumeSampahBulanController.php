@@ -12,7 +12,7 @@ class VolumeSampahBulanController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**

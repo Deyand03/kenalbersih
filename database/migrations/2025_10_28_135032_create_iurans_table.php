@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('iurans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_warga')->constrained()->onDelete('cascade');
+            $table->foreignId('id_rt')->constrained()->onDelete('cascade');
+            $table->string('nama');
+            $table->integer('jumlah_pembayaran');
+            $table->text('no_pembayaran');
+            $table->enum('metode_pembayaran', ['Cash', "Digital"]);
+            $table->string('bukti_pembayaran');
+            $table->enum('status_pembayaran', ['Menunggu', "Diterima", "Ditolak"]);
             $table->timestamps();
         });
     }

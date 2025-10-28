@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('volume_sampah_tahuns', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_rt')->constrained()->onDelete('cascade');
+            $table->date('tahun');
             $table->timestamps();
         });
     }

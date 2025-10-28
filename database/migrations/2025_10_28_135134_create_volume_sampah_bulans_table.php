@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('volume_sampah_bulans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_volume_tahun')->constrained()->onDelete('cascade');
+            $table->unsignedTinyInteger('bulan');
+            $table->integer('organik');
+            $table->integer('non_organik');
+            $table->integer('b3');
             $table->timestamps();
         });
     }
