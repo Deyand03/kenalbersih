@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('laporan_sampahs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_warga')->constrained()->onDelete('cascade');
-            $table->foreignId('id_rt')->constrained()->onDelete('cascade');
+            $table->foreignId('warga_id')->constrained()->onDelete('cascade');
+            $table->foreignId('rt_id')->constrained()->onDelete('cascade');
             $table->text('deskripsi');
             $table->string('alamat');
             $table->string('foto_bukti');

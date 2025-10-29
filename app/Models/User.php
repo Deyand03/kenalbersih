@@ -18,9 +18,9 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -47,10 +47,10 @@ class User extends Authenticatable
     }
 
     public function warga(){
-        //
+        return $this->hasOne(Warga::class, 'user_id', 'id');
     }
     public function rt(){
-        //
+        return $this->hasOne(Rt::class, 'user_id', 'id');
     }
 
 }
