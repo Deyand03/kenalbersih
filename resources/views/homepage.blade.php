@@ -1,15 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-    <div class="flex justify-center items-center h-100">
-        <h1>HELLO WORLD!!</h1>
-        <p>Data Plastik : {{ $plastik }}</p>
+@extends('layouts.index')
+@section('title', 'Homepage')
+
+@section('content')
+    <div class="container">
+        {{-- Hero Page --}}
+        <div class="flex justify-center items-center h-[100vh]">
+            <h1 class="text-center text-5xl font-bold">[Hero Page]</h1>
+        </div>
+        <div class="divider px-20"></div>
+        {{-- Chart --}}
+        <div class="h-[90vh] px-14">
+            <h1 class="text-4xl font-bold">[Chart Page]</h1>
+        </div>
+
+        <div class="divider px-20"></div>
     </div>
-</body>
-</html>
+@endsection
