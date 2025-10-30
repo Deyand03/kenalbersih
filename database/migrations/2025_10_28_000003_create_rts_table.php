@@ -17,9 +17,9 @@ return new class extends Migration
             $table->integer('no_rt');
             $table->string('nama');
             $table->enum('jenis_kelamin', ["Laki-laki", "Perempuan"]);
-            $table->string('no_rekening')->unique();
-            $table->string('no_dana')->unique();
-            $table->string('no_hp')->unique();
+            $table->string('no_rekening')->unique()->nullable();
+            $table->string('no_dana')->unique()->nullable();
+            $table->string('no_hp')->unique()->nullable();
             $table->timestamps();
         });
     }
