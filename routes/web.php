@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [NavigationController::class, 'homepage'])->name('homepage');
+Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

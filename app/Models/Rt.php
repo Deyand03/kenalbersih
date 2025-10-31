@@ -30,4 +30,8 @@ class Rt extends Model
     public function volume_sampah_tahun(){
         return $this->hasMany(VolumeSampahTahun::class, 'rt_id', 'id');
     }
+
+    public function laporan_keuangan(){
+        return $this->hasMany(LaporanKeuangan::class, 'rt_id', 'id');
+    }
 }
