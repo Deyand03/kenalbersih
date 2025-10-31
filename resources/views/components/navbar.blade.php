@@ -1,4 +1,4 @@
-<div class="navbar fixed bg-base-100 shadow-md px-14 z-50">
+<div class="navbar fixed bg-transparent px-14 z-50 text-white navbar-custom">
     <div class="navbar-start">
         {{-- Tombol Mobile --}}
         <div class="dropdown">
@@ -17,7 +17,7 @@
         </div>
 
         {{-- Logo --}}
-        <a class="">[Logo]</a>
+        <a class=""><span class="font-bold text-xl">Kenal</span><span class="font-bold text-xl text-[#016B61]">Bersih</span></a>
     </div>
 
     {{-- Menu Navigasi Desktop --}}
@@ -27,33 +27,33 @@
                 <a href="" class="relative group px-3 py-2">
                     <span>Homepage</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-gradient-to-r from-lime-500 to-green-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
                     <span>[item2]</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-gradient-to-r from-lime-500 to-green-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
                     <span>[item3]</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-gradient-to-r from-lime-500 to-green-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
                     <span>[item4]</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-gradient-to-r from-lime-500 to-green-700 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
         </ul>
     </div>
     <div class="navbar-end">
-        <a href="" class="btn bg-lime-400 "><span class="font-bold text-lime-800">Login</span></a>
+        <a href="" class="btn bg-[#44BB91] px-5"><span class="font-bold text-[#1D413E]">Login</span></a>
     </div>
 </div>
