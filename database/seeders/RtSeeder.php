@@ -21,7 +21,7 @@ class RtSeeder extends Seeder
         for ($i=1; $i < count($nama); $i++) {
             DB::table('rts')->insert([
                 "user_id" => $i,
-                "no_rt" => 12,
+                "no_rt" => 1 + $i,
                 "nama" => $nama[$i - 1],
                 "jenis_kelamin" => "Laki-laki",
                 "no_dana" => "0812345678$i",

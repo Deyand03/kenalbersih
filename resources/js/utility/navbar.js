@@ -1,6 +1,7 @@
 const $ = (selector) => document.querySelector(selector)
 
 const customNav = $('.navbar-custom');
+const webName = $('.web-name');
 
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
@@ -11,10 +12,14 @@ window.addEventListener('scroll', () => {
         if(window.scrollY > 570){
             console.log('more scrolled');
             customNav.classList.add('text-black');
+            webName.classList.remove('text-[#E1EEBC]');
+            webName.classList.add('text-[#016B61]');
             customNav.classList.remove('text-white');
         }
         else{
             customNav.classList.add('text-white');
+            webName.classList.remove('text-[#016B61]');
+            webName.classList.add('text-[#E1EEBC]');
             customNav.classList.remove('text-black');
         }
     }
@@ -27,4 +32,5 @@ window.addEventListener('scroll', () => {
         console.log('top');
     }
     customNav.style.transition = 'all .3s ease-out';
+    webName.style.transition = 'all .4s ease-out';
 });

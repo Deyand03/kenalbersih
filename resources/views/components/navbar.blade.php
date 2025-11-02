@@ -1,15 +1,15 @@
-<div class="navbar fixed bg-transparent px-14 z-50 text-white navbar-custom">
+<div class="navbar fixed bg-transparent px-7 md:px-14 z-50 text-white navbar-custom">
     <div class="navbar-start">
         {{-- Tombol Mobile --}}
         <div class="dropdown">
-            <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+            <div tabindex="0" role="button" class="btn btn-ghost hover:btn-accent active:btn-accent mr-3 lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
                 </svg>
             </div>
             {{-- Menu Dropdown Mobile --}}
-            <ul tabindex="-1" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+            <ul tabindex="-1" class="menu menu-sm dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow dropdown-mobile bg-white/30">
                 <li><a>Item 1</a></li>
                 <li><a>Item 2</a></li>
                 <li><a>Item 3</a></li>
@@ -17,7 +17,7 @@
         </div>
 
         {{-- Logo --}}
-        <a class=""><span class="font-bold text-xl">Kenal</span><span class="font-bold text-xl text-[#016B61]">Bersih</span></a>
+        <a class=""><span class="font-bold text-xl">Kenal</span><span class="font-bold text-xl web-name text-[#E1EEBC]">Bersih</span></a>
     </div>
 
     {{-- Menu Navigasi Desktop --}}
@@ -54,6 +54,6 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a href="" class="btn bg-[#44BB91] px-5"><span class="font-bold text-[#1D413E]">Login</span></a>
+        <a href="" class="btn bg-(--bg-tertiary) px-5 shadow-md"><span class="font-semibold text-white">Login</span></a>
     </div>
 </div>

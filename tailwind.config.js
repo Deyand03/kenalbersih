@@ -1,7 +1,7 @@
-import defaultTheme from 'tailwindcss/defaultTheme';
-import forms from '@tailwindcss/forms';
+import defaultTheme from 'tailwindcss/defaultTheme'
+import forms from '@tailwindcss/forms'
+import daisyui from 'daisyui'
 
-/** @type {import('tailwindcss').Config} */
 export default {
     content: [
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
@@ -17,5 +17,5 @@ export default {
         },
     },
 
-    plugins: [forms, require('daisyui')],
-};
+    plugins: [forms, daisyui],
+}

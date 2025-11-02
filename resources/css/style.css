@@ -1,0 +1,11 @@
+:root {
+    --bg-primary: #016B61;
+    --bg-secondary: #328E6E;
+    --bg-tertiary: #44BB91;
+    --bg-dark: #201E43;
+    --text-primary: #E1EEBC;
+}
+
+.dropdown-mobile {
+    backdrop-filter: blur(10px);
+}
