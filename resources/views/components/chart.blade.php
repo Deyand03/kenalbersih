@@ -1,4 +1,5 @@
-@props(['rts', 'defaultRt'])
+@props(['defaultRt', 'data_rt'])
+@dd($data_rt->volumeSampah)
 <div>
     <div class="">
         <svg viewBox="0 0 1919 235" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -9,8 +10,8 @@
     </div>
     <div class="bg-[#F1FCFF] h-fit pb-20">
         <div class="flex flex-col items-center pb-18">
-            <h1 class="text-center text-2xl md:text-[2.5rem] font-bold mb-1 text-black/75 pt-18" id="volume-sampah">Volume
-                Sampah
+            <h1 class="text-center text-2xl md:text-[2.5rem] font-bold mb-1 text-black/75 pt-18" id="volume-sampah">
+                Volume Sampah
             </h1>
             <div style="background-image: url({{ asset('svg/divider.svg') }})"
                 class="object-cover bg-no-repeat bg-center w-10 rounded md:w-full h-[5px]"></div>
@@ -24,22 +25,21 @@
                     <div class="w-[320px]">
                         <span class="font-semibold text-lg">Masukan No RT:</span>
                         <select class="select" name="no_rt">
-                            <option disabled selected >RT {{ $defaultRt->rt->no_rt }}</option>
-                            @foreach ($rts as $rt)
-                                <option value="{{ $rt->rt->id }}">RT {{ $rt->rt->no_rt }}</option>
+                            @foreach ($data_rt as $rt)
+                                <option value="{{ $rt->id }}">RT {{ $rt->no_rt }}</option>
                             @endforeach
                         </select>
                     </div>
                     {{-- Input Tahun --}}
                     <div class="w-[320px]">
                         <span class="font-semibold text-lg">Pilih Tahun:</span>
-                        <input type="number" class="input" placeholder="Tahun" list="tahun" />
-                        <datalist id="tahun">
-                            <option value="2021"></option>
-                            <option value="2022"></option>
-                            <option value="2023"></option>
-                            <option value="2024"></option>
-                        </datalist>
+                        <select class="select" name="tahun">
+                            @foreach ($data_rt as $rt)
+                                @foreach ($rt->volume_sampah_tahun as $tahun)
+                                    <option value="{{ $tahun->tahun }}">{{ $tahun->tahun }}</option>
+                                @endforeach
+                            @endforeach
+                        </select>
                     </div>
                     {{-- Tombol Cari --}}
                     <div>
@@ -49,12 +49,24 @@
                 </div>
             </form>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-10">
-                <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
-                    <span class="font-semibold text-xl text-black/50">[Chart 1]</span>
-                </div>
-                <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
-                    <span class="font-semibold text-xl text-black/50">[Chart 2]</span>
-                </div>
+                @if ($data_rt->volumeSampah->isNotEmpty())
+                    @foreach ($data_rt->volumeSampah as $data_bulan)
+                        <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
+                            <span class="font-semibold text-xl text-black/50">Organik
+                                {{ $data_bulan->organik }}</span>
+                        </div>
+                        <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
+                            <span class="font-semibold text-xl text-black/50">[Chart 2]</span>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
+                        <span class="font-semibold text-xl text-black/50">Data tidak tersedia</span>
+                    </div>
+                    <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
+                        <span class="font-semibold text-xl text-black/50">Data tidak tersedia</span>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
