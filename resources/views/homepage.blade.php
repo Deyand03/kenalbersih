@@ -33,7 +33,7 @@
         </div>
         {{-- Chart --}}
         <div class="h-[500vh] pt-18">
-            <x-chart :rts="$rts" :defaultRt="$defaultRt"></x-chart>
+            <x-chart :data_rt="$data_rt" :defaultRt="$defaultRt"></x-chart>
         </div>
 
         <div class="divider px-20"></div>
