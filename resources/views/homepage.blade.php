@@ -5,14 +5,16 @@
     <div class="max-w-100vw w-full">
         {{-- Hero Page --}}
         <div class="relative h-screen">
-            <div class="absolute inset-0 bg-cover bg-center md:h-screen h-[calc(100vh)]" style="background-image: url({{ asset('svg/Subtract.svg') }})">
+            <div class="absolute inset-0 bg-cover bg-center md:h-screen h-[calc(100vh)]"
+                style="background-image: url({{ asset('svg/Subtract.svg') }})">
                 <div class="pt-16">
                     <div class="flex flex-wrap pt-10 px-10 md:px-20">
                         <div class="text-white md:w-[50vw]">
                             <div class="flex flex-col">
                                 <h1 class="text-5xl font-bold mb-16">Bukankah ini my...</h1>
                                 <h2 class="text-3xl font-semibold text-[#E1EEBC]">Shorekeeper</h2>
-                                <p class="font-semibold text-md md:text-lg">Shorekeeper in Wuthering Waves is a 5 Stars Spectro
+                                <p class="font-semibold text-md md:text-lg">Shorekeeper in Wuthering Waves is a 5 Stars
+                                    Spectro
                                     character who wields a Rectifier as
                                     their weapon type.
                                     The Shorekeeper, guardian of the Black Shores—this title alone once defined her.
