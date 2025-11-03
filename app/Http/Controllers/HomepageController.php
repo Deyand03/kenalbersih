@@ -9,17 +9,29 @@ use Illuminate\Http\Request;
 
 class HomepageController extends Controller
 {
-    public function index(Request $request){
-        $data_rt = Rt::with(['volume_sampah_tahun'])->get();
-        $defaultRt = $data_rt->first();
+    public function index(Request $request)
+    {
+        $all_rts = Rt::orderBy('no_rt')->get();
+        $selectedRtId = $request->input('no_rt', $all_rts->first()->id ?? null);
+        $selectedTahun = $request->input('tahun', now()->year);
 
-        if(filled($request->no_rt) && filled($request->tahun)){
-            $data_rt->volumeSampah = VolumeSampahBulan::whereHas('volume_sampah_tahun', function($query) use ($request){
-                $query->where('rt_id', $request->no_rt)
-                      ->where('tahun', $request->tahun);
-            })->get();
+        $dataBulanan = collect();
+
+        if ($selectedRtId) {
+            $rt = Rt::find($selectedRtId);
+            $dataBulanan = $rt->volume_sampah_bulan()
+                ->whereHas('volume_sampah_tahun', function ($query) use ($selectedTahun) {
+                    $query->where('tahun', $selectedTahun);
+                })
+                ->orderBy('bulan')
+                ->get();
         }
 
-        return view('homepage', compact( 'defaultRt', 'data_rt' ));
+        return view('homepage', [
+            'all_rts' => $all_rts,
+            'selectedRtId' => $selectedRtId,
+            'selectedTahun' => $selectedTahun,
+            'dataBulanan' => $dataBulanan,     
+        ]);
     }
 }

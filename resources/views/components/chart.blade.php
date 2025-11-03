@@ -1,5 +1,9 @@
-@props(['defaultRt', 'data_rt'])
-@dd($data_rt->volumeSampah)
+@props([
+    'all_rts',
+    'selectedRtId',
+    'selectedTahun',
+    'dataBulanan',
+])
 <div>
     <div class="">
         <svg viewBox="0 0 1919 235" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,26 +25,39 @@
             {{-- Dropdown --}}
             <form action="{{ route('homepage') }}#volume-sampah" method="get">
                 <div class="flex flex-col gap-3 max-w-[44vw] w-full">
+
                     {{-- Input RT --}}
                     <div class="w-[320px]">
                         <span class="font-semibold text-lg">Masukan No RT:</span>
                         <select class="select" name="no_rt">
-                            @foreach ($data_rt as $rt)
-                                <option value="{{ $rt->id }}">RT {{ $rt->no_rt }}</option>
+                            @foreach ($all_rts as $rt)
+                                {{--
+                                GANTI:
+                                1. Value pakai $rt->id (sesuai controller)
+                                2. Tambahkan 'selected' jika ID-nya sama dengan $selectedRtId
+                                --}}
+                                <option value="{{ $rt->id }}" {{ $rt->id == $selectedRtId ? 'selected' : '' }}>
+                                    RT {{ $rt->no_rt }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
+
                     {{-- Input Tahun --}}
                     <div class="w-[320px]">
                         <span class="font-semibold text-lg">Pilih Tahun:</span>
-                        <select class="select" name="tahun">
-                            @foreach ($data_rt as $rt)
-                                @foreach ($rt->volume_sampah_tahun as $tahun)
-                                    <option value="{{ $tahun->tahun }}">{{ $tahun->tahun }}</option>
-                                @endforeach
-                            @endforeach
-                        </select>
+                        {{--
+                        GANTI:
+                        Looping <select> tahun dihapus.
+                            Diganti dengan input number sederhana yang nilainya
+                            sudah disiapkan oleh controller ($selectedTahun).
+                            Ini jauh lebih bersih dan bebas duplikat.
+                            (Asumsikan kamu punya style untuk class 'input')
+                            --}}
+                            <input class="select" {{-- <-- Pakai class 'select' agar styling sama --}} type="number"
+                                name="tahun" value="{{ $selectedTahun }}" placeholder="Contoh: 2024">
                     </div>
+
                     {{-- Tombol Cari --}}
                     <div>
                         <button
@@ -48,18 +65,33 @@
                     </div>
                 </div>
             </form>
+
+            {{--
+            Grid untuk Chart
+            (Sesuai permintaanmu, bagian ini tidak diubah logikanya,
+            HANYA diganti nama variabelnya saja)
+            --}}
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-10">
-                @if ($data_rt->volumeSampah->isNotEmpty())
-                    @foreach ($data_rt->volumeSampah as $data_bulan)
+
+                {{-- GANTI: Cek menggunakan $dataBulanan --}}
+                @if ($dataBulanan->isNotEmpty())
+
+                    {{-- GANTI: Loop menggunakan $dataBulanan --}}
+                    @foreach ($dataBulanan as $data_bulan)
+                        {{-- Ini akan membuat 2 box untuk SETIAP bulan (misal: 12 bulan = 24 box) --}}
                         <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
                             <span class="font-semibold text-xl text-black/50">Organik
-                                {{ $data_bulan->organik }}</span>
+                                {{-- Ini hanya data 1 bulan --}}
+                                {{ $data_bulan->organik }}
+                            </span>
                         </div>
                         <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
                             <span class="font-semibold text-xl text-black/50">[Chart 2]</span>
                         </div>
                     @endforeach
+
                 @else
+                    {{-- Bagian 'else' ini sudah benar --}}
                     <div class="h-64 lg:h-96 aspect-auto bg-white rounded-lg shadow-lg flex items-center justify-center">
                         <span class="font-semibold text-xl text-black/50">Data tidak tersedia</span>
                     </div>
