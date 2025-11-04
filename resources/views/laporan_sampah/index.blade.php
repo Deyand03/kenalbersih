@@ -18,12 +18,45 @@
                 Sampah yang menumpuk bikin nggak nyaman? Yuk, segera laporkan kepada kami supaya dapat ditangani!
             </p>
             <div class="flex justify-center gap-4">
-                <button
+                <button onclick="my_modal_3.showModal()"
                     class="btn btn-lg bg-(--bg-tertiary) text-(--text-primary) rounded-3xl hover:bg-(--bg-secondary) 
             hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
             ease-in-out active:scale-100 active:shadow-none">
                     + Buat Laporan
                 </button>
+                <dialog id="my_modal_3" class="modal">
+                    <div class="modal-box">
+                        <form method="dialog">
+                            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                        </form>
+                        <form action="" class="flex flex-col gap-4">
+                            <h1 class="text-2xl font-bold">Silakan buat laporan Anda</h1>
+                            <div class="flex flex-col gap-3">
+                                <div class="flex flex-col">
+                                    <label for="" class="text-start">Judul</label>
+                                    <input type="text" class="input w-full" placeholder="Masukkan Judul Laporan Anda">
+                                </div>
+
+                                <div class="flex flex-col">
+                                    <label for="" class="text-start">Lokasi Sampah</label>
+                                    <input type="text" class="input w-full"
+                                        placeholder="Masukkan Lokasi Ditemukannya Sampah Menumpuk">
+                                </div>
+
+                                <div class="flex flex-col">
+                                    <label for="" class="text-start">Deskripsi</label>
+                                    <textarea name="" id="" class="textarea w-full" placeholder="Masukkan Pesan"></textarea>
+                                </div>
+
+                                <div class="flex flex-col">
+                                    <label for="" class="text-start">Foto Bukti</label>
+                                    <input type="file" class="file-input w-full">
+                                </div>
+                            </div>
+                            <button class="btn bg-(--bg-tertiary) text-(--text-primary) gap-3">Kirim</button>
+                        </form>
+                    </div>
+                </dialog>
             </div>
         </div>
     </div>
