@@ -31,7 +31,8 @@ class HomepageController extends Controller
             'all_rts' => $all_rts,
             'selectedRtId' => $selectedRtId,
             'selectedTahun' => $selectedTahun,
-            'dataBulanan' => $dataBulanan,     
+            'dataBulanan' => $dataBulanan,
         ]);
+
     }
 }
