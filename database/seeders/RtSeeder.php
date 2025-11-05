@@ -18,15 +18,31 @@ class RtSeeder extends Seeder
             'Azia',
             'Raihan'
         ];
-        for ($i=1; $i < count($nama); $i++) {
-            DB::table('rts')->insert([
-                "user_id" => $i,
-                "no_rt" => 1 + $i,
-                "nama" => $nama[$i - 1],
-                "jenis_kelamin" => "Laki-laki",
-                "no_dana" => "0812345678$i",
-                "no_hp" => "0812345678$i"
-            ]);
-        }
+        DB::table('rts')->insert([
+            [
+                "user_id" => 1,
+                "no_rt" => 1,
+                "nama" => 'Defry',
+                "jenis_kelamin" => 'Laki-laki',
+                "no_dana" => '08123456781',
+                "no_hp" => '08123456781'
+            ],
+            [
+                "user_id" => 2,
+                "no_rt" => 2,
+                "nama" => 'Azia',
+                "jenis_kelamin" => 'Perempuan',
+                "no_dana" => '08123456782',
+                "no_hp" => '08123456782'
+            ],
+            [
+                "user_id" => 3,
+                "no_rt" => 3,
+                "nama" => 'Raihan',
+                "jenis_kelamin" => 'Laki-laki',
+                "no_dana" => '08123456783',
+                "no_hp" => '08123456783'
+            ]
+        ]);
     }
 }

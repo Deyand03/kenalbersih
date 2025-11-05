@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalAngkut;
 use App\Models\Rt;
 use App\Models\VolumeSampahBulan;
 use App\Models\VolumeSampahTahun;
@@ -16,7 +17,6 @@ class HomepageController extends Controller
         $selectedTahun = $request->input('tahun', now()->year);
 
         $dataBulanan = collect();
-
         if ($selectedRtId) {
             $rt = Rt::find($selectedRtId);
             $dataBulanan = $rt->volume_sampah_bulan()
@@ -27,12 +27,41 @@ class HomepageController extends Controller
                 ->get();
         }
 
+
         return view('homepage', [
             'all_rts' => $all_rts,
             'selectedRtId' => $selectedRtId,
             'selectedTahun' => $selectedTahun,
             'dataBulanan' => $dataBulanan,
         ]);
-
     }
+
+    public function data_jadwal(Request $request)
+    {
+        $all_rts = Rt::orderBy('no_rt')->get();
+        $selectedRtId = $request->input('no_rt', $all_rts->first()->id ?? null);
+        $events = JadwalAngkut::where('rt_id', $selectedRtId)->get(['id', 'jadwal', 'status', 'rt_id']);
+        return response()->json($events);
+    }
+
+    // public function data_grafik(Request $request)
+    // {
+    //     $all_rts = Rt::orderBy('no_rt')->get();
+    //     $selectedRtId = $request->input('no_rt', $all_rts->first()->id ?? null);
+    //     $selectedTahun = $request->input('tahun', now()->year);
+
+    //     $dataBulanan = collect();
+
+    //     if ($selectedRtId) {
+    //         $rt = Rt::find($selectedRtId);
+    //         $dataBulanan = $rt->volume_sampah_bulan()
+    //             ->whereHas('volume_sampah_tahun', function ($query) use ($selectedTahun) {
+    //                 $query->where('tahun', $selectedTahun);
+    //             })
+    //             ->orderBy('bulan')
+    //             ->get();
+    //     }
+
+    //     return response()->json($dataBulanan);
+    // }
 }

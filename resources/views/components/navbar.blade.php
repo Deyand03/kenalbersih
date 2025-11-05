@@ -32,21 +32,21 @@
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
-                    <span>[item2]</span>
+                    <span>Lapor Sampah</span>
                     <span
                         class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
-                    <span>[item3]</span>
+                    <span>Keuangan</span>
                     <span
                         class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
-                    <span>[item4]</span>
+                    <span>About</span>
                     <span
                         class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>

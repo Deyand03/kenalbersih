@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="h-[500vh] pt-18">
+        <div class="h-fit pt-18">
             <div>
                 <svg viewBox="0 0 1919 235" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path

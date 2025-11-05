@@ -1,11 +1,13 @@
 <?php
 
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\JadwalAngkutController;
 use App\Http\Controllers\NavigationController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
+Route::get('/jadwal-angkut', [HomepageController::class, 'data_jadwal'])->name('data_jadwal');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
