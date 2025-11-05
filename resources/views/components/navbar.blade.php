@@ -31,7 +31,7 @@
                 </a>
             </li>
             <li>
-                <a href="" class="relative group px-3 py-2">
+                <a href="{{ route('laporan_sampah') }}" class="relative group px-3 py-2">
                     <span>Lapor Sampah</span>
                     <span
                         class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
@@ -54,6 +54,6 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a href="" class="btn bg-linear-to-r from-(--bg-secondary) to-(--bg-tertiary) hover:scale-104 active:scale-100 active:bg-(--bg-tertiary) px-5 hover:shadow-md shadow-none rounded-3xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span class="font-semibold text-white">Login</span></a>
+        <a href="{{ route('login') }}" class="btn bg-linear-to-r from-(--bg-secondary) to-(--bg-tertiary) hover:scale-104 active:scale-100 active:bg-(--bg-tertiary) px-5 hover:shadow-md shadow-none rounded-3xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span class="font-semibold text-white">Login</span></a>
     </div>
 </div>
