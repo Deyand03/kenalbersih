@@ -9,3 +9,12 @@
 *, html {
     box-sizing: border-box;
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none; /*Hide for chrome*/
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;  /* Hide for Edge */
+    scrollbar-width: none;  /* Hide for Firefox */
+}
+
