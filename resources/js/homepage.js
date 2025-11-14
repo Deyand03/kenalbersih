@@ -3,7 +3,8 @@ const $ = (selector) => document.querySelector(selector)
 const customNav = $('.navbar-custom');
 const webName = $('.web-name');
 const textNavbar = document.querySelectorAll('.text-navbar');
-console.log(textNavbar)
+
+// Navbar
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         customNav.style.boxShadow = '0px 0px 10px 2px rgba(0,0,0,0.75)';
@@ -42,6 +43,7 @@ window.addEventListener('scroll', () => {
     })
 });
 
+// Animasi Stat
 function animateValue(obj, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -55,21 +57,67 @@ function animateValue(obj, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
+// Splash Screen ( Kebanggaan gweh )
+if (!localStorage.getItem('splashScreenShown')) {
+    document.body.classList.add('splash-active');
+} else {
+    const splashScreen = document.getElementById('splash-screen');
+    if (splashScreen) {
+        splashScreen.style.display = 'none';
+    }
+}
+
+function startExitAnimation() {
+    const splashScreen = document.getElementById('splash-screen');
+    if (splashScreen) {
+        splashScreen.classList.add('splash-hidden');
+        localStorage.setItem('splashScreenShown', 'true');
+        setTimeout(() => {
+            splashScreen.style.display = 'none';
+        }, 1000);
+    }
+}
 document.addEventListener('DOMContentLoaded', () => {
-    const statWarga = $('#stat-warga');
+    const statWarga = document.getElementById('stat-warga');
     const statRt = $('#stat-rt');
     const statSampah = $('#stat-sampah');
-    const totalWarga = statWarga.dataset.totalWarga;
-    console.log("ASOMASO", totalWarga)
-    const totalRt= JSON.parse(statRt.dataset.totalRt);
-    const totalSampahTerkelola = statSampah.dataset.sampahTerkelola;
+    const totalWarga = parseInt(statWarga.dataset.totalWarga);
+    const totalRt = JSON.parse(statRt.dataset.totalRt);
+    console.log(totalRt)
+    const totalSampahTerkelola = parseInt(statSampah.dataset.sampahTerkelola);
     if (statWarga) {
-        animateValue(statWarga, 0, 1500);
+        animateValue(statWarga,0, totalWarga ? totalWarga : 0, 1500);
     }
     if (statRt) {
-        animateValue(statRt, 0, 1500);
+        animateValue(statRt, 0, totalRt? totalRt : 0, 1500);
     }
     if (statSampah) {
-        animateValue(statSampah, 0, 2000);
+        animateValue(statSampah, 0, totalSampahTerkelola ? totalSampahTerkelola : 0, 2000);
     }
 });
+
+window.addEventListener('load', () => {
+    document.body.classList.remove('splash-active');
+    // Data stat (belom kocaq)
+});
+if (!localStorage.getItem('splashScreenShown')) {
+
+    let isLoaded = false;
+    let isAnimTimeUp = false;
+
+    window.addEventListener('load', () => {
+        isLoaded = true;
+        if (isAnimTimeUp) {
+            startExitAnimation();
+        }
+    });
+    setTimeout(() => {
+        isAnimTimeUp = true;
+        if (isLoaded) {
+            startExitAnimation();
+        }
+    }, 1500);
+
+} else {
+    // WIBU WIBU
+}

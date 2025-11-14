@@ -1,7 +1,7 @@
-<div class="navbar fixed bg-transparent px-7 md:px-14 z-50 text-black navbar-custom">
+<div class="navbar fixed bg-transparent px-18 z-50 text-black navbar-custom">
     <div class="navbar-start">
         {{-- Tombol Mobile --}}
-        <div class="dropdown">
+        <div class="dropdown translate-y-1">
             <div tabindex="0" role="button" class="btn btn-ghost hover:btn-accent active:btn-accent mr-3 lg:hidden">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
@@ -54,6 +54,6 @@
         </ul>
     </div>
     <div class="navbar-end">
-        <a href="{{ route('login') }}" class="text-navbar translate-y-1 btn bg-linear-to-r from-(--bg-secondary) to-(--bg-tertiary) hover:scale-104 active:scale-100 active:bg-(--bg-tertiary) px-5 hover:shadow-md shadow-none rounded-3xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span class="font-semibold text-white">Login</span></a>
+        <a href="{{ route('login') }}" class="text-navbar translate-y-1 btn bg-(--bg-secondary) hover:scale-104 active:scale-100 active:bg-(--bg-tertiary) hover:shadow-md shadow-none rounded-2xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span class="font-semibold text-white">Login</span></a>
     </div>
 </div>

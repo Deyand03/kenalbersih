@@ -13,10 +13,10 @@ class HomepageController extends Controller
 {
     public function index(Request $request)
     {
-        $all_rts = Rt::all();
-        $jumlah_warga = Warga::count();
+        $allRts = Rt::all();
+        $jumlahWarga = Warga::count();
 
-        $selectedRtId = $request->input('rt_id', $all_rts->first()->id ?? null);
+        $selectedRtId = $request->input('rt_id', $allRts->first()->id ?? null);
         $selectedTahun = $request->input('tahun', now()->year);
 
         $totalOrganik = VolumeSampahBulan::sum('organik');
@@ -24,17 +24,17 @@ class HomepageController extends Controller
         $totalB3 = VolumeSampahBulan::sum('b3');
         $totalSampahTerkelola = $totalOrganik + $totalNonOrganik + $totalB3;
 
-        $list_tahun = collect();
+        $listTahun = collect();
         $dataBulanan = collect();
         if ($selectedRtId) {
-            $list_tahun = VolumeSampahTahun::where('rt_id', $selectedRtId)
+            $listTahun = VolumeSampahTahun::where('rt_id', $selectedRtId)
                 ->select('tahun')
                 ->distinct()
                 ->orderBy('tahun', 'desc')
                 ->pluck('tahun');
         }
-        if (!$list_tahun->contains($selectedTahun)) {
-            $selectedTahun = $list_tahun->first() ?? now()->year;
+        if (!$listTahun->contains($selectedTahun)) {
+            $selectedTahun = $listTahun->first() ?? now()->year;
         }
         if ($selectedRtId) {
             $rt = Rt::find($selectedRtId);
@@ -48,20 +48,20 @@ class HomepageController extends Controller
 
 
         return view('homepage', [
-            'all_rts' => $all_rts,
+            'allRts' => $allRts,
             'selectedRtId' => $selectedRtId,
             'selectedTahun' => $selectedTahun,
             'dataBulanan' => $dataBulanan,
-            'list_tahun' => $list_tahun,
-            'jumlah_warga' => $jumlah_warga,
+            'listTahun' => $listTahun,
+            'jumlahWarga' => $jumlahWarga,
             'totalSampahTerkelola' => $totalSampahTerkelola
         ]);
     }
 
     public function data_jadwal(Request $request)
     {
-        $all_rts = Rt::all();
-        $selectedRtId = $request->input('rt_id', $all_rts->first()->id ?? null);
+        $allRts = Rt::all();
+        $selectedRtId = $request->input('rt_id', $allRts->first()->id ?? null);
         $events = JadwalAngkut::where('rt_id', $selectedRtId)->get(['id', 'jadwal', 'status', 'rt_id']);
         return response()->json($events);
     }
@@ -81,8 +81,8 @@ class HomepageController extends Controller
 
     // public function data_grafik(Request $request)
     // {
-    //     $all_rts = Rt::orderBy('no_rt')->get();
-    //     $selectedRtId = $request->input('no_rt', $all_rts->first()->id ?? null);
+    //     $allRts = Rt::orderBy('no_rt')->get();
+    //     $selectedRtId = $request->input('no_rt', $allRts->first()->id ?? null);
     //     $selectedTahun = $request->input('tahun', now()->year);
 
     //     $dataBulanan = collect();

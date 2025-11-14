@@ -10,3 +10,88 @@
     backdrop-filter: blur(10px);
 }
 
+body.splash-active {
+    overflow: hidden;
+}
+
+#splash-screen {
+    position: fixed;
+    inset: 0;
+    /* 1. Background Ganti Putih */
+    background-color: var(--bg-white, #FFFFFF);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* 2. Animasi Exit: Bukan 'opacity', tapi 'clip-path' (mengecil bulat) */
+    clip-path: circle(150% at 50% 50%);
+    /* Mulai dari terbuka penuh */
+    /* Lyra's Mod: Durasi lebih lama (1s) dan cubic-bezier "kesendat" (ease-in-out-back) */
+    transition: clip-path 1s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    pointer-events: auto;
+    /* Pastikan bisa diklik (meski ga ada apa2) */
+}
+
+/* 2. State Sembunyi: Mengecil ke 0% */
+#splash-screen.splash-hidden {
+    clip-path: circle(0% at 50% 50%);
+    pointer-events: none;
+}
+
+
+.splash-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 3. Bikin SVG Daun lebih besar dan 'hidup' */
+.splash-leaf {
+    width: 100px;
+    height: 100px;
+    overflow: visible;
+    /* Penting untuk stroke */
+}
+
+.leaf-path {
+    fill: none;
+    /* Warna stroke pakai --bg-tertiary */
+    stroke: var(--bg-tertiary, #44BB91);
+    stroke-width: 4;
+    stroke-linecap: round;
+
+    /* Animasi 'draw' berjalan 1 detik, 1 kali */
+    animation: draw 1s ease-out forwards;
+}
+
+/* 4. Teks pakai animasi Zoom-In */
+.splash-text {
+    /* Teks "KenalBersih" */
+    font-size: 1.75rem;
+    /* 28px */
+    font-weight: 600;
+    /* Warna teks pakai --bg-primary (gelap di bg putih) */
+    color: var(--bg-primary, #016B61);
+    margin-top: 16px;
+    opacity: 0;
+    transform: scale(0.8);
+    /* Animasi 'zoomIn' 0.6s, mulai setelah 1.2s (daun hampir selesai tumbuh) */
+    animation: zoomIn 0.6s ease-out forwards 1.2s;
+}
+
+/* Animasi "menggambar" */
+@keyframes draw {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+/* 4. Keyframe untuk Zoom-In Teks */
+@keyframes zoomIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
