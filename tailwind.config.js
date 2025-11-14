@@ -8,7 +8,11 @@ export default {
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
     ],
-
+    safelist: [
+        'translate-x-full',
+        'rotate-6',
+        'opacity-0'
+    ],
     theme: {
         extend: {
             fontFamily: {

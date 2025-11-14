@@ -1,4 +1,4 @@
-<div class="navbar fixed bg-transparent px-7 md:px-14 z-50 text-white navbar-custom">
+<div class="navbar fixed bg-transparent px-7 md:px-14 z-50 text-black navbar-custom">
     <div class="navbar-start">
         {{-- Tombol Mobile --}}
         <div class="dropdown">
@@ -17,43 +17,43 @@
         </div>
 
         {{-- Logo --}}
-        <a class=""><span class="font-bold text-xl">Kenal</span><span class="font-bold text-xl web-name text-[#E1EEBC]">Bersih</span></a>
+        <a class="text-navbar transform-gpu translate-y-1"><span class="font-bold text-xl">Kenal</span><span class="font-bold text-xl web-name text-[#016B61]">Bersih</span></a>
     </div>
 
     {{-- Menu Navigasi Desktop --}}
-    <div class="navbar-center hidden lg:flex">
+    <div class="navbar-center hidden lg:flex text-navbar transform-gpu translate-y-1">
         <ul class="flex items-center gap-2 px-1 text-base font-medium space-x-2">
             <li>
-                <a href="" class="relative group px-3 py-2">
+                <a href="{{ route('homepage') }}" class="relative group px-3 py-2">
                     <span>Homepage</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="{{ route('laporan_sampah') }}" class="relative group px-3 py-2">
                     <span>Lapor Sampah</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
                     <span>Keuangan</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
             <li>
                 <a href="" class="relative group px-3 py-2">
                     <span>About</span>
                     <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-[#E1EEBC] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
                 </a>
             </li>
         </ul>
     </div>
     <div class="navbar-end">
-        <a href="{{ route('login') }}" class="btn bg-linear-to-r from-(--bg-secondary) to-(--bg-tertiary) hover:scale-104 active:scale-100 active:bg-(--bg-tertiary) px-5 hover:shadow-md shadow-none rounded-3xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span class="font-semibold text-white">Login</span></a>
+        <a href="{{ route('login') }}" class="text-navbar translate-y-1 btn bg-linear-to-r from-(--bg-secondary) to-(--bg-tertiary) hover:scale-104 active:scale-100 active:bg-(--bg-tertiary) px-5 hover:shadow-md shadow-none rounded-3xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span class="font-semibold text-white">Login</span></a>
     </div>
 </div>
