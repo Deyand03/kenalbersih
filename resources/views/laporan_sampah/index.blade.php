@@ -19,7 +19,7 @@
             </p>
             <div class="flex justify-center gap-4">
                 <button onclick="my_modal_3.showModal()"
-                    class="btn btn-lg bg-(--bg-tertiary) text-(--text-primary) rounded-3xl hover:bg-(--bg-secondary) 
+                    class="btn btn-lg bg-(--bg-tertiary) text-(--text-primary) rounded-3xl hover:bg-(--bg-secondary)
             hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
             ease-in-out active:scale-100 active:shadow-none">
                     + Buat Laporan
@@ -152,5 +152,5 @@
             </div>
         </div>
     </div>
-
+    @vite('resources/js/utility/navbar_lapor_sampah.js')
 @endsection

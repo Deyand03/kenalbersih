@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             RtSeeder::class,
+            JadwalAngkutSeeder::class,
             VolumeTahunSeeder::class,
             VolumeBulanSeeder::class
         ]);
