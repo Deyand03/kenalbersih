@@ -2,12 +2,15 @@
 
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 
 Route::get('/laporan_sampah', [NavigationController::class, 'laporan_sampah'])->name('laporan_sampah');
+
+Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
