@@ -76,7 +76,9 @@
                         <tr>
                             <th></th>
                             <th>Detail</th>
+                            <th>Lokasi</th>
                             <th>Lampiran</th>
+                            <th>Tanggal Dibuat</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -84,23 +86,23 @@
                         <!-- row 1 -->
                         <tr>
                             <th>1</th>
-                            <td>Cy Ganderton</td>
-                            <td>Quality Control Specialist</td>
-                            <td>Blue</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <!-- row 2 -->
                         <tr>
                             <th>2</th>
-                            <td>Hart Hagerty</td>
-                            <td>Desktop Support Technician</td>
-                            <td>Purple</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                         <!-- row 3 -->
                         <tr>
                             <th>3</th>
-                            <td>Brice Swyre</td>
-                            <td>Tax Accountant</td>
-                            <td>Red</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                         </tr>
                     </tbody>
                 </table>
