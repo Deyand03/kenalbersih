@@ -12,10 +12,18 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
-    Route::get('register', [RegisteredUserController::class, 'create'])
-        ->name('register');
+    Route::get('register-rt', [RegisteredUserController::class, 'create'])
+        ->name('register.rt');
 
-    Route::post('register', [RegisteredUserController::class, 'store']);
+    Route::post('register-rt', [RegisteredUserController::class, 'store'])
+        ->name('register.rt.store');
+
+    // RUTE BARU UNTUK REGISTRASI WARGA (Publik)
+    Route::get('register-warga', [RegisteredUserController::class, 'createWarga'])
+        ->name('register.warga');
+
+    Route::post('register-warga', [RegisteredUserController::class, 'storeWarga'])
+        ->name('register.warga.store');
 
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
         ->name('login');

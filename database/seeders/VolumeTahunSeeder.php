@@ -14,9 +14,21 @@ class VolumeTahunSeeder extends Seeder
     public function run(): void
     {
         DB::table('volume_sampah_tahuns')->insert([
-            "id" => 1,
-            "rt_id" => 1,
-            "tahun" => 2024,
+            [
+                "id" => 1,
+                "rt_id" => 1,
+                "tahun" => 2024,
+            ],
+            [
+                "id" => 2,
+                "rt_id" => 2,
+                "tahun" => 2023,
+            ],
+            [
+                "id" => 3,
+                "rt_id" => 3,
+                "tahun" => 2025,
+            ]
         ]);
     }
 }

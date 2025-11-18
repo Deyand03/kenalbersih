@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register RT</title>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Parisienne&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Glitch&family=Saira+Stencil+One&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body style="font-family: 'Poppins', sans-serif;">
+    <div class="flex max-w-100vw w-full">
+        @if ($errors->any())
+            <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 10000)" x-transition
+                class="fixed top-5 left-1/2 -translate-x-1/2 w-full max-w-sm bg-red-600 text-white rounded-lg shadow-lg p-4"
+                style="z-index: 50; display: none;"> <button @click="show = false"
+                    class="absolute top-2 right-2 text-white">&times;</button>
+
+                <h4 class="font-bold">Terjadi Kesalahan!</h4>
+                <ul class="list-disc list-inside mt-2 text-sm">
+
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+
+                </ul>
+            </div>
+        @endif
+        {{-- Left Section --}}
+        <div class="relative overflow-hidden h-screen">
+            <div class="h-screen bg-no-repeat bg-cover bg-center flex flex-col"
+                style="background-image: url('{{ asset('svg/Group 13.svg') }}')">
+                <div class="flex flex-col w-1/2 justify-between h-full px-16 py-8">
+                    <h1 class="text-4xl font-bold mb-6 text-[#E1EEBC]">Sistem Informasi Pengelolaan Sampah </h1>
+                    <p class="text-2xl pr-12 text-white">
+                        Selamat datang di solusi digital untuk pengelolaan sampah terpadu. Sistem ini mengubah data menjadi aksi nyata.
+                        mulai dari pelacakan volume, optimalisasi jadwal angkut, hingga pengelolaan iuran yang transparan.
+                        Inilah alat bantu Anda untuk mengambil keputusan yang lebih baik dan menciptakan lingkungan yang lebih lestari.
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <p class="text-[#E1EEBC] italic">Teamwork makes the dream work</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        {{-- Right Section --}}
+        <p class="text-3xl absolute top-8 right-8 pr-5 text-[#016B61] font-bold">
+
+            K<span style="font-family: 'Parisienne', cursive; font-weight: normal;">enal</span>&nbsp;B<span
+                style="font-family: 'Parisienne', cursive; font-weight: normal;">ersih</span>
+
+        </p>
+        <div class="absolute top-0 right-0 w-1/2 h-full flex justify-end pr-24 py-24">
+
+            <div class="relative w-full h-full max-w-md overflow-y-auto scrollbar-hide">
+
+                <div class="sticky top-0 h-5 bg-linear-to-b from-white to-transparent pointer-events-none z-10"></div>
+
+                <div class="w-full h-full relative z-0">
+
+
+                    <form method="POST" action="{{ route('register.rt.store') }}">
+                        @csrf
+                        <div class="mt-4">
+                            <h2 class="text-xl mb-4 text-center text-[#328E6E]">Selamat datang</h2>
+                            <p class="text-sm text-gray-500 mb-8 text-center px-12">Mari melangkah untuk menjaga dan
+                                menciptakan Lingkungan RT yang asri bersama.</p>
+                        </div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <x-input-label for="name" :value="__('Nama lengkap')" />
+                                <x-text-input id="name" class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md"
+                                    type="text" name="name" placeholder="Nama Lengkap" :value="old('name')" required
+                                    autofocus autocomplete="name" />
+                            </div>
+
+                            <div>
+                                <x-input-label for="email" :value="__('Email')" />
+                                <x-text-input id="email" class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md"
+                                    type="email" name="email" placeholder="user@gmail.com" :value="old('email')"
+                                    required autocomplete="username" />
+                            </div>
+
+                            <div x-data="{ show: false }">
+                                <x-input-label for="password" :value="__('Password')" />
+                                <div class="relative mt-1">
+                                    <input id="password"
+                                        class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md border-gray-200 pr-10"
+                                        :type="show ? 'text' : 'password'" name="password"
+                                        placeholder="Masukkan Password" required autocomplete="new-password" />
+                                    <button type="button"
+                                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
+                                        @click="show = !show">
+                                        <svg x-show="show" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        <svg x-show="!show" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+                                            style="display: none;">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243l-4.243-4.243" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div x-data="{ show: false }">
+                                <x-input-label for="password_confirmation" :value="__('Konfirmasi password')" />
+                                <div class="relative mt-1">
+                                    <input id="password_confirmation"
+                                        class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md border-gray-200 pr-10"
+                                        :type="show ? 'text' : 'password'" name="password_confirmation"
+                                        placeholder="Konfirmasi Password" required autocomplete="new-password" />
+                                    <button type="button"
+                                        class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
+                                        @click="show = !show">
+                                        <svg x-show="show" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                        <svg x-show="!show" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                            stroke="currentColor" style="display: none;">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243l-4.243-4.243" />
+                                        </svg>
+                                </div>
+                            </div>
+
+                            <div>
+                                <x-input-label for="jenis_kelamin" :value="__('Jenis Kelamin')" />
+                                <div class="relative mt-1">
+                                    <select id="jenis_kelamin" name="jenis_kelamin"
+                                        class="block px-3 py-3 w-full bg-gray-200 rounded-md border-gray-200 appearance-none">
+                                        <option value="">Pilih Jenis Kelamin</option>
+                                        <option value="Laki-laki">Laki-laki</option>
+                                        <option value="Perempuan">Perempuan</option>
+                                    </select>
+                                    <div
+                                        class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                                        <svg class="fill-current h-5 w-5" xmlns="http://www.w3.org/2000/svg"
+                                            viewBox="0 0 20 20">
+                                            <path
+                                                d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <x-input-label for="no_rt" :value="__('No. RT')" />
+                                    <div class="relative mt-1">
+                                        <x-text-input id="no_rt"
+                                            class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md" type="number"
+                                            name="no_rt" placeholder="Contoh: 1" :value="old('no_rt')" required />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <x-input-label for="no_hp" :value="__('No. Hp')" />
+                            <x-text-input id="no_hp" class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md"
+                                placeholder="Masukkan No. Hp" type="tel" name="no_hp"
+                                :value="old('no_hp')" required />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-input-label for="alamat_rumah" :value="__('Alamat')" />
+                            <textarea id="alamat_rumah" name="alamat_rumah"
+                                class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md border-gray-200" placeholder="Jl. yang benar"
+                                rows="3" required>{{ old('alamat_rumah') }}</textarea>
+                        </div>
+                        <div class="mt-4">
+                            <x-input-label for="no_rekening" :value="__('Nomor Rekening')" />
+                            <x-text-input id="no_rekening" class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md"
+                                placeholder="Masukkan Nomor Rekening" type="text" name="no_rekening"
+                                :value="old('no_rekening')" required />
+                        </div>
+
+                        <div class="mt-4">
+                            <x-input-label for="no_dana" :value="__('Nomor Dana')" />
+                            <x-text-input id="no_dana" class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md"
+                                placeholder="Masukkan Nomor Dana" type="text" name="no_dana" :value="old('no_dana')" />
+                        </div>
+
+
+                        <div class="mt-6">
+                            <button type="submit"
+                                class="w-full justify-center inline-flex items-center px-4 py-3 border border-transparent 
+                           rounded-md font-semibold text-base text-white uppercase tracking-widest 
+                           bg-linear-to-r from-[#5BA58B] to-[#328E6E] 
+                           hover:brightness-110 focus:outline-none transition-all">
+                                {{ __('Daftar') }}
+                            </button>
+                        </div>
+
+                        <p class="mt-8 text-center text-sm text-gray-500">
+                            {{ __('Sudah punya akun?') }}
+                            @if (Route::has('login'))
+                                <a href="{{ route('login') }}"
+                                    class="font-medium underline text-[#328E6E] hover:text-[#016B61]">
+                                    {{ __('Login') }}
+                                </a>
+                            @endif
+                        </p>
+                    </form>
+                    <div class="sticky bottom-0 h-5 bg-linear-to-t from-white pointer-events-none z-10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
