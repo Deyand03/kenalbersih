@@ -15,7 +15,17 @@ Route::get('/laporan_sampah', [NavigationController::class, 'laporan_sampah'])->
 // tambahin middleware role rt
 
 Route::middleware(['auth', 'role:rt'])->group(function () {
+
     Route::get('/dashboard', [RtController::class, 'index'])->name('dashboard');
+    Route::prefix('rt')->name('rt.')->group(function () {
+        Route::controller(RtController::class)->group(function() {
+            Route::get('/jadwal/events', 'getEvents')->name('jadwal.events');
+            Route::post('/jadwal/store', 'storeEvent')->name('jadwal.store');
+            Route::post('/jadwal/update/{id}', 'updateEvent')->name('jadwal.update');
+            Route::post('/jadwal/delete/{id}', 'deleteEvent')->name('jadwal.delete');
+        });
+
+    });
 });
 
 require __DIR__.'/auth.php';

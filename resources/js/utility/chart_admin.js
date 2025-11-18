@@ -1,0 +1,144 @@
+import Chart from 'chart.js/auto';
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    // --- 1. LINE CHART (Statistik Tahunan) ---
+    const lineCtx = document.getElementById('line-chart');
+    if (lineCtx) {
+        // Ambil data dari HTML attribute
+        const labels = JSON.parse(lineCtx.dataset.labels);
+        const dataOrganik = JSON.parse(lineCtx.dataset.organik);
+        const dataNonOrganik = JSON.parse(lineCtx.dataset.nonOrganik); // camelCase dari data-non-organik
+        const dataB3 = JSON.parse(lineCtx.dataset.b3);
+
+        new Chart(lineCtx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: 'Organik',
+                        data: dataOrganik,
+                        borderColor: '#f43f5e', // Rose-500
+                        backgroundColor: 'rgba(244, 63, 94, 0.1)',
+                        tension: 0.4, // Garis melengkung
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    },
+                    {
+                        label: 'Non-Organik',
+                        data: dataNonOrganik,
+                        borderColor: '#3b82f6', // Blue-500
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    },
+                    {
+                        label: 'B3',
+                        data: dataB3,
+                        borderColor: '#10b981', // Emerald-500
+                        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false // Kita sudah punya custom legend di HTML
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        titleColor: '#1f2937',
+                        bodyColor: '#4b5563',
+                        borderColor: '#e5e7eb',
+                        borderWidth: 1,
+                        padding: 10,
+                        boxPadding: 4
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            borderDash: [2, 4],
+                            color: '#e5e7eb',
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#9ca3af',
+                            font: { size: 11 }
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false,
+                            drawBorder: false
+                        },
+                        ticks: {
+                            color: '#9ca3af',
+                            font: { size: 11 }
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    // --- 2. PIE CHART (Proporsi Bulan Ini) ---
+    const pieCtx = document.getElementById('pie-chart');
+    if (pieCtx) {
+        const valOrganik = parseInt(pieCtx.dataset.organik) || 0;
+        const valNonOrganik = parseInt(pieCtx.dataset.nonOrganik) || 0;
+        const valB3 = parseInt(pieCtx.dataset.b3) || 0;
+
+        // Cek kalau data kosong semua, kasih dummy kecil biar gak error/jelek
+        const isDataEmpty = (valOrganik + valNonOrganik + valB3) === 0;
+        const pieData = isDataEmpty ? [1] : [valOrganik, valNonOrganik, valB3];
+        const pieColors = isDataEmpty
+            ? ['#e5e7eb'] // Abu-abu kalau kosong
+            : ['#fb7185', '#60a5fa', '#34d399']; // Rose-400, Blue-400, Emerald-400
+
+        new Chart(pieCtx, {
+            type: 'doughnut', // Doughnut lebih modern daripada Pie biasa
+            data: {
+                labels: isDataEmpty ? ['Tidak ada data'] : ['Organik', 'Non-Organik', 'B3'],
+                datasets: [{
+                    data: pieData,
+                    backgroundColor: pieColors,
+                    hoverOffset: 4,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%', // Bolong tengahnya seberapa besar
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            usePointStyle: true,
+                            padding: 20,
+                            font: { size: 11 },
+                            color: '#4b5563'
+                        }
+                    },
+                    tooltip: {
+                        enabled: !isDataEmpty // Matikan tooltip kalau data kosong
+                    }
+                }
+            }
+        });
+    }
+});

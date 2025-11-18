@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\JadwalAngkut;
 use App\Models\Rt;
 use App\Models\VolumeSampahTahun;
 use Carbon\Carbon;
@@ -27,13 +28,21 @@ class RtController extends Controller
         $selectedTahun = null;
         $selectedBulan = null;
 
+        // Data untuk Chart (Default array kosong)
+        $chartData = [
+            'labels' => [],
+            'organik' => [],
+            'non_organik' => [],
+            'b3' => []
+        ];
+
         if ($rt) {
-            // 1. Ambil List Tahun untuk Dropdown Filter
+            // 1. Ambil List Tahun
             $listTahun = VolumeSampahTahun::where('rt_id', $rt->id)
                 ->orderBy('tahun', 'desc')
                 ->pluck('tahun');
 
-            // 2. Tentukan Tahun Terpilih (Input User atau Default Tahun Terbaru)
+            // 2. Tentukan Tahun Terpilih
             $selectedTahun = $request->input('tahun');
             if (!$selectedTahun && $listTahun->isNotEmpty()) {
                 $selectedTahun = $listTahun->first();
@@ -45,26 +54,36 @@ class RtController extends Controller
                 ->first();
 
             if ($volumeTahun) {
-                // 4. Tentukan Bulan Terpilih (Input User atau Default Bulan Terakhir di tahun tsb)
+                // --- LOGIKA CHART (LINE CHART) ---
+                // Ambil semua bulan di tahun ini, urutkan dari Januari (1) ke Desember (12)
+                $allBulanData = $volumeTahun->volume_sampah_bulan()
+                    ->orderBy('bulan', 'asc')
+                    ->get();
+
+                // Mapping data untuk dikirim ke Chart JS
+                $chartData['labels'] = $allBulanData->map(function($item) {
+                    return Carbon::createFromDate(null, $item->bulan, 1)->translatedFormat('F');
+                })->toArray();
+
+                $chartData['organik'] = $allBulanData->pluck('organik')->toArray();
+                $chartData['non_organik'] = $allBulanData->pluck('non_organik')->toArray();
+                $chartData['b3'] = $allBulanData->pluck('b3')->toArray();
+
+                // --- LOGIKA KARTU STATISTIK (BULANAN) ---
                 $selectedBulan = $request->input('bulan');
 
                 if (!$selectedBulan) {
-                    // Kalau user gak milih bulan, cari bulan paling akhir yg datanya ada
                     $latestBulanRecord = $volumeTahun->volume_sampah_bulan()
                         ->orderBy('bulan', 'desc')
                         ->first();
                     $selectedBulan = $latestBulanRecord ? $latestBulanRecord->bulan : now()->month;
                 }
 
-                // 5. Ambil Data Sampah berdasarkan Tahun & Bulan terpilih
                 $dataBulan = $volumeTahun->volume_sampah_bulan()
                     ->where('bulan', $selectedBulan)
                     ->first();
 
-                // Nama Bulan untuk Info (Contoh: "Januari 2025")
-                // Lyra's Fix:
-                // 1. Casting (int) $selectedBulan karena request input itu string.
-                // 2. Pakai createFromDate(null, bulan, 1) untuk set tanggal ke 1, mencegah error overflow di tanggal 31.
+                // Casting ke int untuk keamanan Carbon
                 $namaBulan = Carbon::createFromDate(null, (int) $selectedBulan, 1)->translatedFormat('F');
                 $bulanInfo = "$namaBulan $selectedTahun";
 
@@ -85,55 +104,75 @@ class RtController extends Controller
             'bulanInfo',
             'listTahun',
             'selectedTahun',
-            'selectedBulan'
+            'selectedBulan',
+            'chartData'
         ));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function getEvents()
     {
-        //
+        $rt = Auth::user()->rt;
+        if (!$rt) return response()->json([]);
+
+        $events = JadwalAngkut::where('rt_id', $rt->id)
+            ->get(['id', 'jadwal', 'status'])
+            ->map(function ($event) {
+                return [
+                    'id' => $event->id,
+                    'title' => $event->status == 'Diangkut' ? 'Diangkut' : 'Belum Diangkut',
+                    'start' => $event->jadwal,
+                    'backgroundColor' => $event->status == 'Diangkut' ? '#10b981' : '#9ca3af', // Hijau vs Abu
+                    'borderColor' => $event->status == 'Diangkut' ? '#10b981' : '#9ca3af',
+                    'extendedProps' => [
+                        'status' => $event->status
+                    ]
+                ];
+            });
+
+        return response()->json($events);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function storeEvent(Request $request)
     {
-        //
+        $request->validate([
+            'jadwal' => 'required|date',
+            'status' => 'required|in:Diangkut,Belum Diangkut'
+        ]);
+
+        $event = JadwalAngkut::create([
+            'rt_id' => Auth::user()->rt->id,
+            'jadwal' => $request->jadwal,
+            'status' => $request->status
+        ]);
+
+        return response()->json(['success' => true, 'data' => $event]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Rt $rt)
+    public function updateEvent(Request $request, $id)
     {
-        //
+        $request->validate([
+            'jadwal' => 'nullable|date',
+            'status' => 'nullable|in:Diangkut,Belum Diangkut'
+        ]);
+
+        $event = JadwalAngkut::where('rt_id', Auth::user()->rt->id)->findOrFail($id);
+
+        if ($request->has('jadwal')) $event->jadwal = $request->jadwal;
+        if ($request->has('status')) $event->status = $request->status;
+
+        $event->save();
+
+        return response()->json(['success' => true]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Rt $rt)
+    public function deleteEvent($id)
     {
-        //
-    }
+        $event = JadwalAngkut::where('rt_id', Auth::user()->rt->id)->findOrFail($id);
+        $event->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Rt $rt)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Rt $rt)
-    {
-        //
+        return response()->json(['success' => true]);
     }
 }

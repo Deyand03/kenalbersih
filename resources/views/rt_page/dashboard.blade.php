@@ -20,11 +20,12 @@
 
         <!-- Form Filter Tahun & Bulan -->
         <form action="{{ route('dashboard') }}" method="GET"
-              class="flex flex-wrap items-center gap-3 bg-white p-2 px-4 rounded-xl shadow-sm border border-gray-100">
+            class="flex flex-wrap items-center gap-3 bg-white p-2 px-4 rounded-xl shadow-sm border border-gray-100">
 
             <!-- Filter Bulan -->
             <div class="form-control w-full md:w-auto">
-                <select name="bulan" class="select select-bordered select-sm w-full md:w-32 focus:border-purple-500 focus:ring-purple-500">
+                <select name="bulan"
+                    class="select select-bordered select-sm w-full md:w-32 focus:border-purple-500 focus:ring-purple-500">
                     @foreach(range(1, 12) as $bulan)
                         <option value="{{ $bulan }}" {{ $bulan == $selectedBulan ? 'selected' : '' }}>
                             {{ \Carbon\Carbon::create()->month($bulan)->translatedFormat('F') }}
@@ -35,7 +36,8 @@
 
             <!-- Filter Tahun -->
             <div class="form-control w-full md:w-auto">
-                <select name="tahun" class="select select-bordered select-sm w-full md:w-28 focus:border-purple-500 focus:ring-purple-500">
+                <select name="tahun"
+                    class="select select-bordered select-sm w-full md:w-28 focus:border-purple-500 focus:ring-purple-500">
                     @forelse($listTahun as $tahun)
                         <option value="{{ $tahun }}" {{ $tahun == $selectedTahun ? 'selected' : '' }}>
                             {{ $tahun }}
@@ -48,8 +50,10 @@
 
             <!-- Tombol Submit -->
             <button type="submit" class="btn btn-sm bg-purple-600 hover:bg-purple-700 text-white border-none">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
                 </svg>
                 Filter
             </button>
@@ -59,7 +63,7 @@
     <!-- Stats Cards Section -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 
-        <!-- Card 1: Sampah Organik (Pink Gradient) -->
+        <!-- Card 1: Sampah Organik -->
         <div
             class="relative overflow-hidden bg-gradient-to-r from-rose-400 to-red-500 rounded-xl p-6 text-white shadow-lg shadow-red-500/30 transition-transform hover:-translate-y-1">
             <!-- Circle Decoration -->
@@ -129,28 +133,82 @@
         </div>
     </div>
 
-    <!-- Chart Section (Card Style Putih) -->
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Chart Section  -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
         <!-- Line Chart (Besar) -->
         <div class="bg-white p-6 rounded-xl shadow-sm lg:col-span-2 border border-gray-100">
             <div class="flex justify-between items-center mb-6">
-                <h3 class="text-lg font-bold text-gray-800">Visit And Sales Statistics</h3>
+                <h3 class="text-lg font-bold text-gray-800">Statistik Volume Sampah</h3>
                 <div class="flex gap-2">
-                    <span class="badge badge-ghost badge-xs bg-purple-100 text-purple-600">ORG</span>
-                    <span class="badge badge-ghost badge-xs bg-red-100 text-red-600">NON</span>
+                    <span class="badge badge-xs bg-rose-100 text-rose-600 border-none p-2">Organik</span>
+                    <span class="badge badge-xs bg-blue-100 text-blue-600 border-none p-2">Non-Organik</span>
+                    <span class="badge badge-xs bg-emerald-100 text-emerald-600 border-none p-2">B3</span>
                 </div>
             </div>
             <div class="relative h-64 w-full">
-                <canvas id="line-chart"></canvas>
+                <canvas id="line-chart" data-labels="{{ json_encode($chartData['labels']) }}"
+                    data-organik="{{ json_encode($chartData['organik']) }}"
+                    data-non-organik="{{ json_encode($chartData['non_organik']) }}"
+                    data-b3="{{ json_encode($chartData['b3']) }}">
+                </canvas>
             </div>
         </div>
 
         <!-- Pie Chart (Kecil) -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h3 class="text-lg font-bold text-gray-800 mb-6">Traffic Sources</h3>
+            <h3 class="text-lg font-bold text-gray-800 mb-6">Proporsi Sampah (Bulan Ini)</h3>
             <div class="relative h-64 flex justify-center">
-                <canvas id="pie-chart"></canvas>
+                <canvas id="pie-chart" data-organik="{{ $organik }}" data-non-organik="{{ $nonOrganik }}"
+                    data-b3="{{ $b3 }}">
+                </canvas>
             </div>
         </div>
     </div>
+
+    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 mb-10">
+        <div class="flex justify-between items-center mb-6">
+            <div>
+                <h3 class="text-lg font-bold text-gray-800">Kelola Jadwal Angkut</h3>
+                <p class="bg-black/5 border-l-4 rounded border-purple-600 text-sm px-2 font-medium text-gray-500">Klik tanggal untuk tambah, klik event untuk edit/hapus.</p>
+            </div>
+            <!-- Legend Kecil -->
+            <div class="flex gap-2 text-xs">
+                <div class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-emerald-500"></div> Diangkut</div>
+                <div class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-gray-400"></div> Belum</div>
+            </div>
+        </div>
+        <!-- FullCalendar Container -->
+        <div id="calendar" class="min-h-[600px]"></div>
+    </div>
+
+    <dialog id="jadwal_modal" class="modal">
+        <div class="modal-box">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="font-bold text-lg mb-4" id="modal-title">Tambah Jadwal</h3>
+            <form id="jadwal-form">
+                <input type="hidden" id="input-jadwal-id">
+                <!-- Input Tanggal -->
+                <div class="form-control w-full mb-4">
+                    <label class="label"><span class="label-text">Tanggal</span></label>
+                    <input type="date" id="input-jadwal-date" name="jadwal" class="input input-bordered w-full" required />
+                </div>
+                <!-- Input Status -->
+                <div class="form-control w-full mb-6">
+                    <label class="label"><span class="label-text">Status Pengangkutan</span></label>
+                    <select id="input-jadwal-status" name="status" class="select select-bordered w-full">
+                        <option value="Belum Diangkut">Belum Diangkut</option>
+                        <option value="Diangkut">Sudah Diangkut</option>
+                    </select>
+                </div>
+                <!-- Action Buttons -->
+                <div class="flex justify-end gap-2">
+                    <button type="button" id="btn-delete" class="btn btn-error text-white hidden">Hapus</button>
+                    <button type="submit" id="btn-save" class="btn btn-primary text-white">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </dialog>
+    @vite(['resources/js/jadwal_admin.js'])
 @endsection
