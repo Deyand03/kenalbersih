@@ -3,7 +3,7 @@
 @section('content')
 
     {{-- Bagian 1 --}}
-    <div class="bg-linear-to-br from-(--bg-secondary) to-(--bg-primary) h-16"></div>
+    <div class="bg-transparent h-16"></div>
 
     <div class="bg-base-200 h-[65vh] relative overflow-hidden">
         {{-- Elemen dekoratif di latar belakang --}}

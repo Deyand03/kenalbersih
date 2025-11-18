@@ -6,7 +6,7 @@ const textNavbar = document.querySelectorAll('.text-navbar');
 
 // Navbar
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
+    if (window.scrollY > 20) {
         customNav.style.boxShadow = '0px 0px 10px 2px rgba(0,0,0,0.75)';
         customNav.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
         customNav.style.backdropFilter = 'blur(8px)';
@@ -96,27 +96,27 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-window.addEventListener('load', () => {
-    document.body.classList.remove('splash-active');
-    // Data stat (belom kocaq)
-});
 if (!localStorage.getItem('splashScreenShown')) {
 
     let isLoaded = false;
     let isAnimTimeUp = false;
-
+    window.addEventListener('load', () => {
+        document.body.classList.remove('splash-active');
+        // Data stat (belom kocaq)
+    });
     window.addEventListener('load', () => {
         isLoaded = true;
+        startExitAnimation();
         if (isAnimTimeUp) {
-            startExitAnimation();
         }
     });
     setTimeout(() => {
         isAnimTimeUp = true;
+        startExitAnimation();
         if (isLoaded) {
-            startExitAnimation();
         }
     }, 1500);
+
 
 } else {
     // WIBU WIBU

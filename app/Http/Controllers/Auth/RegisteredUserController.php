@@ -39,7 +39,7 @@ class RegisteredUserController extends Controller
             'jenis_kelamin' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'no_rt' => ['required', 'integer', 'unique:rts'],
             'alamat_rumah' => ['required', 'string', 'max:255'],
-            'no_rekening' => ['required', 'string', 'max:255', 'unique:rts'],
+            'no_rekening' => ['nullable', 'string', 'max:255', 'unique:rts'],
             'no_dana' => ['nullable', 'string', 'max:255', 'unique:rts'],
             'no_hp' => ['required', 'string', 'max:255', 'unique:rts'],
 
