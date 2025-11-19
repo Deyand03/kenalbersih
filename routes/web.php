@@ -13,15 +13,11 @@ Route::get('/jadwal-angkut', [HomepageController::class, 'data_jadwal'])->name('
 Route::get('/getTahunByRt', [HomepageController::class, 'fetchTahun'])->name('fetch.tahun');
 Route::get('/laporan_sampah', [NavigationController::class, 'laporan_sampah'])->name('laporan_sampah');
 
-<<<<<<< HEAD
 Route::get('/about', [AboutController::class, 'about'])->name('about');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
-=======
-// tambahin middleware role rt
->>>>>>> ee9dcfb64be16e43c7f1ffce30e73470647f8544
 
 Route::middleware(['auth', 'role:rt'])->group(function () {
     Route::get('/dashboard', [RtController::class, 'index'])->name('dashboard');
