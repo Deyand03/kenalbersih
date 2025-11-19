@@ -5,7 +5,8 @@
     <!-- Header Page -->
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div class="flex items-center gap-3">
-            <div class="bg-gradient-to-br from-purple-500 to-purple-700 p-2 rounded-lg shadow-lg shadow-purple-500/30">
+            <div
+                class="bg-gradient-to-br from-(--bg-tertiary) to-(--bg-secondary) p-2 rounded-lg shadow-lg shadow-green-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-house-door-fill"
                     viewBox="0 0 16 16">
                     <path
@@ -14,7 +15,6 @@
             </div>
             <div>
                 <h2 class="text-2xl font-bold text-gray-800">Dashboard</h2>
-                <p class="text-sm text-gray-500">Overview of your RT management</p>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
             </div>
 
             <!-- Tombol Submit -->
-            <button type="submit" class="btn btn-sm bg-purple-600 hover:bg-purple-700 text-white border-none">
+            <button type="submit" class="btn btn-sm bg-(--bg-secondary) hover:bg-(--bg-primary) text-white border-none">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -59,6 +59,77 @@
             </button>
         </form>
     </div>
+
+    <details class="collapse collapse-arrow bg-white shadow-md border border-gray-100 rounded-xl mb-8">
+        <summary class="collapse-title text-lg font-bold text-[#016B61] bg-[#E1EEBC]/60">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 inline-block align-middle" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Input Data Volume Sampah Bulanan
+        </summary>
+        <div class="collapse-content bg-white p-6 pt-0">
+            <form action="{{ route('rt.volume.store') }}" method="POST" class="flex flex-col gap-4">
+                @csrf
+                <p class="text-md text-gray-500 mb-2 font-medium mt-3">Masukkan data volume sampah (dalam Kilogram) untuk periode tertentu.
+                </p>
+
+                {{-- Pilihan Bulan & Tahun (Sama seperti Filter) --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="form-control flex flex-col">
+                        <label class="label"><span class="label-text">Bulan</span></label>
+                        <select name="bulan" class="select select-bordered focus:border-[#016B61]">
+                            @foreach(range(1, 12) as $bulan)
+                                <option value="{{ $bulan }}" {{ $bulan == now()->month ? 'selected' : '' }}>
+                                    {{ \Carbon\Carbon::createFromDate(null, $bulan, 1)->translatedFormat('F') }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-control flex flex-col">
+                        <label class="label"><span class="label-text">Tahun</span></label>
+                        <select name="tahun" class="select select-bordered focus:border-[#016B61]">
+                            @php $currentYear = now()->year; @endphp
+                            @for ($y = $currentYear; $y >= $currentYear - 3; $y--)
+                                <option value="{{ $y }}" {{ $y == $currentYear ? 'selected' : '' }}>{{ $y }}</option>
+                            @endfor
+                        </select>
+                    </div>
+                </div>
+
+                {{-- Input Volume Sampah --}}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="form-control flex flex-col">
+                        <label class="label"><span class="label-text">Organik (Kg)</span></label>
+                        <input type="number" name="organik" step="0.01" min="0"
+                            class="input input-bordered focus:border-rose-500" placeholder="0.00" required>
+                    </div>
+                    <div class="form-control flex flex-col">
+                        <label class="label"><span class="label-text">Non-Organik (Kg)</span></label>
+                        <input type="number" name="non_organik" step="0.01" min="0"
+                            class="input input-bordered focus:border-blue-500" placeholder="0.00" required>
+                    </div>
+                    <div class="form-control flex flex-col">
+                        <label class="label"><span class="label-text">B3 (Kg)</span></label>
+                        <input type="number" name="b3" step="0.01" min="0"
+                            class="input input-bordered focus:border-emerald-500" placeholder="0.00" required>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <button type="submit" class="btn bg-[#016B61] hover:bg-[#328E6E] text-white w-full md:w-auto">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z"
+                                clip-rule="evenodd" />
+                        </svg>
+                        Simpan Data
+                    </button>
+                </div>
+            </form>
+        </div>
+    </details>
 
     <!-- Stats Cards Section -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
@@ -135,7 +206,7 @@
 
     <!-- Chart Section  -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-        <!-- Line Chart (Besar) -->
+        <!-- Line Chart -->
         <div class="bg-white p-6 rounded-xl shadow-sm lg:col-span-2 border border-gray-100">
             <div class="flex justify-between items-center mb-6">
                 <h3 class="text-lg font-bold text-gray-800">Statistik Volume Sampah</h3>
@@ -154,7 +225,7 @@
             </div>
         </div>
 
-        <!-- Pie Chart (Kecil) -->
+        <!-- Pie Chart -->
         <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
             <h3 class="text-lg font-bold text-gray-800 mb-6">Proporsi Sampah (Bulan Ini)</h3>
             <div class="relative h-64 flex justify-center">
@@ -169,12 +240,17 @@
         <div class="flex justify-between items-center mb-6">
             <div>
                 <h3 class="text-lg font-bold text-gray-800">Kelola Jadwal Angkut</h3>
-                <p class="bg-black/5 border-l-4 rounded border-purple-600 text-sm px-2 font-medium text-gray-500">Klik tanggal untuk tambah, klik event untuk edit/hapus.</p>
+                <p class="bg-black/5 border-l-4 rounded border-(--bg-secondary) text-sm px-2 font-medium text-gray-500">Klik
+                    tanggal untuk tambah, klik event untuk edit/hapus.</p>
             </div>
             <!-- Legend Kecil -->
             <div class="flex gap-2 text-xs">
-                <div class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-emerald-500"></div> Diangkut</div>
-                <div class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-gray-400"></div> Belum</div>
+                <div class="flex items-center gap-1">
+                    <div class="w-3 h-3 rounded-full bg-emerald-500"></div> Diangkut
+                </div>
+                <div class="flex items-center gap-1">
+                    <div class="w-3 h-3 rounded-full bg-gray-400"></div> Belum
+                </div>
             </div>
         </div>
         <!-- FullCalendar Container -->
@@ -210,5 +286,17 @@
             </form>
         </div>
     </dialog>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if(session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Berhasil!',
+                text: "{{ session('success') }}",
+                confirmButtonColor: '#10b981'
+            });
+        </script>
+    @endif
     @vite(['resources/js/jadwal_admin.js'])
 @endsection

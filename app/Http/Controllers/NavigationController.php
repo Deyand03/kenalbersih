@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class NavigationController extends Controller
 {
     public function laporan_sampah(){
-        return view("laporan_sampah.index");
+        
     }
 }

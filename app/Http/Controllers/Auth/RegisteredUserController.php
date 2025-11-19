@@ -94,7 +94,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             // Data untuk tabel 'wargas'
             'name' => ['required', 'string', 'max:255'],
-            'rt_id' => ['required', 'integer', Rule::exists('rts', 'id')], // Cek ID-nya ada di tabel 'rts'
+            'rt_id' => ['required', 'integer', Rule::exists('rts', 'id')],
             'jenis_kelamin' => ['required', Rule::in(['Laki-laki', 'Perempuan'])],
             'alamat_rumah' => ['required', 'string', 'max:255'],
             'no_hp' => ['required', 'string', 'max:255'],
@@ -123,6 +123,6 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         Auth::login($user);
-        return redirect(route('dashboard', absolute: false));
+        return redirect(route('homepage', absolute: false));
     }
 }

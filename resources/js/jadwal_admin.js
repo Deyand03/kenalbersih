@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // --- Helper: Colored Toast ---
-    // Fungsi bikin Toast dengan background dinamis
     const showToast = (title, icon, color) => {
         Swal.mixin({
             toast: true,
@@ -28,9 +27,9 @@ document.addEventListener('DOMContentLoaded', function () {
             showConfirmButton: false,
             timer: 3000,
             timerProgressBar: true,
-            background: color, // Warna background
-            color: '#fff',     // Warna teks putih
-            iconColor: '#fff', // Warna icon putih
+            background: color,
+            color: '#fff',
+            iconColor: '#fff',
             didOpen: (toast) => {
                 toast.addEventListener('mouseenter', Swal.stopTimer)
                 toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -64,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
             events: '/rt/jadwal/events',
 
             // 1. Klik Tanggal Kosong -> Tambah Event
-            dateClick: function(info) {
+            dateClick: function (info) {
                 resetForm();
                 dateInput.value = info.dateStr;
                 modalTitle.innerText = 'Tambah Jadwal';
@@ -72,7 +71,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
 
             // 2. Klik Event -> Edit/Hapus
-            eventClick: function(info) {
+            eventClick: function (info) {
                 const event = info.event;
                 eventIdInput.value = event.id;
                 dateInput.value = event.startStr ? event.startStr.split('T')[0] : '';
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
 
             // 3. Drag & Drop
-            eventDrop: function(info) {
+            eventDrop: function (info) {
                 updateEventDate(info.event);
             }
         });
@@ -96,7 +95,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // --- Form Submit Handler ---
         if (form) {
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function (e) {
                 e.preventDefault();
 
                 const freshCsrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
@@ -123,47 +122,47 @@ document.addEventListener('DOMContentLoaded', function () {
                     },
                     body: JSON.stringify(payload)
                 })
-                .then(async response => {
-                    const isJson = response.headers.get('content-type')?.includes('application/json');
-                    const data = isJson ? await response.json() : null;
+                    .then(async response => {
+                        const isJson = response.headers.get('content-type')?.includes('application/json');
+                        const data = isJson ? await response.json() : null;
 
-                    if (!response.ok) {
-                        const errorMessage = (data && data.message) || response.statusText;
-                        throw new Error(errorMessage);
-                    }
-                    return data;
-                })
-                .then(data => {
-                    if (data && data.success) {
-                        if (modal) modal.close();
-                        calendar.refetchEvents();
-                        resetForm();
-
-                        if (isUpdate) {
-                            // Update: Biru
-                            showToast('Jadwal berhasil diperbarui!', 'success', '#3b82f6');
-                        } else {
-                            // Create: Hijau (Emerald)
-                            showToast('Jadwal baru ditambahkan!', 'success', '#10b981');
+                        if (!response.ok) {
+                            const errorMessage = (data && data.message) || response.statusText;
+                            throw new Error(errorMessage);
                         }
-                    } else {
-                        throw new Error('Terjadi kesalahan server.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Fetch Error:', error);
-                    showToast(error.message, 'error', '#ef4444');
-                })
-                .finally(() => {
-                    btnSave.innerText = originalText;
-                    btnSave.disabled = false;
-                });
+                        return data;
+                    })
+                    .then(data => {
+                        if (data && data.success) {
+                            if (modal) modal.close();
+                            calendar.refetchEvents();
+                            resetForm();
+
+                            if (isUpdate) {
+                                // Update: Biru
+                                showToast('Jadwal berhasil diperbarui!', 'success', '#3b82f6');
+                            } else {
+                                // Create: Hijau (Emerald)
+                                showToast('Jadwal baru ditambahkan!', 'success', '#10b981');
+                            }
+                        } else {
+                            throw new Error('Terjadi kesalahan server.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Fetch Error:', error);
+                        showToast(error.message, 'error', '#ef4444');
+                    })
+                    .finally(() => {
+                        btnSave.innerText = originalText;
+                        btnSave.disabled = false;
+                    });
             });
         }
 
         // --- Delete Handler ---
         if (btnDelete) {
-            btnDelete.addEventListener('click', function() {
+            btnDelete.addEventListener('click', function () {
                 if (!confirm('Yakin ingin menghapus jadwal ini? Data tidak bisa dikembalikan.')) {
                     return;
                 }
@@ -175,27 +174,27 @@ document.addEventListener('DOMContentLoaded', function () {
                 fetch(`/rt/jadwal/delete/${id}`, {
                     method: 'POST',
                     headers: {
-                         'X-CSRF-TOKEN': freshCsrfToken,
-                         'Accept': 'application/json'
+                        'X-CSRF-TOKEN': freshCsrfToken,
+                        'Accept': 'application/json'
                     }
                 })
-                .then(async response => {
-                    if (!response.ok) throw new Error(response.statusText);
-                    return response.json();
-                })
-                .then(data => {
-                    if (data.success) {
-                        if (modal) modal.close();
-                        calendar.refetchEvents();
+                    .then(async response => {
+                        if (!response.ok) throw new Error(response.statusText);
+                        return response.json();
+                    })
+                    .then(data => {
+                        if (data.success) {
+                            if (modal) modal.close();
+                            calendar.refetchEvents();
 
-                        // Delete: Merah
-                        showToast('Jadwal telah dihapus.', 'success', '#ef4444');
-                    }
-                })
-                .catch(error => {
-                    console.error('Delete Error:', error);
-                    showToast('Gagal menghapus data.', 'error', '#ef4444');
-                });
+                            // Delete: Merah
+                            showToast('Jadwal telah dihapus.', 'success', '#ef4444');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Delete Error:', error);
+                        showToast('Gagal menghapus data.', 'error', '#ef4444');
+                    });
             });
         }
     }
@@ -222,20 +221,19 @@ document.addEventListener('DOMContentLoaded', function () {
                 jadwal: newDate
             })
         })
-        .then(res => res.json())
-        .then(data => {
-            if(data.success) {
-                // Drag Drop: Biru (Update)
-                showToast('Tanggal jadwal diperbarui', 'success', '#3b82f6');
-            } else {
-                showToast('Gagal update tanggal', 'error', '#ef4444');
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showToast('Tanggal jadwal diperbarui', 'success', '#3b82f6');
+                } else {
+                    showToast('Gagal update tanggal', 'error', '#ef4444');
+                    event.revert();
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                showToast('Gagal koneksi server', 'error', '#ef4444');
                 event.revert();
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            showToast('Gagal koneksi server', 'error', '#ef4444');
-            event.revert();
-        });
+            });
     }
 });

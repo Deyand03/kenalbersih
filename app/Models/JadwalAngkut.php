@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class JadwalAngkut extends Model
 {
     protected $table = 'jadwal_angkuts';
-    protected $guarded = [];
-
     protected $fillable = [
         'rt_id',
         'jadwal',

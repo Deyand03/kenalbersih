@@ -1,0 +1,29 @@
+:root {
+    --bg-primary: #016B61;
+    --bg-secondary: #328E6E;
+    --bg-tertiary: #44BB91;
+    --bg-dark: #201E43;
+    --text-primary: #E1EEBC;
+    --text-secondary: #016B61;
+}
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f2edf3;
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c7c7c7;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}

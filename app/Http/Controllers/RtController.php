@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JadwalAngkut;
 use App\Models\Rt;
+use App\Models\VolumeSampahBulan;
 use App\Models\VolumeSampahTahun;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -54,8 +55,6 @@ class RtController extends Controller
                 ->first();
 
             if ($volumeTahun) {
-                // --- LOGIKA CHART (LINE CHART) ---
-                // Ambil semua bulan di tahun ini, urutkan dari Januari (1) ke Desember (12)
                 $allBulanData = $volumeTahun->volume_sampah_bulan()
                     ->orderBy('bulan', 'asc')
                     ->get();
@@ -175,4 +174,40 @@ class RtController extends Controller
 
         return response()->json(['success' => true]);
     }
+
+    public function storeVolumeSampah(Request $request)
+    {
+        $rtId = Auth::user()->rt->id;
+
+        $validated = $request->validate([
+            'tahun' => 'required|integer|min:2020',
+            'bulan' => 'required|integer|min:1|max:12',
+            'organik' => 'required|numeric|min:0',
+            'non_organik' => 'required|numeric|min:0',
+            'b3' => 'required|numeric|min:0',
+        ]);
+
+        // 1. Find or create VolumeSampahTahun
+        $volumeTahun = VolumeSampahTahun::firstOrCreate(
+            ['rt_id' => $rtId, 'tahun' => $validated['tahun']],
+            ['tahun' => $validated['tahun']] // Asumsi model VolumeSampahTahun punya field ini
+        );
+
+        // 2. Update or create VolumeSampahBulan
+        // NOTE: Ini mengasumsikan VolumeSampahBulan punya foreign key 'volume_sampah_tahun_id'
+        VolumeSampahBulan::updateOrCreate(
+            [
+                'volume_tahun_id' => $volumeTahun->id,
+                'bulan' => $validated['bulan']
+            ],
+            [
+                'organik' => $validated['organik'],
+                'non_organik' => $validated['non_organik'],
+                'b3' => $validated['b3'],
+            ]
+        );
+
+        return redirect()->route('dashboard')->with('success', 'Data volume sampah berhasil disimpan!');
+    }
 }
+

@@ -5,7 +5,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // --- 1. LINE CHART (Statistik Tahunan) ---
     const lineCtx = document.getElementById('line-chart');
     if (lineCtx) {
-        // Ambil data dari HTML attribute
         const labels = JSON.parse(lineCtx.dataset.labels);
         const dataOrganik = JSON.parse(lineCtx.dataset.organik);
         const dataNonOrganik = JSON.parse(lineCtx.dataset.nonOrganik); // camelCase dari data-non-organik
@@ -95,22 +94,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // --- 2. PIE CHART (Proporsi Bulan Ini) ---
+    // --- 2. PIE CHART  ---
     const pieCtx = document.getElementById('pie-chart');
     if (pieCtx) {
         const valOrganik = parseInt(pieCtx.dataset.organik) || 0;
         const valNonOrganik = parseInt(pieCtx.dataset.nonOrganik) || 0;
         const valB3 = parseInt(pieCtx.dataset.b3) || 0;
 
-        // Cek kalau data kosong semua, kasih dummy kecil biar gak error/jelek
         const isDataEmpty = (valOrganik + valNonOrganik + valB3) === 0;
         const pieData = isDataEmpty ? [1] : [valOrganik, valNonOrganik, valB3];
         const pieColors = isDataEmpty
-            ? ['#e5e7eb'] // Abu-abu kalau kosong
-            : ['#fb7185', '#60a5fa', '#34d399']; // Rose-400, Blue-400, Emerald-400
+            ? ['#e5e7eb']
+            : ['#fb7185', '#60a5fa', '#34d399']; 
 
         new Chart(pieCtx, {
-            type: 'doughnut', // Doughnut lebih modern daripada Pie biasa
+            type: 'doughnut',
             data: {
                 labels: isDataEmpty ? ['Tidak ada data'] : ['Organik', 'Non-Organik', 'B3'],
                 datasets: [{
@@ -123,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function () {
             options: {
                 responsive: true,
                 maintainAspectRatio: false,
-                cutout: '70%', // Bolong tengahnya seberapa besar
+                cutout: '50%',
                 plugins: {
                     legend: {
                         position: 'bottom',

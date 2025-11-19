@@ -7,8 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class LaporanSampah extends Model
 {
     protected $table = 'laporan_sampahs';
-    protected $guarded = [];
-
+protected $fillable = [
+        'warga_id',
+        'rt_id',
+        'deskripsi',
+        'alamat',
+        'foto_bukti',
+        'status',
+    ];
     public function warga(){
         return $this->belongsTo(Warga::class, 'warga_id', 'id');
     }
