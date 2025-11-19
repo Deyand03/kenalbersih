@@ -11,6 +11,10 @@
     backdrop-filter: blur(10px);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body.splash-active {
     overflow: hidden;
 }

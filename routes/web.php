@@ -4,6 +4,7 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\JadwalAngkutController;
 use App\Http\Controllers\LaporanSampahController;
 use App\Http\Controllers\NavigationController;
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RtController;
 use Illuminate\Support\Facades\Route;
@@ -11,8 +12,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomepageController::class, 'index'])->name('homepage');
 Route::get('/jadwal-angkut', [HomepageController::class, 'data_jadwal'])->name('data_jadwal');
 Route::get('/getTahunByRt', [HomepageController::class, 'fetchTahun'])->name('fetch.tahun');
+Route::get('/about', [AboutController::class, 'about'])->name('about');
 
-// tambahin middleware role rt
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/laporan_sampah', [LaporanSampahController::class, 'index_warga'])->name('laporan_sampah');
