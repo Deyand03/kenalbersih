@@ -63,7 +63,7 @@
         </p>
         <div class="absolute top-0 right-0 w-1/2 h-full flex justify-end pr-24 py-24">
 
-            <div class="relative w-full h-full max-w-md overflow-y-auto scrollbar-hide">
+            <div class="relative w-full h-full max-w-md overflow-y-auto">
 
                 <div class="sticky top-0 h-5 bg-linear-to-b from-white to-transparent pointer-events-none z-10"></div>
 
@@ -193,7 +193,7 @@
                             <x-input-label for="no_rekening" :value="__('Nomor Rekening')" />
                             <x-text-input id="no_rekening" class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md"
                                 placeholder="Masukkan Nomor Rekening" type="text" name="no_rekening"
-                                :value="old('no_rekening')" required />
+                                :value="old('no_rekening')" />
                         </div>
 
                         <div class="mt-4">
@@ -205,9 +205,9 @@
 
                         <div class="mt-6">
                             <button type="submit"
-                                class="w-full justify-center inline-flex items-center px-4 py-3 border border-transparent 
-                           rounded-md font-semibold text-base text-white uppercase tracking-widest 
-                           bg-linear-to-r from-[#5BA58B] to-[#328E6E] 
+                                class="w-full justify-center inline-flex items-center px-4 py-3 border border-transparent
+                           rounded-md font-semibold text-base text-white uppercase tracking-widest
+                           bg-linear-to-r from-[#5BA58B] to-[#328E6E]
                            hover:brightness-110 focus:outline-none transition-all">
                                 {{ __('Daftar') }}
                             </button>

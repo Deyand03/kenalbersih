@@ -13,11 +13,6 @@ class RtSeeder extends Seeder
      */
     public function run(): void
     {
-        $nama = [
-            'Defry',
-            'Azia',
-            'Raihan'
-        ];
         DB::table('rts')->insert([
             [
                 "user_id" => 1,
@@ -25,7 +20,8 @@ class RtSeeder extends Seeder
                 "nama" => 'Defry',
                 "jenis_kelamin" => 'Laki-laki',
                 "no_dana" => '08123456781',
-                "no_hp" => '08123456781'
+                "no_hp" => '08123456781',
+                "alamat_rumah" => "Jln.ASOMASO"
             ],
             [
                 "user_id" => 2,
@@ -33,7 +29,8 @@ class RtSeeder extends Seeder
                 "nama" => 'Azia',
                 "jenis_kelamin" => 'Perempuan',
                 "no_dana" => '08123456782',
-                "no_hp" => '08123456782'
+                "no_hp" => '08123456782',
+                "alamat_rumah" => "Jln.ASOMASO"
             ],
             [
                 "user_id" => 3,
@@ -41,7 +38,8 @@ class RtSeeder extends Seeder
                 "nama" => 'Raihan',
                 "jenis_kelamin" => 'Laki-laki',
                 "no_dana" => '08123456783',
-                "no_hp" => '08123456783'
+                "no_hp" => '08123456783',
+                "alamat_rumah" => "Jln.ASOMASO"
             ]
         ]);
     }
