@@ -3,44 +3,162 @@
 @section('content')
 
     {{-- header --}}
-    <div class="bg-linear-to-br from-(--bg-secondary) to-(--bg-primary) h-16"></div>
 
     {{-- awal --}}
-    <div class="bg-[#E0F9D3] relative min-h-[calc(100vh-4rem)] pb-20">
+    <div class="h-screen bg-cover bg-center" style="background-image: url({{ asset('assets/begron.svg') }})">
         {{-- Kontainer untuk Teks --}}
-        <div class="container mx-auto px-6 lg:px-8 pt-10 pb-20 lg:pt-12 lg:pb-24 text-center relative z-20">
-            <h1 class="text-5xl md:text-6xl font-extrabold mb-4">
-                <span class="text-[#066057] [text-shadow:0px_1.5px_2px_rgba(0,0,0,0.4)]">
+        <div class="container mx-auto px-6 lg:px-8 pt-10 pb-20 lg:pt-12 lg:pb-24 relative z-20" data-animasi="zoom-in"
+            data-delay="100">
+            <h1 class="text-5xl md:text-6xl font-extrabold mb-4 pt-24" data-animasi="">
+                <span
+                    class="inline-block text-[#066057] [text-shadow:0px_1.5px_2px_rgba(0,0,0,0.4)]
+                transform transition-transform duration-300 hover:scale-110 hover:-translate-y-1 cursor-pointer">
                     Tentang
                 </span>
-                <span class="text-[#529661] [text-shadow:0px_1.5px_2px_rgba(0,0,0,0.4)]">
+                <span
+                    class="inline-block text-[#529661] [text-shadow:0px_1.5px_2px_rgba(0,0,0,0.4)]
+                transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1 cursor-pointer">
                     KenalBersih
                 </span>
             </h1>
-            <p class="text-lg text-[#201E43] max-w-5xl mx-auto mb-8 mt-8">KenalBersih merupakan website yang dirancang khusus
-                untuk membantu Ketua RT yang ada di Desa Mendalo Indah,
+            <p class="text-base text-[#201E43] max-w-2xl mb-8 mt-8">KenalBersih merupakan website yang dirancang
+                khusus untuk membantu Ketua RT yang ada di Desa Mendalo Indah,
                 Kabupaten Muaro Jambi mengelola sampah di lingkungan RT mereka dengan baik. Melalui website ini, warga dapat
-                melihat jadwal
-                pengangkutan sampah setiap minggunya, membuat laporan apabila mendapati sampah yang menumpuk di suatu
+                melihat jadwal pengangkutan sampah setiap minggunya, membuat laporan apabila mendapati sampah yang menumpuk
+                di suatu
                 tempat, hingga
                 membayar iuran kebersihan setiap bulannya. Lingkungan yang bersih membuat kita nyaman beraktifitas dan
                 terhindar dari
                 berbagai macam penyakit. Segera daftarkan RT Anda di website ini agar pengelolaan sampah di lingkungan Anda
-                dapat terorganisir dengan baik!</p>
-        </div>
+                dapat terorganisir dengan baik!
+            </p>
 
-        {{-- Kontainer untuk Matahari dan Bukit --}}
-        <div class="absolute bottom-0 left-0 w-full z-10 h-auto">
-            {{-- Matahari --}}
-            <img src="/assets/matahari.png" alt=""
-                class="w-70 mx-auto animate-[spin_10s_linear_infinite] absolute z-0 left-0 right-0 top-100">
+            <div class="">
+                <a href="https://sid.mendaloindah.desa.id/" target="_blank" rel="noopener noreferrer"
+                    class="btn btn-lg bg-(--bg-tertiary) text-[#F5FFFA] rounded-3xl hover:bg-(--bg-secondary)
+                 hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
+                 ease-in-out active:scale-100 active:shadow-none mr-5">Profil
+                    Desa</a>
 
-            {{-- Bukit --}}
-            <img src="/assets/bukit.svg" class="w-full top-100 relative z-10" alt="">
+                <a href="#selengkapnya"
+                    class="btn btn-lg bg-(--bg-tertiary) text-[#F5FFFA] rounded-3xl hover:bg-(--bg-secondary)
+                 hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
+                 ease-in-out active:scale-100 active:shadow-none">Selengkapnya</a>
+            </div>
 
-            {{-- Mobil di atas bukit --}}
-            <img src="/assets/mobil.png" alt="Mobil Sampah" class="absolute right-10 z-20 w-24 top-86 transform rotate-[-10deg]"
-                style="bottom: 120px;">
+            {{-- <img src="/assets/bukit.svg" alt=""
+                class="w-[2000px] mx-auto z-0 left-0 right-0 top-[100px]"> --}}
         </div>
     </div>
+
+    {{-- bagian tengah --}}
+    <div id="selengkapnya" class="bg-[#F1FCFF] pt-15">
+        <div class="bg-[#F1FCFF] h-fit py-10 relative">
+            <h1 class="text-5xl font-extrabold text-center text-[#066057]">
+                Daftar Layanan KenalBersih
+            </h1>
+            <ul class="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical pt-8">
+                <li>
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-start mb-10 md:text-end">
+                        <time class="text-lg font-black">Laporan Volume Sampah</time>
+                        <div class=""></div>
+                        <p class="">
+                            Ibarat buku harian sampah kita bersama, Pengurus RT dapat mengisi data sampah yang berhasil
+                            dikumpulkan.
+                            Kemudian, semua warga bisa melihat datanya dengan mudah. Kita bisa tahu berapa banyak sampah
+                            yang terkumpul bulan ini, tahun ini, hingga jenis sampahnya mulai dari organik, anorganik, dan
+                            B3. Jadi, kita
+                            bisa tahu apakah usaha daur ulang kita sudah berhasil atau belum. Semua jadi terbuka dan jelas!
+                        </p>
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end md:mb-10">
+                        <time class="text-lg font-black">Jadwal Pengangkutan Sampah</time>
+                        <div class=""></div>
+                        Jangan bingung lagi kapan truk sampah datang! Ini adalah papan informasi jadwal yang dipegang oleh
+                        RT. Pengurus RT bisa memasukkan dan mengubah jadwal angkut sampah di sini. Warga bisa mengecek
+                        jadwalnya kapan saja. Begitu ada perubahan atau sampah sudah diangkut, statusnya akan langsung
+                        diperbarui. Lingkungan pun jadi bersih tepat waktu.
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-start mb-10 md:text-end">
+                        <time class="text-lg font-black">Pembayaran Iuran Kebersihan</time>
+                        <div class=""></div>
+                        Bayar iuran bulanan jadi super gampang, secepat kirim pesan! Warga bisa membayar iuran kebersihan
+                        langsung lewat fitur ini, biasanya bisa pakai transfer atau cara digital lainnya. Kita tidak perlu
+                        repot lagi menanti petugas tagihan. Pembayaran akan langsung tercatat otomatis, kita pun langsung
+                        dapat buktinya. Proses kebersihan RT jadi lancar karena dananya selalu siap.
+                    </div>
+                    <hr />
+                </li>
+                <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-end md:mb-10">
+                        <time class="text-lg font-black">Melaporkan Sampah Menumpuk</time>
+                        <div class=""></div>
+                        Kalau Bapak/Ibu atau Adik-adik melihat ada tumpukan sampah yang tercecer atau belum diangkut,
+                        langsung saja laporkan di sini! Cukup foto, kasih keterangan tempatnya, dan kirim. Laporan ini akan
+                        segera diterima oleh RT. Pengurus RT akan langsung bertindak cepat untuk menangani tumpukan
+                        tersebut. Kita semua bisa ikut menjaga kebersihan lingkungan dengan mudah dan cepat.
+                    </div>
+                    <hr />
+                </li>
+                {{-- <li>
+                    <hr />
+                    <div class="timeline-middle">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="h-5 w-5">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="timeline-start mb-10 md:text-end">
+                        <time class="text-lg font-black">Apple Watch</time>
+                        <div></div>
+                        The Apple Watch is a line of smartwatches produced by Apple Inc. It incorporates fitness
+                        tracking, health-oriented capabilities, and wireless telecommunication, and integrates with
+                        iOS and other Apple products and services
+                    </div>
+                </li> --}}
+            </ul>
+        </div>
+    </div>
+
+
+
+    @vite(['resources/js/utility/navbar_lapor_sampah.js'])
 @endsection
