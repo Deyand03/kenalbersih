@@ -19,18 +19,21 @@
         </div>
         <div class="flex items-center gap-3">
             {{-- Tombol Settings --}}
-            <button onclick="modal_settings.showModal()" class="btn btn-outline border-[#016B61] text-[#016B61] hover:bg-[#016B61] hover:text-white gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
-                        <path d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z"/>
-                    </svg>
-                    Atur Tarif
-                </button>
+            <button onclick="modal_settings.showModal()"
+                class="btn btn-outline border-[#016B61] text-[#016B61] hover:bg-[#016B61] hover:text-white gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-gear-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                </svg>
+                Atur Tarif
+            </button>
 
             <!-- Tombol Input Manual -->
             <button onclick="modal_input_manual.showModal()"
                 class="btn bg-(--bg-secondary) hover:bg-(--bg-primary) text-white border-none shadow-md gap-2">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg"
-                    viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-plus-lg" viewBox="0 0 16 16">
                     <path fill-rule="evenodd"
                         d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2z" />
                 </svg>
@@ -41,11 +44,16 @@
 
     {{-- Bar Info --}}
     <div class="alert bg-white border border-gray-200 shadow-sm mb-8">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-[#016B61] shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+            class="stroke-[#016B61] shrink-0 w-6 h-6">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+        </svg>
         <div>
             <h3 class="font-bold text-gray-700">Aturan Iuran Aktif</h3>
             <div class="text-xs text-gray-500">
-                Warga dikenakan biaya <span class="font-bold text-[#016B61]">Rp {{ number_format($rt->biaya_iuran, 0, ',', '.') }}</span> setiap
+                Warga dikenakan biaya <span class="font-bold text-[#016B61]">Rp
+                    {{ number_format($rt->biaya_iuran, 0, ',', '.') }}</span> setiap
                 <span class="badge badge-sm badge-ghost font-bold">{{ $rt->jenis_iuran }}</span>
             </div>
         </div>
@@ -86,7 +94,7 @@
     <!-- Tabs Section -->
     <div role="tablist" class="tabs tabs-boxed bg-transparent p-0 mb-4 gap-2">
         <input type="radio" name="my_tabs_1" role="tab"
-            class="tab h-10 px-6 rounded-full bg-white data-[checked]:bg-[#016B61] data-[checked]:text-white shadow-sm"
+            class="tab h-10 px-6 rounded-full bg-white data-checked:bg-[#016B61] data-checked:text-white shadow-sm"
             aria-label="Menunggu Konfirmasi" checked />
         <div role="tabpanel" class="tab-content bg-white border border-gray-100 rounded-2xl p-6 mt-4 shadow-sm">
             <!-- Tabel Menunggu -->
@@ -145,7 +153,7 @@
         </div>
 
         <input type="radio" name="my_tabs_1" role="tab"
-            class="tab h-10 px-6 rounded-full bg-white data-[checked]:bg-[#016B61] data-[checked]:text-white shadow-sm"
+            class="tab h-10 px-6 rounded-full bg-white data-checked:bg-[#016B61] data-checked:text-white shadow-sm"
             aria-label="Riwayat Transaksi" />
         <div role="tabpanel" class="tab-content bg-white border border-gray-100 rounded-2xl p-6 mt-4 shadow-sm">
             <!-- Tabel Riwayat -->
@@ -182,7 +190,8 @@
                                         <span
                                             class="badge bg-green-100 text-green-700 border-none font-semibold">Diterima</span>
                                     @else
-                                        <span class="badge bg-red-100 text-red-700 border-none font-semibold">Ditolak</span>
+                                        <span
+                                            class="badge bg-red-100 text-red-700 border-none font-semibold">Ditolak</span>
                                     @endif
                                 </td>
                                 <td class="text-sm text-gray-500">{{ $iuran->created_at->format('d M Y') }}</td>
@@ -231,10 +240,12 @@
                     <div class="divider">Aksi</div>
 
                     <div class="flex gap-3">
-                        <button onclick="submitVerification('Ditolak')"
-                            class="btn btn-error text-white flex-1">Tolak</button>
+                        <button onclick="submitVerification('Ditolak')" class="btn btn-error text-white flex-1"
+                            id="btn-bg"><span class="" id="btn-tolak">Tolak</span></button>
                         <button onclick="submitVerification('Diterima')"
-                            class="btn bg-[#016B61] hover:bg-[#328E6E] text-white flex-1">Terima</button>
+                            class="btn bg-(--bg-tertiary) hover:bg-(--bg-secondary) text-white flex-1" id="btn-bg1">
+                            <span class="" id="btn-terima">Terima</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -242,8 +253,8 @@
     </dialog>
 
     {{-- MODAL 2: INPUT MANUAL (CASH) --}}
-    <dialog id="modal_input_manual" class="modal">
-        <div class="modal-box">
+    <dialog id="modal_input_manual" class="modal modal-top px-auto md:px-40 lg:px-80 pt-20">
+        <div class="modal-box rounded-t-2xl">
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
             </form>
@@ -255,34 +266,55 @@
                     <label class="label"><span class="label-text">Pilih Warga</span></label>
                     <select name="warga_id" class="select select-bordered w-full" required>
                         <option value="" disabled selected>-- Pilih Warga --</option>
-                        @foreach($wargas as $warga)
+                        @foreach ($wargas as $warga)
                             <option value="{{ $warga->id }}">{{ $warga->nama }}</option>
                         @endforeach
                     </select>
                 </div>
 
-                {{-- Lyra's Add: Dropdown Periode (Mingguan) --}}
                 <div class="form-control w-full mb-4">
                     <label class="label"><span class="label-text">Untuk Pembayaran</span></label>
-                    <select name="periode" class="select select-bordered w-full" required>
+                    <select name="periode" class="select select-bordered w-full h-12 max-h-12" required>
                         @php
                             $currentMonth = now()->translatedFormat('F Y');
+                            $currentYear = now()->translatedFormat('Y');
+                            $year = [
+                                'Januari',
+                                'Februari',
+                                'Maret',
+                                'April',
+                                'Mei',
+                                'Juni',
+                                'Juli',
+                                'Agustus',
+                                'September',
+                                'Oktober',
+                                'November',
+                                'Desember',
+                            ];
                         @endphp
                         <option value="" disabled selected>-- Pilih Periode --</option>
-                        <option value="{{ $currentMonth }} - Minggu 1">{{ $currentMonth }} - Minggu 1</option>
-                        <option value="{{ $currentMonth }} - Minggu 2">{{ $currentMonth }} - Minggu 2</option>
-                        <option value="{{ $currentMonth }} - Minggu 3">{{ $currentMonth }} - Minggu 3</option>
-                        <option value="{{ $currentMonth }} - Minggu 4">{{ $currentMonth }} - Minggu 4</option>
-                        <option value="{{ $currentMonth }} - Minggu 5">{{ $currentMonth }} - Minggu 5</option>
+                        @if (Auth::user()->rt->jenis_iuran == 'Mingguan')
+                            @for ($i = 1; $i <= 5; $i++)
+                                <option value="{{ $currentMonth }} - Minggu {{ $i }}">
+                                    {{ $currentMonth }} - Minggu {{ $i }}</option>
+                            @endfor
+                        @else
+                            @for ($i = 0; $i < 12; $i++)
+                                <option value="{{ `$year[$i] $currentYear` }}">{{ $year[$i] }}</option>
+                            @endfor
+                        @endif
                     </select>
                 </div>
 
                 <div class="form-control w-full mb-6">
                     <label class="label"><span class="label-text">Jumlah (Rp)</span></label>
-                    <input type="number" name="jumlah_pembayaran" class="input input-bordered w-full" placeholder="Contoh: 5000" min="1000" required />
+                    <input type="number" name="jumlah_pembayaran" class="input input-bordered w-full"
+                        placeholder="Contoh: 5000" min="1000" required />
                 </div>
 
-                <button type="submit" class="btn bg-[#016B61] hover:bg-[#328E6E] text-white w-full">Simpan Catatan</button>
+                <button type="submit" class="btn bg-[#016B61] hover:bg-[#328E6E] text-white w-full">Simpan
+                    Catatan</button>
             </form>
         </div>
     </dialog>
@@ -302,23 +334,26 @@
                         <option value="Mingguan" {{ $rt->jenis_iuran == 'Mingguan' ? 'selected' : '' }}>Mingguan</option>
                         <option value="Bulanan" {{ $rt->jenis_iuran == 'Bulanan' ? 'selected' : '' }}>Bulanan</option>
                     </select>
-                    <label class="label"><span class="label-text-alt text-gray-500">Frekuensi tagihan ke warga.</span></label>
+                    <label class="label"><span class="label-text-alt text-gray-500">Frekuensi tagihan ke
+                            warga.</span></label>
                 </div>
 
                 <div class="form-control w-full mb-6">
                     <label class="label"><span class="label-text">Nominal (Rp)</span></label>
-                    <input type="number" name="biaya_iuran" class="input input-bordered w-full" value="{{ $rt->biaya_iuran }}" min="0" required />
+                    <input type="number" name="biaya_iuran" class="input input-bordered w-full"
+                        value="{{ $rt->biaya_iuran }}" min="0" required />
                 </div>
 
                 <div class="bg-yellow-50 p-3 rounded-lg text-xs text-yellow-700 mb-4">
                     Perubahan ini akan berlaku untuk tagihan baru. Tagihan lama yang sudah dibayar tidak akan berubah.
                 </div>
 
-                <button type="submit" class="btn bg-[#016B61] hover:bg-[#328E6E] text-white w-full">Simpan Perubahan</button>
+                <button type="submit" class="btn bg-[#016B61] hover:bg-[#328E6E] text-white w-full">Simpan
+                    Perubahan</button>
             </form>
         </div>
     </dialog>
-
+    @vite('resources/js/utility/iuran_rt.js')
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         let currentIuranId = null;
@@ -326,7 +361,6 @@
         function openVerifyModal(iuranData, imgUrl) {
             currentIuranId = iuranData.id;
             document.getElementById('modal-verify-nama').textContent = iuranData.warga.nama;
-            // Format Rupiah Manual sederhana
             document.getElementById('modal-verify-jumlah').textContent = 'Rp ' + new Intl.NumberFormat('id-ID').format(
                 iuranData.jumlah_pembayaran);
             document.getElementById('modal-verify-no').textContent = iuranData.no_pembayaran;
@@ -337,38 +371,57 @@
 
         function submitVerification(status) {
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
-
-            Swal.fire({
-                title: status === 'Diterima' ? 'Terima Pembayaran?' : 'Tolak Pembayaran?',
-                text: "Status akan diperbarui secara permanen.",
-                icon: status === 'Diterima' ? 'question' : 'warning',
-                showCancelButton: true,
-                confirmButtonColor: status === 'Diterima' ? '#10b981' : '#ef4444',
-                confirmButtonText: 'Ya, Lanjutkan'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    fetch(`/rt/kelola-iuran/verify/${currentIuranId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'X-CSRF-TOKEN': csrfToken
-                            },
-                            body: JSON.stringify({
-                                status: status
-                            })
+            const btnTolak = document.getElementById('btn-tolak')
+            const btnTerima = document.getElementById('btn-terima')
+            const btnBgTolak = document.getElementById('btn-bg')
+            const btnBgTerima = document.getElementById('btn-bg1')
+            if (status == 'Diterima') {
+                btnTerima.classList.add('loading', 'loading-dots', 'loading-md');
+                btnBgTerima.classList.add('bg-green-900', 'disabled', 'cursor-none');
+                fetch(`/rt/kelola-iuran/verify/${currentIuranId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({
+                            status: status
                         })
-                        .then(res => res.json())
-                        .then(data => {
-                            if (data.success) {
-                                document.getElementById('modal_verify').close();
-                                Swal.fire('Berhasil!', data.message, 'success').then(() => location.reload());
-                            }
-                        });
-                }
-            });
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            btnTerima.classList.remove('loading', 'loading-dots', 'loading-md');
+                            btnBgTerima.classList.remove('bg-green-900', 'disabled', 'cursor-none');
+                            document.getElementById('modal_verify').close();
+                            Swal.fire('Berhasil!', data.message, 'success').then(() => location.reload());
+                        }
+                    });
+            } else {
+                btnTolak.classList.add('loading', 'loading-dots', 'loading-md');
+                btnBgTolak.classList.add('bg-red-900', 'disabled', 'cursor-none');
+                fetch(`/rt/kelola-iuran/verify/${currentIuranId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': csrfToken
+                        },
+                        body: JSON.stringify({
+                            status: status
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            btnTolak.classList.remove('loading', 'loading-dots', 'loading-md');
+                            btnBgTolak.classList.remove('bg-red-900', 'disabled', 'cursor-none');
+                            document.getElementById('modal_verify').close();
+                            Swal.fire('DiTolak!', data.message, 'warning').then(() => location.reload());
+                        }
+                    });
+            }
         }
 
-        // SweetAlert untuk Manual Input Success
         @if (session('success'))
             Swal.fire({
                 icon: 'success',

@@ -6,55 +6,83 @@ use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+    public function index_warga(){
+        $user = Auth::user();
+        $warga = $user->warga;
+
+        return view('warga.profile', compact('user', 'warga'));
     }
-
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update_warga(Request $request)
     {
-        $request->user()->fill($request->validated());
+        $user = Auth::user();
+        $warga = $user->warga;
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'no_hp' => 'required|numeric',
+            'alamat_rumah' => 'required|string',
+            'password' => 'nullable|min:6|confirmed',
+        ]);
+
+        // 1. Update Data Warga
+        $warga->update([
+            'nama' => $request->nama,
+            'no_hp' => $request->no_hp,
+            'alamat_rumah' => $request->alamat_rumah,
+        ]);
+
+        // 2. Update Password User jika diisi
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
         }
 
-        $request->user()->save();
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
+    }
+    public function index_rt()
+    {
+        $user = Auth::user();
+        // Eager load relasi RT biar datanya kebawa
+        $rt = $user->rt;
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return view('rt_page.profile', compact('user', 'rt'));
     }
 
-    /**
-     * Delete the user's account.
-     */
-    public function destroy(Request $request): RedirectResponse
+    public function update(Request $request)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        $user = Auth::user();
+        $rt = $user->rt;
+
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'no_hp' => 'required|numeric', // Penting buat kontak warga
+            'no_dana' => 'nullable|numeric', // Khusus E-Wallet
+            'alamat_rumah' => 'required|string',
+            'password' => 'nullable|min:6|confirmed', // Confirmed butuh input name="password_confirmation"
         ]);
 
-        $user = $request->user();
+        // 1. Update Data RT (Tabel 'rts')
+        $rt->update([
+            'nama' => $request->nama,
+            'no_hp' => $request->no_hp,
+            'no_dana' => $request->no_dana,
+            'alamat_rumah' => $request->alamat_rumah,
+        ]);
 
-        Auth::logout();
+        // 2. Update Password User (Tabel 'users') jika diisi
+        if ($request->filled('password')) {
+            $user->update([
+                'password' => Hash::make($request->password),
+            ]);
+        }
 
-        $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return redirect()->back()->with('success', 'Profil berhasil diperbarui!');
     }
 }

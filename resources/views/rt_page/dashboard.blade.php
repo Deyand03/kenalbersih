@@ -6,7 +6,7 @@
     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
         <div class="flex items-center gap-3">
             <div
-                class="bg-gradient-to-br from-(--bg-tertiary) to-(--bg-secondary) p-2 rounded-lg shadow-lg shadow-green-500/30">
+                class="bg-linear-to-br from-(--bg-tertiary) to-(--bg-secondary) p-2 rounded-lg shadow-lg shadow-green-500/30">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="white" class="bi bi-house-door-fill"
                     viewBox="0 0 16 16">
                     <path
@@ -136,7 +136,7 @@
 
         <!-- Card 1: Sampah Organik -->
         <div
-            class="relative overflow-hidden bg-gradient-to-r from-rose-400 to-red-500 rounded-xl p-6 text-white shadow-lg shadow-red-500/30 transition-transform hover:-translate-y-1">
+            class="relative overflow-hidden bg-linear-to-r from-rose-400 to-red-500 rounded-xl p-6 text-white shadow-lg shadow-red-500/30 transition-transform hover:-translate-y-1">
             <!-- Circle Decoration -->
             <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
             <div class="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-full -mb-8 -mr-8"></div>
@@ -159,7 +159,7 @@
 
         <!-- Card 2: Sampah Non-Organik (Blue Gradient) -->
         <div
-            class="relative overflow-hidden bg-gradient-to-r from-blue-400 to-cyan-500 rounded-xl p-6 text-white shadow-lg shadow-blue-500/30 transition-transform hover:-translate-y-1">
+            class="relative overflow-hidden bg-linear-to-r from-blue-400 to-cyan-500 rounded-xl p-6 text-white shadow-lg shadow-blue-500/30 transition-transform hover:-translate-y-1">
             <!-- Circle Decoration -->
             <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
             <div class="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-full -mb-8 -mr-8"></div>
@@ -182,7 +182,7 @@
 
         <!-- Card 3: Sampah B3 (Green Gradient) -->
         <div
-            class="relative overflow-hidden bg-gradient-to-r from-emerald-400 to-teal-500 rounded-xl p-6 text-white shadow-lg shadow-emerald-500/30 transition-transform hover:-translate-y-1">
+            class="relative overflow-hidden bg-linear-to-r from-emerald-400 to-teal-500 rounded-xl p-6 text-white shadow-lg shadow-emerald-500/30 transition-transform hover:-translate-y-1">
             <!-- Circle Decoration -->
             <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/20 rounded-full blur-2xl"></div>
             <div class="absolute bottom-0 right-0 w-24 h-24 bg-white/10 rounded-full -mb-8 -mr-8"></div>

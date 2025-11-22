@@ -1,193 +1,183 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="id" data-theme="light">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Login</title>
+    <title>Masuk - KenalBersih</title>
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Irish+Grover&family=Parisienne&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Rubik+Glitch&family=Saira+Stencil+One&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&family=Parisienne&display=swap" rel="stylesheet">
+
+    {{-- AlpineJS --}}
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .font-heading { font-family: 'Poppins', sans-serif; }
+        .font-script { font-family: 'Parisienne', cursive; }
+
+        /* Custom Scrollbar */
+        .custom-scroll::-webkit-scrollbar { width: 4px; }
+        .custom-scroll::-webkit-scrollbar-track { background: transparent; }
+        .custom-scroll::-webkit-scrollbar-thumb { background-color: #cbd5e1; border-radius: 4px; }
+    </style>
 </head>
 
-<body style="font-family: 'Poppins', sans-serif;">
-    <div class="flex max-w-100vw w-full">
-        {{-- Left Section --}}
-        <div class="relative overflow-hidden h-screen">
-            <div class="h-screen bg-no-repeat bg-cover bg-center flex flex-col"
-                style="background-image: url('{{ asset('svg/Group 13.svg') }}')">
-                <div class="flex flex-col w-1/2 justify-between h-full px-16 py-8">
-                    <h1 class="text-4xl font-bold mb-6 text-[#E1EEBC]">Sistem Informasi Pengelolaan Sampah </h1>
-                    <p class="text-2xl pr-12 text-white">
-                        Selamat datang di solusi digital untuk pengelolaan sampah terpadu. Sistem ini mengubah data
-                        menjadi aksi nyata.
-                        mulai dari pelacakan volume, optimalisasi jadwal angkut, hingga pengelolaan iuran yang
-                        transparan.
-                        Inilah alat bantu Anda untuk mengambil keputusan yang lebih baik dan menciptakan lingkungan yang
-                        lebih lestari.
-                    </p>
-                    <div class="flex items-center space-x-4">
-                        <p class="text-[#E1EEBC] italic">Teamwork makes the dream work</p>
+<body class="bg-white min-h-screen w-full overflow-hidden relative">
+
+    {{-- Error Toast --}}
+    @if ($errors->any())
+        <div x-data="{ show: true }" x-show="show" x-init="setTimeout(() => show = false, 5000)"
+             class="fixed top-5 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md bg-red-50 border-l-4 border-red-500 text-red-700 p-4 rounded shadow-lg flex items-start gap-3 shadow-red-100"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 transform -translate-y-2"
+             x-transition:enter-end="opacity-100 transform translate-y-0">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <div>
+                <h4 class="font-bold text-sm">Login Gagal</h4>
+                <ul class="list-disc list-inside text-xs mt-1">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            <button @click="show = false" class="ml-auto text-red-400 hover:text-red-600">&times;</button>
+        </div>
+    @endif
+
+    <div class="hidden lg:block absolute top-0 left-0 h-full w-[55%] z-0 pointer-events-none">
+        <svg width="100%" height="100%" viewBox="0 0 1198 1080" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg" class="drop-shadow-2xl">
+            <path d="M0 1080V0H1198C1198 0 1012.35 65.5607 959.801 92.5857C851.839 148.114 777.529 240.422 778.15 361.835C778.7 469.515 863.04 516.049 940.785 590.547C1048.38 693.642 1123.32 718.759 1166.47 854.291C1192.56 936.232 1156.97 1080 1156.97 1080H0Z" fill="url(#paint0_linear_124_2)"/>
+            <defs>
+                <linearGradient id="paint0_linear_124_2" x1="168.641" y1="104.597" x2="995.407" y2="942.798" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#5BA58B"/>
+                    <stop offset="1" stop-color="#201E43"/>
+                </linearGradient>
+            </defs>
+        </svg>
+    </div>
+
+    <div class="relative z-10 w-full h-screen flex flex-col lg:flex-row">
+
+        {{-- KIRI: Branding --}}
+        <div class="hidden lg:flex lg:w-[45%] flex-col justify-center px-16 xl:px-24 text-white h-full sticky top-0">
+            <div>
+                <div class="flex items-center gap-3 mb-8">
+                    <div class="p-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                     </div>
+                    <span class="text-2xl font-bold tracking-wide font-heading">KenalBersih</span>
                 </div>
 
-            </div>
-        </div>
+                <h1 class="text-5xl font-bold font-heading leading-tight mb-6">
+                    Selamat Datang <br>
+                    <span class="text-[#E1EEBC]">Kembali!</span>
+                </h1>
 
-        {{-- Right Section --}}
-        <div class="absolute top-0 right-0 w-1/2 h-full flex items-center justify-end py-8 pr-24">
-
-            <p class="text-3xl absolute top-8 right-8 pr-5 text-[#016B61] font-bold">
-
-                K<span style="font-family: 'Parisienne', cursive; font-weight: normal;">enal</span>&nbsp;B<span
-                    style="font-family: 'Parisienne', cursive; font-weight: normal;">ersih</span>
-
-            </p>
-
-            <div class="w-full max-w-md">
-
-                <h2 class="text-xl mb-4 text-center text-[#328E6E]">Selamat datang</h2>
-                <p class="text-sm text-gray-500 mb-8 text-center px-12">Mari lakukan yang terbaik untuk menjaga
-                    kebersihan bersama.</p>
-
-
-                <form method="POST" action="{{ route('login') }}">
-                    @csrf
-
-                    <div>
-                        <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 px-3 py-3 w-full bg-gray-200" type="email"
-                            name="email" placeholder="user@gmail.com" :value="old('email')" required autofocus
-                            autocomplete="username" />
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
-                    </div>
-
-                    <div x-data="{ show: false }" class="mt-4">
-                        <x-input-label for="password" :value="__('Password')" />
-                        <div class="relative mt-1">
-                            <input id="password"
-                                class="block mt-1 px-3 py-3 w-full bg-gray-200 rounded-md border-gray-200 pr-10"
-                                :type="show ? 'text' : 'password'" name="password" placeholder="Masukkan Password"
-                                required autocomplete="new-password" />
-                            <button type="button"
-                                class="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-500"
-                                @click="show = !show">
-                                <svg x-show="show" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                                <svg x-show="!show" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="display: none;">
-                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                        d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.522 10.522 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.243 4.243l-4.243-4.243" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="flex mt-4 justify-between">
-                        <label for="remember_me" class="inline-flex items-center">
-                            <input id="remember_me" type="checkbox" class="rounded border-gray-300 shadow-sm"
-                                name="remember">
-                            <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                        </label>
-                        {{-- Dipakai jika mau pakai mailtrap --}}
-                        {{-- @if (Route::has('password.request'))
-                        <a class="underline text-[#328E6E] hover:text-[#016B61] text-sm"
-                            href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
-                        </a>
-                        @endif --}}
-                    </div>
-
-                    <div class="mt-6">
-                        <button type="submit" class="w-full justify-center inline-flex items-center px-4 py-3 border border-transparent
-                            rounded-md font-semibold text-base text-white uppercase tracking-widest
-
-                            bg-linear-to-r from-[#5BA58B] to-[#328E6E]
-
-                            hover:brightness-110 transition-all">
-
-                            {{ __('Log in') }}
-
-                        </button>
-                    </div>
-                </form>
-
-                <p class="mt-8 text-center text-sm text-gray-500">
-                    {{ __('Belum punya akun?') }}
-                    @if (Route::has('register.warga'))
-                        <a href="{{ route('register.warga') }}" class="font-medium underline text-[#328E6E] hover:text-[#016B61]">
-                            {{ __('Daftar') }}
-                        </a>
-                    @endif
+                <p class="text-lg text-emerald-50/90 font-light leading-relaxed max-w-lg mb-10">
+                    Lanjutkan kontribusi Anda untuk lingkungan yang lebih bersih dan teratur. Masuk untuk mengakses dasbor warga.
                 </p>
 
+                <div class="flex items-center gap-4">
+                    <div class="h-[1px] w-12 bg-[#E1EEBC]"></div>
+                    <p class="text-[#E1EEBC] italic font-medium">Welcome back, neighbor!</p>
+                </div>
             </div>
+        </div>
 
+        {{--
+            KANAN: Form Login (FIXED SCROLL)
+        --}}
+        <div class="w-full lg:w-[54%] h-full bg-white/90 lg:bg-transparent overflow-y-auto custom-scroll">
+
+            {{-- Wrapper --}}
+            <div class="min-h-full w-full flex flex-col justify-center items-center py-10 lg:py-0">
+
+                {{-- Mobile Header --}}
+                <div class="lg:hidden w-full bg-gradient-to-r from-[#5BA58B] to-[#201E43] p-6 text-white mb-8 shrink-0">
+                    <h2 class="text-2xl font-bold font-heading">KenalBersih</h2>
+                    <p class="text-xs opacity-80">Masuk ke akun warga</p>
+                </div>
+
+                <div class="w-full max-w-md px-8">
+
+                    <div class="text-center lg:text-left mb-8">
+                        <p class="text-3xl font-bold text-[#016B61] mb-2 lg:hidden">
+                            K<span class="font-script font-normal">enal</span>&nbsp;B<span class="font-script font-normal">ersih</span>
+                        </p>
+                        <h2 class="text-3xl font-heading font-bold text-slate-800 mb-2">Masuk Akun 👋</h2>
+                        <p class="text-slate-500 text-sm">Masukkan kredensial Anda untuk melanjutkan.</p>
+                    </div>
+
+                    <form method="POST" action="{{ route('login') }}" class="space-y-6">
+                        @csrf
+
+                        <div class="form-control">
+                            <label for="email" class="block text-xs font-bold text-slate-600 uppercase mb-2 ml-1 tracking-wider">Email</label>
+                            <div class="relative group">
+                                <span class="absolute left-4 top-3.5 text-slate-400 group-focus-within:text-[#016B61] transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+                                </span>
+                                <input id="email" type="email" name="email" value="{{ old('email') }}" required autofocus
+                                    class="w-full pl-12 pr-4 py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-sm focus:bg-white focus:ring-2 focus:ring-[#016B61] focus:border-transparent transition-all outline-none placeholder-slate-400"
+                                    placeholder="email@anda.com">
+                            </div>
+                        </div>
+
+                        <div class="form-control" x-data="{ showPass: false }">
+                            <div class="flex justify-between items-center mb-2 ml-1">
+                                <label for="password" class="block text-xs font-bold text-slate-600 uppercase tracking-wider">Password</label>
+                                @if (Route::has('password.request'))
+                                    <a href="{{ route('password.request') }}" class="text-xs text-[#016B61] hover:underline font-medium">Lupa password?</a>
+                                @endif
+                            </div>
+                            <div class="relative group">
+                                <span class="absolute left-4 top-3.5 text-slate-400 group-focus-within:text-[#016B61] transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                                </span>
+                                <input id="password" :type="showPass ? 'text' : 'password'" name="password" required autocomplete="current-password"
+                                    class="w-full pl-12 pr-12 py-3.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-700 text-sm focus:bg-white focus:ring-2 focus:ring-[#016B61] focus:border-transparent transition-all outline-none placeholder-slate-400"
+                                    placeholder="Masukkan password">
+                                <button type="button" @click="showPass = !showPass" class="absolute right-4 top-3.5 text-slate-400 hover:text-[#016B61] transition-colors focus:outline-none">
+                                    <svg x-show="!showPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.88 9.88a3 3 0 1 0 4.24 4.24"/><path d="M10.73 5.08A10.43 10.43 0 0 1 12 5c7 0 10 7 10 7a13.16 13.16 0 0 1-1.67 2.68"/><path d="M6.61 6.61A13.526 13.526 0 0 0 2 12s3 7 10 7a9.74 9.74 0 0 0 5.39-1.61"/><line x1="2" x2="22" y1="2" y2="22"/></svg>
+                                    <svg x-show="showPass" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center">
+                            <label for="remember_me" class="inline-flex items-center cursor-pointer group">
+                                <div class="relative">
+                                    <input id="remember_me" type="checkbox" class="sr-only peer" name="remember">
+                                    <div class="w-5 h-5 border-2 border-slate-300 rounded peer-checked:bg-[#016B61] peer-checked:border-[#016B61] transition-all"></div>
+                                    <svg class="w-3.5 h-3.5 text-white absolute top-0.5 left-0.5 opacity-0 peer-checked:opacity-100 transition-opacity" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                                </div>
+                                <span class="ms-2 text-sm text-slate-500 group-hover:text-slate-700 transition-colors">{{ __('Ingat saya') }}</span>
+                            </label>
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="w-full bg-gradient-to-r from-[#5BA58B] to-[#016B61] hover:from-[#4a967a] hover:to-[#015a52] text-white font-bold py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-900/20 transition-all transform active:scale-[0.98] flex justify-center items-center gap-2">
+                                <span>Masuk Sekarang</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" x2="3" y1="12" y2="12"/></svg>
+                            </button>
+                        </div>
+
+                        <p class="text-center text-sm text-slate-500 mt-6">
+                            Belum memiliki akun?
+                            <a href="{{ route('register.warga') }}" class="font-bold text-[#016B61] hover:underline hover:text-[#201E43] transition-colors">Daftar di sini</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+
 </body>
-
 </html>
-
-{{-- <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-    <div class="absolute inset-0 flex min-h-screen w-full">
-
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
-
-            <!-- Email Address -->
-            <div>
-                <x-input-label for="email" :value="('Email')" />
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')"
-                    required autofocus autocomplete="username" />
-                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-            </div>
-
-            <!-- Password -->
-            <div class="mt-4">
-                <x-input-label for="password" :value="('Password')" />
-
-                <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required
-                    autocomplete="current-password" />
-
-                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-            </div>
-
-            <!-- Remember Me -->
-            <div class="block mt-4">
-                <label for="remember_me" class="inline-flex items-center">
-                    <input id="remember_me" type="checkbox"
-                        class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-                </label>
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                    href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-                @endif
-
-                <x-primary-button class="ms-3">
-                    {{ __('Log in') }}
-                </x-primary-button>
-            </div>
-        </form>
-    </div>
-</x-guest-layout> --}}

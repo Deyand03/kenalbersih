@@ -208,7 +208,7 @@
                         <a href="{{ route('rt.laporan_sampah') }}"
                             class="{{ request()->routeIs('rt.laporan_sampah') ? 'active' : 'hover:text-[#016B61]' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="-translate-x-[2px]">
+                                viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" class="-translate-x-0.5">
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                             </svg>
@@ -245,6 +245,18 @@
                             Pengeluaran
                         </a>
                     </li>
+                    {{-- Data Warga --}}
+                    <li>
+                        <a href="{{ route('rt.data_warga') }}"
+                            class="{{ request()->routeIs('rt.data_warga') ? 'active' : 'hover:text-[#016B61]' }}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                                fill="currentColor" class="bi bi-table" viewBox="0 0 16 16">
+                                <path
+                                    d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z" />
+                            </svg>
+                            Data Warga
+                        </a>
+                    </li>
 
                     <div class="pt-8 px-4 mb-2">
                         <h3 class="text-xs font-semibold text-gray-400 uppercase">Akun</h3>
@@ -252,7 +264,7 @@
 
                     {{-- 5. Profile --}}
                     <li>
-                        <a href="#" class="hover:text-[#016B61]">
+                        <a href="{{ route('rt.profile') }}" class="hover:text-[#016B61]">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                 <path

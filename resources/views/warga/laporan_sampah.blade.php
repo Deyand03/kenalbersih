@@ -209,7 +209,6 @@
         </script>
     @endif
 
-    {{-- Lyra's Add: Handle Error (Penting buat kasus Warga null) --}}
     @if (session('error'))
         <script>
             Swal.fire({

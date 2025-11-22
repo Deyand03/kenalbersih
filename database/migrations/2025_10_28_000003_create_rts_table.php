@@ -19,8 +19,7 @@ return new class extends Migration {
             $table->string('alamat_rumah');
             $table->enum('jenis_iuran', ['Mingguan', 'Bulanan'])->default('Bulanan');
             $table->integer('biaya_iuran')->default(0);
-            $table->string('no_rekening')->unique()->nullable();
-            $table->string('no_dana')->unique()->nullable();
+            $table->string('no_dana')->unique();
             $table->string('no_hp')->unique()->nullable();
             $table->timestamps();
         });

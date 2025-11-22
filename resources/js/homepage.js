@@ -57,26 +57,7 @@ function animateValue(obj, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-// Splash Screen
-if (!localStorage.getItem('splashScreenShown')) {
-    document.body.classList.add('splash-active');
-} else {
-    const splashScreen = document.getElementById('splash-screen');
-    if (splashScreen) {
-        splashScreen.style.display = 'none';
-    }
-}
 
-function startExitAnimation() {
-    const splashScreen = document.getElementById('splash-screen');
-    if (splashScreen) {
-        splashScreen.classList.add('splash-hidden');
-        localStorage.setItem('splashScreenShown', 'true');
-        setTimeout(() => {
-            splashScreen.style.display = 'none';
-        }, 2000);
-    }
-}
 document.addEventListener('DOMContentLoaded', () => {
     const statWarga = document.getElementById('stat-warga');
     const statRt = $('#stat-rt');
@@ -96,27 +77,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-if (!localStorage.getItem('splashScreenShown')) {
+const splashScreen = document.getElementById('splash-screen');
 
-    let isLoaded = false;
-    let isAnimTimeUp = false;
-    window.addEventListener('load', () => {
-        document.body.classList.remove('splash-active');
-    });
-    window.addEventListener('load', () => {
-        isLoaded = true;
-        startExitAnimation();
-        if (isAnimTimeUp) {
-        }
-    });
-    setTimeout(() => {
-        isAnimTimeUp = true;
-        startExitAnimation();
-        if (isLoaded) {
-        }
-    }, 1500);
-
-
-} else {
-    // WIBU WIBU
+if (splashScreen) {
+    document.body.classList.add('splash-active', 'overflow-hidden');
+    splashScreen.classList.remove('splash-hidden');
+    splashScreen.style.display = 'flex';
 }
+
+function startExitAnimation() {
+    if (splashScreen) {
+        splashScreen.classList.add('splash-hidden');
+        document.body.classList.remove('splash-active', 'overflow-hidden');
+
+        setTimeout(() => {
+            splashScreen.style.display = 'none';
+        }, 1000);
+    }
+}
+
+let isPageLoaded = false;
+let isMinTimePassed = false;
+
+function tryCloseSplash() {
+    if (isPageLoaded && isMinTimePassed) {
+        startExitAnimation();
+    }
+}
+
+window.addEventListener('load', () => {
+    isPageLoaded = true;
+    tryCloseSplash();
+});
+
+setTimeout(() => {
+    isMinTimePassed = true;
+    tryCloseSplash();
+}, 1500);

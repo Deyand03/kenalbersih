@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DataWargaController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\IuranController;
 use App\Http\Controllers\LaporanSampahController;
@@ -22,6 +23,9 @@ Route::middleware(['auth'])->group(function () {
     // Iuran
     Route::get('/iuran', [IuranController::class, 'index_warga'])->name('iuran');
     Route::post('/iuran/store', [IuranController::class, 'storeWarga'])->name('iuran.store');
+    // Profile Warga
+    Route::get('/profile', [ProfileController::class, 'index_warga'])->name('profile');
+    Route::put('/profile/update', [ProfileController::class, 'update_warga'])->name('profile.update');
 });
 
 Route::middleware(['auth', 'role:rt'])->group(function () {
@@ -52,7 +56,16 @@ Route::middleware(['auth', 'role:rt'])->group(function () {
                 Route::get('/pengeluaran', 'index_rt')->name('pengeluaran');
                 Route::post('/pengeluaran/store', 'store')->name('pengeluaran.store');
             });
-
+            // Data Warga
+            Route::controller(DataWargaController::class)->group(function(){
+                Route::get('/data-warga', 'index')->name('data_warga');
+                Route::patch('/data-warga/{id}/toggle', 'toggleStatus')->name('data_warga.status');
+            });
+            // Profil RT
+            Route::controller(ProfileController::class)->group(function () {
+                Route::get('/profile', 'index_rt')->name('profile');
+                Route::put('/profile/update', 'update')->name('profile.update');
+            });
         });
     });
 });

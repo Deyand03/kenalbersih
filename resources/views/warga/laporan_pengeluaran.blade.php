@@ -197,8 +197,7 @@
                         </div>
                         <h3 class="text-2xl font-bold text-emerald-600 mt-1">Rp
                             {{ number_format($totalMasuk, 0, ',', '.') }}</h3>
-                        {{-- Pake 'progress' DaisyUI tapi warna custom --}}
-                        <progress class="progress progress-success w-full mt-3 h-2" value="100" max="100"></progress> {{-- Warna Emerald-500 --}}
+                        <progress class="progress progress-success w-full mt-3 h-2" value="100" max="100"></progress>
                     </div>
                 </div>
                 <!-- Pengeluaran Card -->
@@ -220,15 +219,13 @@
                         </div>
                         <h3 class="text-2xl font-bold text-red-500 mt-1">Rp {{ number_format($totalKeluar, 0, ',', '.') }}
                         </h3>
-                        {{-- Pake 'progress' DaisyUI tapi warna custom --}}
-                        <progress class="progress w-full mt-3 h-2"
+                        <progress class="progress progress-error w-full mt-3 h-2"
                             value="{{ $totalMasuk > 0 ? ($totalKeluar / $totalMasuk) * 100 : 0 }}" max="100"
                             style="--p: 239 68 68; --bc: 241 245 249;"></progress>
                     </div>
                 </div>
             </div>
 
-            <!-- MAIN CONTENT GRID (Layout Grid + Kartu Interaktif) -->
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 animate-fade-in-up animation-delay-200">
 
                 <!-- CHART SECTION -->
@@ -252,13 +249,13 @@
                         </div>
 
                         <!-- Chart Container -->
-                        <div class="relative flex-grow min-h-[350px] w-full z-10">
+                        <div class="relative grow min-h-[200px] w-full z-10">
                             <canvas id="guestChart"></canvas>
                         </div>
 
                         {{-- Dekorasi Latar Chart --}}
                         <div
-                            class="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-slate-50 to-transparent pointer-events-none z-0">
+                            class="absolute bottom-0 left-0 w-full h-32 bg-linear-to-t from-slate-50 to-transparent pointer-events-none z-0">
                         </div>
                     </div>
                 </div>
@@ -282,10 +279,10 @@
                         </div>
 
                         <!-- Scrollable List dengan Kartu Interaktif -->
-                        <div class="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar bg-slate-50/80">
+                        <div class="flex-1 p-4 space-y-3 custom-scrollbar bg-slate-50/80">
                             @forelse($riwayat as $item)
                                 <div
-                                    class="group bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-[#016B61]/30 hover:shadow-md hover:shadow-[#016B61]/5 hover:bg-[#016B61]/[0.02] transition-all duration-200">
+                                    class="group bg-white border border-slate-200/80 rounded-2xl p-4 hover:border-[#016B61]/30 hover:shadow-md hover:shadow-[#016B61]/5 hover:bg-[#016B61]/2 transition-all duration-200">
                                     <div class="flex justify-between items-start mb-2">
                                         <span
                                             class="text-[10px] font-bold uppercase bg-slate-100 text-slate-500 px-2.5 py-1 rounded-lg tracking-wider group-hover:bg-white transition-colors">
