@@ -3,165 +3,207 @@ import Chart from 'chart.js/auto';
 document.addEventListener('DOMContentLoaded', function () {
     const chartCanvas = document.getElementById('line-chart');
     const pieCanvas = document.getElementById('pie-chart');
-    console.log('chartCanvas:', chartCanvas);
-    if (!chartCanvas) {
-        console.log('Elemen grafik tidak ditemukan, hentikan eksekusi.');
-        return;
-    }
-    if (!pieCanvas) {
-        console.log("Element pie chart tidak ditemukan");
-        return;
-    }
-    // Data Sampah
-    const chartLabels = JSON.parse(chartCanvas.dataset.labels);
-    console.log('chartLabels:', chartLabels);
-    const dataOrganik = JSON.parse(chartCanvas.dataset.organik);
-    console.log('dataOrganik:', dataOrganik);
-    const dataNonOrganik = JSON.parse(chartCanvas.dataset.anorganik);
-    console.log('dataNonOrganik:', dataNonOrganik);
-    const dataB3 = JSON.parse(chartCanvas.dataset.b3);
-    console.log('dataB3:', dataB3);
 
+    // Cek elemen dulu
+    if (!chartCanvas || !pieCanvas) {
+        return;
+    }
+
+    // --- 1. Ambil Data dari Dataset ---
+    const chartLabels = JSON.parse(chartCanvas.dataset.labels);
+    const dataOrganik = JSON.parse(chartCanvas.dataset.organik);
+    const dataNonOrganik = JSON.parse(chartCanvas.dataset.anorganik);
+    const dataB3 = JSON.parse(chartCanvas.dataset.b3);
+
+    // Hitung Total untuk Pie Chart
     const sumArray = (arr) => arr.reduce((acc, val) => acc + val, 0);
     const totalOrganik = sumArray(dataOrganik);
     const totalNonOrganik = sumArray(dataNonOrganik);
     const totalB3 = sumArray(dataB3);
 
+    // --- 2. Konfigurasi Style Global (Konsisten dengan Dashboard) ---
+    Chart.defaults.font.family = "'Inter', sans-serif";
+    Chart.defaults.color = '#64748b'; // Slate-500
 
-    // Render Line Chart
+    // Palet Warna (Sesuai Dashboard kamu: Organik=Merah, Non=Biru, B3=Hijau)
+    const colors = {
+        organik: {
+            border: '#ef4444', // Red-500
+            bg: 'rgba(239, 68, 68, 0.1)'
+        },
+        nonOrganik: {
+            border: '#3b82f6', // Blue-500
+            bg: 'rgba(59, 130, 246, 0.1)'
+        },
+        b3: {
+            border: '#10b981', // Emerald-500
+            bg: 'rgba(16, 185, 129, 0.1)'
+        }
+    };
+
     const ctx = chartCanvas.getContext('2d');
     const ptx = pieCanvas.getContext('2d');
     let lineChart = null;
     let pieChart = null;
 
-    setTimeout(() => {
-        function createLineChart() {
-            if (lineChart) {
-                lineChart.destroy();
+    // --- 3. Fungsi Render Line Chart ---
+    function createLineChart() {
+        if (lineChart) lineChart.destroy();
+
+        lineChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: chartLabels,
+                datasets: [
+                    {
+                        label: 'Sampah Organik',
+                        data: dataOrganik,
+                        borderColor: colors.organik.border,
+                        backgroundColor: colors.organik.bg,
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 3,
+                        fill: true, // Area di bawah garis diwarnai tipis
+                        tension: 0.4 // Garis melengkung (modern look)
+                    },
+                    {
+                        label: 'Non-Organik',
+                        data: dataNonOrganik,
+                        borderColor: colors.nonOrganik.border,
+                        backgroundColor: colors.nonOrganik.bg,
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    },
+                    {
+                        label: 'B3',
+                        data: dataB3,
+                        borderColor: colors.b3.border,
+                        backgroundColor: colors.b3.bg,
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        pointBackgroundColor: '#fff',
+                        pointBorderWidth: 3,
+                        fill: true,
+                        tension: 0.4
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        mode: 'index',
+                        intersect: false,
+                        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                        titleColor: '#1f2937',
+                        bodyColor: '#4b5563',
+                        borderColor: '#e5e7eb',
+                        borderWidth: 1,
+                        padding: 10,
+                        boxPadding: 4
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: '#f1f5f9', borderDash: [5, 5] },
+                        ticks: { padding: 10 }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { padding: 10 }
+                    }
+                },
+                interaction: {
+                    mode: 'index',
+                    intersect: false,
+                },
             }
-            lineChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: chartLabels,
-                    datasets: [
-                        {
-                            label: 'Sampah Organik (kg)',
-                            data: dataOrganik,
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                        },
-                        {
-                            label: 'Sampah Non-Organik (kg)',
-                            data: dataNonOrganik,
-                            borderColor: 'rgba(255, 159, 64, 1)',
-                            backgroundColor: 'rgba(255, 159, 64, 0.2)',
-                        },
-                        {
-                            label: 'Sampah B3 (kg)',
-                            data: dataB3,
-                            borderColor: 'rgba(255, 99, 132, 1)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        });
+    }
+
+    // --- 4. Fungsi Render Pie Chart ---
+    function createPieChart() {
+        if (pieChart) pieChart.destroy();
+
+        pieChart = new Chart(ptx, {
+            type: 'doughnut', // Doughnut lebih modern daripada Pie biasa
+            data: {
+                labels: ['Organik', 'Non-Organik', 'B3'],
+                datasets: [{
+                    data: [totalOrganik, totalNonOrganik, totalB3],
+                    backgroundColor: [
+                        colors.organik.border,
+                        colors.nonOrganik.border,
+                        colors.b3.border
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                    hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                cutout: '70%', // Lubang tengah lebih besar
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: { usePointStyle: true, padding: 20, font: { weight: '600' } }
+                    },
+                    tooltip: {
+                        backgroundColor: '#1e293b',
+                        padding: 12,
+                        callbacks: {
+                            label: function(context) {
+                                let val = context.parsed;
+                                let total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                let percentage = total > 0 ? ((val / total) * 100).toFixed(1) + '%' : '0%';
+                                return ` ${context.label}: ${val} kg (${percentage})`;
+                            }
                         }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        intersect: false,
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Volume Sampah Bulanan'
-                        },
-                    },
-                }
-            });
-        }
-
-
-        // Data Pie Chart
-        function createPieChart() {
-            if (pieChart) {
-                pieChart.destroy()
-            }
-            pieChart = new Chart(
-                ptx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Organik', 'Non-Organik', 'B3'],
-                    datasets: [
-                        {
-                            label: 'Total Sampah (kg)',
-                            data: [totalOrganik, totalNonOrganik, totalB3],
-                            borderColor: 'rgba(75, 192, 192, 1)',
-                            borderColor: [
-                                'rgba(75, 192, 192, 1)',
-                                'rgba(255, 159, 64, 1)',
-                                'rgba(255, 99, 132, 1)'
-                            ],
-                            backgroundColor: [
-                                'rgba(75, 192, 192, 0.2)',
-                                'rgba(255, 159, 64, 0.2)',
-                                'rgba(255, 99, 132, 0.2)'
-                            ],
-                        },
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        intersect: false,
-                    },
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                        },
-                        title: {
-                            display: true,
-                            text: 'Total Komposisi Sampah'
-                        },
                     }
                 }
             }
-            )
-        }
+        });
+    }
 
-        // Observer Section
-        const chartCard = document.getElementById('chart-card');
-        const pieCard = document.getElementById('pie-card');
+    // --- 5. Observer (Scroll Animation) ---
+    // Biar chart-nya baru muncul animasinya pas di-scroll ke bawah
+    const chartCard = document.getElementById('chart-card');
+    const pieCard = document.getElementById('pie-card');
 
-        if (chartCard) {
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    console.log('Line Chart terlihat, animasi dimulai!');
-                    createLineChart();
-                    observer.unobserve(chartCard);
-                }
-            }, {
-                threshold: 0.1
-            });
+    const observerOptions = { threshold: 0.2 };
 
-            observer.observe(chartCard);
-        }
-        if (pieCard) {
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    console.log('Pie Chart terlihat, animasi dimulai!');
-                    createPieChart();
-                    observer.unobserve(chartCard);
-                }
-            }, {
-                threshold: 0.1
-            });
+    if (chartCard) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                createLineChart();
+                observer.unobserve(chartCard);
+            }
+        }, observerOptions);
+        observer.observe(chartCard);
+    }
 
-            observer.observe(chartCard);
-        }
-
-    }, 100);
+    if (pieCard) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                createPieChart();
+                observer.unobserve(pieCard);
+            }
+        }, observerOptions);
+        observer.observe(pieCard);
+    }
 });

@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('warga_id')->constrained()->onDelete('cascade');
             $table->foreignId('rt_id')->constrained()->onDelete('cascade');
-            $table->string('nama');
             $table->integer('jumlah_pembayaran');
             $table->text('no_pembayaran');
+            $table->string('periode')->nullable();
             $table->enum('metode_pembayaran', ['Cash', "Digital"]);
-            $table->string('bukti_pembayaran');
+            $table->string('bukti_pembayaran')->nullable();
             $table->enum('status_pembayaran', ['Menunggu', "Diterima", "Ditolak"]);
             $table->timestamps();
         });

@@ -21,7 +21,11 @@ class RtSeeder extends Seeder
                 "jenis_kelamin" => 'Laki-laki',
                 "no_dana" => '08123456781',
                 "no_hp" => '08123456781',
-                "alamat_rumah" => "Jln.ASOMASO"
+                "alamat_rumah" => "Jln.ASOMASO",
+                "jenis_iuran" => 'Mingguan',
+                "biaya_iuran" => 5000,
+                "created_at" => now(),
+                "updated_at" => now(),
             ],
             [
                 "user_id" => 2,
@@ -30,7 +34,11 @@ class RtSeeder extends Seeder
                 "jenis_kelamin" => 'Perempuan',
                 "no_dana" => '08123456782',
                 "no_hp" => '08123456782',
-                "alamat_rumah" => "Jln.ASOMASO"
+                "alamat_rumah" => "Jln.ASOMASO",
+                "jenis_iuran" => 'Bulanan',
+                "biaya_iuran" => 20000,
+                "created_at" => now(),
+                "updated_at" => now(),
             ],
             [
                 "user_id" => 3,
@@ -39,7 +47,11 @@ class RtSeeder extends Seeder
                 "jenis_kelamin" => 'Laki-laki',
                 "no_dana" => '08123456783',
                 "no_hp" => '08123456783',
-                "alamat_rumah" => "Jln.ASOMASO"
+                "alamat_rumah" => "Jln.ASOMASO",
+                "jenis_iuran" => 'Mingguan',
+                "biaya_iuran" => 7000,
+                "created_at" => now(),
+                "updated_at" => now(),
             ]
         ]);
     }

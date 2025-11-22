@@ -2,8 +2,6 @@
 @section('title', 'Tentang')
 @section('content')
 
-    {{-- header --}}
-
     {{-- awal --}}
     <div class="h-screen bg-cover bg-center" style="background-image: url({{ asset('assets/begron.svg') }})">
         {{-- Kontainer untuk Teks --}}
@@ -12,12 +10,12 @@
             <h1 class="text-5xl md:text-6xl font-extrabold mb-4 pt-24" data-animasi="">
                 <span
                     class="inline-block text-[#066057] [text-shadow:0px_1.5px_2px_rgba(0,0,0,0.4)]
-                transform transition-transform duration-300 hover:scale-110 hover:-translate-y-1 cursor-pointer">
+                    transform transition-transform duration-300 hover:scale-110 hover:-translate-y-1 cursor-pointer">
                     Tentang
                 </span>
                 <span
                     class="inline-block text-[#529661] [text-shadow:0px_1.5px_2px_rgba(0,0,0,0.4)]
-                transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1 cursor-pointer">
+                    transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1 cursor-pointer">
                     KenalBersih
                 </span>
             </h1>
@@ -36,18 +34,17 @@
             <div class="">
                 <a href="https://sid.mendaloindah.desa.id/" target="_blank" rel="noopener noreferrer"
                     class="btn btn-lg bg-(--bg-tertiary) text-[#F5FFFA] rounded-3xl hover:bg-(--bg-secondary)
-                 hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
-                 ease-in-out active:scale-100 active:shadow-none mr-5">Profil
+                     hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
+                     ease-in-out active:scale-100 active:shadow-none mr-5">Profil
                     Desa</a>
 
                 <a href="#selengkapnya"
                     class="btn btn-lg bg-(--bg-tertiary) text-[#F5FFFA] rounded-3xl hover:bg-(--bg-secondary)
-                 hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
-                 ease-in-out active:scale-100 active:shadow-none">Selengkapnya</a>
+                     hover:shadow-md hover:scale-103 will-change-transform transform-gpu transition-all duration-300
+                     ease-in-out active:scale-100 active:shadow-none">Selengkapnya</a>
             </div>
 
-            {{-- <img src="/assets/bukit.svg" alt=""
-                class="w-[2000px] mx-auto z-0 left-0 right-0 top-[100px]"> --}}
+            {{-- <img src="/assets/bukit.svg" alt="" class="w-[2000px] mx-auto z-0 left-0 right-0 top-[100px]"> --}}
         </div>
     </div>
 
@@ -188,7 +185,6 @@
                         tersebut. Kita semua bisa ikut menjaga kebersihan lingkungan dengan mudah
                         dan cepat.
                     </div>
-
                     <div class="timeline-start hidden md:block pr-2 md:w-5/6">
                         <div class="h-full flex items-center justify-end">
                             <div class="p-4">

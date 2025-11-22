@@ -87,40 +87,39 @@
 
                 {{-- Form Filter--}}
                 <form action="{{ route('homepage') }}#volume-sampah" method="get"
-                    class="flex flex-col md:flex-row gap-4 lg:gap-6 items-center bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto"
+                    class="flex flex-col md:flex-row gap-4 lg:gap-6 items-end bg-white p-6 rounded-xl shadow-lg max-w-3xl mx-auto"
                     data-animasi="fade-up">
-
-                    <div class="w-full md:flex-1">
-                        <label for="rt-select" class="font-semibold text-lg text-gray-700">Masukan No RT:</label>
-                        <select
-                            class="select w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#328E6E] focus:border-[#328E6E] transition-all"
-                            name="rt_id" id="rt-select">
-                            @foreach ($allRts as $rt)
-                                <option value="{{ $rt->no_rt }}" {{ $rt->id == $selectedRtId ? 'selected' : '' }}>
-                                    RT {{ $rt->no_rt }}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="flex flex-col md:flex-row items-center gap-3 w-full">
+                        <div class="w-full md:flex-1">
+                            <label for="rt-select" class="font-semibold text-lg text-gray-700">Masukan No RT:</label>
+                            <select
+                                class="select w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#328E6E] focus:border-[#328E6E] transition-all"
+                                name="rt_id" id="rt-select">
+                                @foreach ($allRts as $rt)
+                                    <option value="{{ $rt->no_rt }}" {{ $rt->id == $selectedRtId ? 'selected' : '' }}>
+                                        RT {{ $rt->no_rt }} - ({{ $rt->nama }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="w-full md:flex-1">
+                            <label for="tahun-select" class="font-semibold text-lg text-gray-700">Pilih Tahun:</label>
+                            <select
+                                class="select w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#328E6E] focus:border-[#328E6E] transition-all"
+                                name="tahun" id="tahun-select">
+                                @forelse ($listTahun as $tahun)
+                                    <option value="{{ $tahun }}" {{ $tahun == $selectedTahun ? 'selected' : '' }}>
+                                        {{ $tahun }}
+                                    </option>
+                                @empty
+                                    <option value="">Data tahun tidak tersedia</option>
+                                @endforelse
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="w-full md:flex-1">
-                        <label for="tahun-select" class="font-semibold text-lg text-gray-700">Pilih Tahun:</label>
-                        <select
-                            class="select w-full mt-1 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-[#328E6E] focus:border-[#328E6E] transition-all"
-                            name="tahun" id="tahun-select">
-                            @forelse ($listTahun as $tahun)
-                                <option value="{{ $tahun }}" {{ $tahun == $selectedTahun ? 'selected' : '' }}>
-                                    {{ $tahun }}
-                                </option>
-                            @empty
-                                <option value="">Data tahun tidak tersedia</option>
-                            @endforelse
-                        </select>
-                    </div>
-
-                    <div class="w-full md:w-auto mt-7 md:mt-0">
+                    <div class="w-full md:w-auto flex justify-end">
                         <button
-                            class="w-full bg-[#44BB91] text-white font-bold rounded-lg px-6 py-3 transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#328E6E] hover:shadow-md active:scale-100 transform-gpu will-change-transform disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100"
+                            class="w-full bg-[#44BB91] text-white font-bold rounded-lg px-6 py-2 transition-all duration-300 ease-in-out hover:scale-105 hover:bg-[#328E6E] hover:shadow-md active:scale-100 transform-gpu will-change-transform disabled:bg-gray-400 disabled:cursor-not-allowed disabled:hover:scale-100"
                             type="submit" id="button-filter">Tampilkan</button>
                     </div>
                 </form>

@@ -144,13 +144,13 @@
                                             'Diajukan' => 'bg-yellow-100 text-yellow-700 border-yellow-200',
                                             'Diterima' => 'bg-blue-100 text-blue-700 border-blue-200',
                                             'Selesai' => 'bg-emerald-100 text-emerald-700 border-emerald-200',
-                                            default => 'bg-gray-100 text-gray-700'
+                                            default => 'bg-gray-100 text-gray-700',
                                         };
                                         $statusIcon = match ($laporan->status) {
                                             'Diajukan' => '⏳',
                                             'Diterima' => '🛠️',
                                             'Selesai' => '✅',
-                                            default => '❓'
+                                            default => '❓',
                                         };
                                     @endphp
                                     <div class="badge {{ $statusClass }} gap-2 p-3 font-semibold border">
@@ -163,8 +163,11 @@
                             <tr>
                                 <td colspan="4" class="text-center py-12">
                                     <div class="flex flex-col items-center justify-center text-gray-400">
-                                        <img src="https://illustrations.popsy.co/amber/surr-list-is-empty.svg" alt="Empty"
-                                            class="h-32 mb-4 opacity-50">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                            fill="currentColor" class="opacity-50 bi bi-file-earmark" viewBox="0 0 16 16">
+                                            <path
+                                                d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5z" />
+                                        </svg>
                                         <p class="font-medium">Belum ada laporan yang Anda buat.</p>
                                     </div>
                                 </td>
@@ -175,7 +178,7 @@
             </div>
 
             <!-- Pagination -->
-            @if($laporans->hasPages())
+            @if ($laporans->hasPages())
                 <div class="p-4 border-t border-gray-100 bg-gray-50">
                     {{ $laporans->links() }}
                 </div>
@@ -185,7 +188,7 @@
 
     {{-- SweetAlert2 untuk Notifikasi Sukses --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    @if(session('success'))
+    @if (session('success'))
         <script>
             Swal.fire({
                 icon: 'success',
@@ -195,7 +198,7 @@
             });
         </script>
     @endif
-    @if(session('success'))
+    @if (session('success'))
         <script>
             Swal.fire({
                 icon: 'success',
@@ -207,7 +210,7 @@
     @endif
 
     {{-- Lyra's Add: Handle Error (Penting buat kasus Warga null) --}}
-    @if(session('error'))
+    @if (session('error'))
         <script>
             Swal.fire({
                 icon: 'error',

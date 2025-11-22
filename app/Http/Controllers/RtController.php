@@ -29,7 +29,6 @@ class RtController extends Controller
         $selectedTahun = null;
         $selectedBulan = null;
 
-        // Data untuk Chart (Default array kosong)
         $chartData = [
             'labels' => [],
             'organik' => [],
@@ -38,28 +37,20 @@ class RtController extends Controller
         ];
 
         if ($rt) {
-            // 1. Ambil List Tahun
             $listTahun = VolumeSampahTahun::where('rt_id', $rt->id)
                 ->orderBy('tahun', 'desc')
                 ->pluck('tahun');
-
-            // 2. Tentukan Tahun Terpilih
             $selectedTahun = $request->input('tahun');
             if (!$selectedTahun && $listTahun->isNotEmpty()) {
                 $selectedTahun = $listTahun->first();
             }
-
-            // 3. Cari Record Tahun tersebut
             $volumeTahun = VolumeSampahTahun::where('rt_id', $rt->id)
                 ->where('tahun', $selectedTahun)
                 ->first();
-
             if ($volumeTahun) {
                 $allBulanData = $volumeTahun->volume_sampah_bulan()
                     ->orderBy('bulan', 'asc')
                     ->get();
-
-                // Mapping data untuk dikirim ke Chart JS
                 $chartData['labels'] = $allBulanData->map(function($item) {
                     return Carbon::createFromDate(null, $item->bulan, 1)->translatedFormat('F');
                 })->toArray();
@@ -67,10 +58,7 @@ class RtController extends Controller
                 $chartData['organik'] = $allBulanData->pluck('organik')->toArray();
                 $chartData['non_organik'] = $allBulanData->pluck('non_organik')->toArray();
                 $chartData['b3'] = $allBulanData->pluck('b3')->toArray();
-
-                // --- LOGIKA KARTU STATISTIK (BULANAN) ---
                 $selectedBulan = $request->input('bulan');
-
                 if (!$selectedBulan) {
                     $latestBulanRecord = $volumeTahun->volume_sampah_bulan()
                         ->orderBy('bulan', 'desc')
@@ -82,7 +70,6 @@ class RtController extends Controller
                     ->where('bulan', $selectedBulan)
                     ->first();
 
-                // Casting ke int untuk keamanan Carbon
                 $namaBulan = Carbon::createFromDate(null, (int) $selectedBulan, 1)->translatedFormat('F');
                 $bulanInfo = "$namaBulan $selectedTahun";
 
@@ -123,7 +110,7 @@ class RtController extends Controller
                     'id' => $event->id,
                     'title' => $event->status == 'Diangkut' ? 'Diangkut' : 'Belum Diangkut',
                     'start' => $event->jadwal,
-                    'backgroundColor' => $event->status == 'Diangkut' ? '#10b981' : '#9ca3af', // Hijau vs Abu
+                    'backgroundColor' => $event->status == 'Diangkut' ? '#10b981' : '#9ca3af',
                     'borderColor' => $event->status == 'Diangkut' ? '#10b981' : '#9ca3af',
                     'extendedProps' => [
                         'status' => $event->status
@@ -187,14 +174,11 @@ class RtController extends Controller
             'b3' => 'required|numeric|min:0',
         ]);
 
-        // 1. Find or create VolumeSampahTahun
         $volumeTahun = VolumeSampahTahun::firstOrCreate(
             ['rt_id' => $rtId, 'tahun' => $validated['tahun']],
             ['tahun' => $validated['tahun']] // Asumsi model VolumeSampahTahun punya field ini
         );
 
-        // 2. Update or create VolumeSampahBulan
-        // NOTE: Ini mengasumsikan VolumeSampahBulan punya foreign key 'volume_sampah_tahun_id'
         VolumeSampahBulan::updateOrCreate(
             [
                 'volume_tahun_id' => $volumeTahun->id,

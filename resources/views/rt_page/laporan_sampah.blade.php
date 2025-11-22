@@ -5,7 +5,7 @@
 @section('content')
     <!-- Header -->
     <div class="flex items-center gap-3 mb-8">
-        <div class="bg-gradient-to-br from-purple-500 to-purple-700 p-2 rounded-lg shadow-lg shadow-purple-500/30">
+        <div class="bg-linear-to-br from-(--bg-tertiary) to-(--bg-secondary) p-2 rounded-lg shadow-lg shadow-green-500/30">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
             </svg>
@@ -206,7 +206,7 @@
                 didOpen: () => Swal.showLoading()
             });
 
-            fetch(`/rt/laporan_sampah/update/${id}`, {
+            fetch(`/rt/laporan-sampah/update/${id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

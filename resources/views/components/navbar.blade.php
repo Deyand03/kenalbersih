@@ -13,8 +13,9 @@
                 class="menu menu-sm dropdown-content backdrop-blur-md rounded-box z-1 mt-3 w-52 p-2 shadow dropdown-mobile bg-white/70">
                 <li><a href="{{ route('homepage') }}" class="py-2">Homepage</a></li>
                 <li><a href="{{ route('laporan_sampah') }}" class="py-2">Lapor Sampah</a></li>
-                <li><a href="#" class="py-2">Keuangan</a></li>
-                <li><a href="#" class="py-2">About</a></li>
+                <li><a href="{{ route('iuran') }}" class="py-2">Iuran</a></li>
+                <li><a href="{{ route('pengeluaran') }}" class="py-2">Laporan Transparansi</a></li>
+                <li><a href="{{ route('about') }}" class="py-2">About</a></li>
             </ul>
         </div>
 
@@ -25,36 +26,87 @@
 
     {{-- Menu Navigasi Desktop --}}
     <div class="navbar-center hidden lg:flex text-navbar transform-gpu translate-y-1">
-        <ul class="flex items-center gap-2 px-1 text-base font-medium space-x-2">
-            <li>
-                <a href="{{ route('homepage') }}" class="relative group px-3 py-2">
-                    <span>Homepage</span>
-                    <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('homepage') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('laporan_sampah') }}" class="relative group px-3 py-2">
-                    <span>Lapor Sampah</span>
-                    <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('laporan_sampah') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="relative group px-3 py-2">
-                    <span>Keuangan</span>
-                    <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
-                </a>
-            </li>
-            <li>
-                <a href="" class="relative group px-3 py-2">
-                    <span>About</span>
-                    <span
-                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
-                </a>
-            </li>
-        </ul>
+        @guest
+            <ul class="flex items-center gap-2 px-1 text-base font-medium space-x-2">
+                <li>
+                    <a href="{{ route('homepage') }}" class="relative group px-3 py-2">
+                        <span>Homepage</span>
+                        <span
+                            class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('homepage') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('laporan_sampah') }}" class="relative group px-3 py-2">
+                        <span>Lapor Sampah</span>
+                        <span
+                            class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('laporan_sampah') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('pengeluaran') }}" class="relative group px-3 py-2">
+                        <span>Laporan Transparansi</span>
+                        <span
+                            class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('iuran') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('about') }}" class="relative group px-3 py-2">
+                        <span>About</span>
+                        <span
+                            class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('about') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                    </a>
+                </li>
+            </ul>
+        @endguest
+        @auth
+            <ul class="menu menu-horizontal flex items-center gap-2 px-1 text-base font-medium space-x-2">
+                <li>
+                    <a href="{{ route('homepage') }}" class="hover:bg-transparent active:bg-transparent active:text-black relative group px-3 py-2">
+                        <span>Homepage</span>
+                        <span
+                            class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('homepage') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('laporan_sampah') }}" class="hover:bg-transparent active:bg-transparent active:text-black relative group px-3 py-2">
+                        <span>Lapor Sampah</span>
+                        <span
+                            class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('laporan_sampah') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                    </a>
+                </li>
+                <li>
+                    <details>
+                        <summary class="group hover:bg-transparent active:bg-transparent active:text-black">
+                            <span>Keuangan</span>
+                            <span class="absolute bottom-1.5 left-0 w-full h-[3px] bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('pengeluaran') || request()->routeIs('iuran') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                        </summary>
+                        <ul class="bg-white/50 rounded-t-none p-3" style="backdrop-filter: blur(8px)">
+                            <li>
+                                <a href="{{ route('iuran') }}" class="hover:bg-transparent active:bg-transparent active:text-black relative group px-3 py-2">
+                                    <span>Bayar Iuran</span>
+                                    <span
+                                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ route('pengeluaran') }}" class="hover:bg-transparent active:bg-transparent active:text-black relative group px-3 py-2">
+                                    <span>Laporan Transparansi</span>
+                                    <span
+                                        class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+                <li>
+                    <a href="{{ route('about') }}" class="hover:bg-transparent active:bg-transparent active:text-black relative group px-3 py-2">
+                        <span>About</span>
+                        <span
+                            class="absolute bottom-1.5 left-0 w-full h-0.5 bg-linear-to-r from-(--bg-secondary) to-(--bg-primary) {{ request()->routeIs('about') ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100' }} transition-transform duration-300 ease-out origin-left"></span>
+                    </a>
+                </li>
+            </ul>
+        @endauth
     </div>
 
     <div class="navbar-end">
@@ -94,10 +146,11 @@
                     <div class="divider my-1"></div>
 
                     {{-- Menu Items --}}
-                    @if(Auth::user()->role === 'warga')
+                    @if (Auth::user()->role === 'warga')
                         <li>
                             <a href="{{ route('homepage') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
                                     <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                         clip-rule="evenodd" />
                                 </svg>
@@ -107,7 +160,8 @@
                     @elseif(Auth::user()->role === 'rt')
                         <li>
                             <a href="{{ route('dashboard') }}">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20"
+                                    fill="currentColor">
                                     <path
                                         d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
                                 </svg>
@@ -122,7 +176,8 @@
                     <li>
                         <form method="POST" action="{{ route('logout') }}" class="flex w-full p-0">
                             @csrf
-                            <button type="submit" class="flex w-full p-2 px-3 gap-2 text-left text-error hover:bg-error/20">
+                            <button type="submit"
+                                class="flex w-full p-2 px-3 gap-2 text-left text-error hover:bg-error/20">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor" stroke-width="2">
                                     <path stroke-linecap="round" stroke-linejoin="round"

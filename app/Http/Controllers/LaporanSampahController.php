@@ -20,13 +20,11 @@ class LaporanSampahController extends Controller
         if (!$user->warga) {
             $laporans = LaporanSampah::where('id', -1)->paginate(5);
 
-            // (Opsional) Kirim pesan error session biar muncul alert
             session()->now('error', 'Akun Anda belum terhubung dengan data Warga. Silakan hubungi Admin.');
 
             return view('warga.laporan_sampah', compact('laporans'));
         }
 
-        // Kalau aman, baru ambil datanya
         $laporans = LaporanSampah::where('warga_id', $user->warga->id)
             ->orderBy('created_at', 'desc')
             ->paginate(5);
@@ -40,11 +38,10 @@ class LaporanSampahController extends Controller
     {
         $rtId = Auth::user()->rt->id;
 
-        // Ambil laporan berdasarkan RT, urutkan dari yang terbaru
-        $laporans = LaporanSampah::with('warga') // Eager load warga biar kenceng
+        $laporans = LaporanSampah::with('warga')
             ->where('rt_id', $rtId)
             ->orderBy('created_at', 'desc')
-            ->paginate(10); // Pagination biar rapi kalau datanya banyak
+            ->paginate(10); 
 
         return view('rt_page.laporan_sampah', compact('laporans'));
     }

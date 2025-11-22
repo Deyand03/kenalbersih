@@ -57,7 +57,7 @@ function animateValue(obj, start, end, duration) {
     window.requestAnimationFrame(step);
 }
 
-// Splash Screen ( Kebanggaan gweh )
+// Splash Screen
 if (!localStorage.getItem('splashScreenShown')) {
     document.body.classList.add('splash-active');
 } else {
@@ -74,7 +74,7 @@ function startExitAnimation() {
         localStorage.setItem('splashScreenShown', 'true');
         setTimeout(() => {
             splashScreen.style.display = 'none';
-        }, 1000);
+        }, 2000);
     }
 }
 document.addEventListener('DOMContentLoaded', () => {
@@ -102,7 +102,6 @@ if (!localStorage.getItem('splashScreenShown')) {
     let isAnimTimeUp = false;
     window.addEventListener('load', () => {
         document.body.classList.remove('splash-active');
-        // Data stat (belom kocaq)
     });
     window.addEventListener('load', () => {
         isLoaded = true;

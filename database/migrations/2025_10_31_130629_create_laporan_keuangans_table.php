@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('laporan_keuangans', function (Blueprint $table) {
             $table->id();
             $table->foreignId('rt_id')->constrained()->onDelete('cascade');
-            $table->string('kegiatan');
-            $table->string('biaya');
-            $table->string('lampiran');
-            $table->date('tanggal_pengeluaran');
+            $table->string('judul');
+            $table->string('deskripsi')->nullable();
+            $table->integer('jumlah');
+            $table->date('tanggal');
+            $table->string('bukti_foto')->nullable();
             $table->timestamps();
         });
     }

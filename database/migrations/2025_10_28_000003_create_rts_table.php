@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -17,8 +16,10 @@ return new class extends Migration
             $table->integer('no_rt');
             $table->string('nama');
             $table->enum('jenis_kelamin', ["Laki-laki", "Perempuan"]);
-            $table->string('no_rekening')->unique()->nullable();
             $table->string('alamat_rumah');
+            $table->enum('jenis_iuran', ['Mingguan', 'Bulanan'])->default('Bulanan');
+            $table->integer('biaya_iuran')->default(0);
+            $table->string('no_rekening')->unique()->nullable();
             $table->string('no_dana')->unique()->nullable();
             $table->string('no_hp')->unique()->nullable();
             $table->timestamps();

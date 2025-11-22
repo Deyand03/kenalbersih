@@ -7,8 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Rt extends Model
 {
     protected $table = 'rts';
-    protected $guarded = [];
-
+protected $fillable = [
+        'no_rt',
+        'nama',
+        'alamat_rumah',
+        'jenis_iuran',
+        'biaya_iuran',
+        'no_rekening',
+        'no_dana',
+        'no_hp',
+    ];
     public function user(){
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
@@ -43,7 +51,7 @@ class Rt extends Model
             'rt_id',
             'volume_tahun_id',
             'id',
-            'id' 
+            'id'
         );
     }
 }

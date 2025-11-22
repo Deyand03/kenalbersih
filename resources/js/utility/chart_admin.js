@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 maintainAspectRatio: false,
                 plugins: {
                     legend: {
-                        display: false // Kita sudah punya custom legend di HTML
+                        display: false
                     },
                     tooltip: {
                         mode: 'index',
@@ -69,25 +69,12 @@ document.addEventListener('DOMContentLoaded', function () {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        grid: {
-                            borderDash: [2, 4],
-                            color: '#e5e7eb',
-                            drawBorder: false
-                        },
-                        ticks: {
-                            color: '#9ca3af',
-                            font: { size: 11 }
-                        }
+                        grid: { color: '#f1f5f9', borderDash: [5, 5] },
+                        ticks: { padding: 10 }
                     },
                     x: {
-                        grid: {
-                            display: false,
-                            drawBorder: false
-                        },
-                        ticks: {
-                            color: '#9ca3af',
-                            font: { size: 11 }
-                        }
+                        grid: { display: false },
+                        ticks: { padding: 10 }
                     }
                 }
             }
@@ -105,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const pieData = isDataEmpty ? [1] : [valOrganik, valNonOrganik, valB3];
         const pieColors = isDataEmpty
             ? ['#e5e7eb']
-            : ['#fb7185', '#60a5fa', '#34d399']; 
+            : ['#fb7185', '#60a5fa', '#34d399'];
 
         new Chart(pieCtx, {
             type: 'doughnut',
