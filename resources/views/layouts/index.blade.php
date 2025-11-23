@@ -20,7 +20,7 @@
         <x-navbar></x-navbar>
     </nav>
     {{-- Content --}}
-    <div class="pt-[64]">
+    <div>
         @yield('content')
     </div>
     {{-- Footer --}}
