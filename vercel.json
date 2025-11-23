@@ -6,8 +6,12 @@
     },
     "routes": [
         {
-            "src": "/(build|css|js|images|storage|svg|favicon.ico/(.*)",
+            "src": "/(build|css|js|images|storage|svg)/(.*)",
             "dest": "/public/$1/$2"
+        },
+        {
+            "src": "/favicon.ico",
+            "dest": "/public/favicon.ico"
         },
         {
             "src": "/(.*)",
@@ -15,9 +19,6 @@
         }
     ],
     "env": {
-        "APP_ENV": "production",
-        "APP_DEBUG": "true",
-        "APP_URL": "https://kenalbersih.vercel.app",
         "APP_CONFIG_CACHE": "/tmp/config.php",
         "APP_EVENTS_CACHE": "/tmp/events.php",
         "APP_PACKAGES_CACHE": "/tmp/packages.php",
