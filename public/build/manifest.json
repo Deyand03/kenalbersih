@@ -1,4 +1,20 @@
 {
+  "_auto-aF82oVy8.js": {
+    "file": "assets/auto-aF82oVy8.js",
+    "name": "auto"
+  },
+  "_index-DV-XWUlF.js": {
+    "file": "assets/index-DV-XWUlF.js",
+    "name": "index"
+  },
+  "resources/css/admin.css": {
+    "file": "assets/admin-u6UskCkG.css",
+    "src": "resources/css/admin.css",
+    "isEntry": true,
+    "names": [
+      "admin.css"
+    ]
+  },
   "resources/css/app.css": {
     "file": "assets/app-BQVpTprA.css",
     "src": "resources/css/app.css",
@@ -7,13 +23,108 @@
       "app.css"
     ]
   },
+  "resources/css/style.css": {
+    "file": "assets/style-C1dr0ap7.css",
+    "src": "resources/css/style.css",
+    "isEntry": true,
+    "names": [
+      "style.css"
+    ]
+  },
   "resources/js/app.js": {
-    "file": "assets/app-DScD-yHh.js",
+    "file": "assets/app-DJPxTr7D.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
+    "imports": [
+      "resources/js/bootstrap.js"
+    ],
     "css": [
       "assets/app-DvB2Xm2x.css"
     ]
+  },
+  "resources/js/bootstrap.js": {
+    "file": "assets/bootstrap-CvgioS1y.js",
+    "name": "bootstrap",
+    "src": "resources/js/bootstrap.js",
+    "isEntry": true
+  },
+  "resources/js/homepage.js": {
+    "file": "assets/homepage-7KU5OpV8.js",
+    "name": "homepage",
+    "src": "resources/js/homepage.js",
+    "isEntry": true
+  },
+  "resources/js/jadwal_admin.js": {
+    "file": "assets/jadwal_admin-Btj5jJA6.js",
+    "name": "jadwal_admin",
+    "src": "resources/js/jadwal_admin.js",
+    "isEntry": true,
+    "imports": [
+      "_index-DV-XWUlF.js"
+    ]
+  },
+  "resources/js/utility/chart_admin.js": {
+    "file": "assets/chart_admin-BGV6P95R.js",
+    "name": "chart_admin",
+    "src": "resources/js/utility/chart_admin.js",
+    "isEntry": true,
+    "imports": [
+      "_auto-aF82oVy8.js"
+    ]
+  },
+  "resources/js/utility/chart_homepage.js": {
+    "file": "assets/chart_homepage-BGWbixAm.js",
+    "name": "chart_homepage",
+    "src": "resources/js/utility/chart_homepage.js",
+    "isEntry": true,
+    "imports": [
+      "_auto-aF82oVy8.js"
+    ]
+  },
+  "resources/js/utility/fetch_tahun.js": {
+    "file": "assets/fetch_tahun-BZwqJMPg.js",
+    "name": "fetch_tahun",
+    "src": "resources/js/utility/fetch_tahun.js",
+    "isEntry": true
+  },
+  "resources/js/utility/iuran_rt.js": {
+    "file": "assets/iuran_rt-l0sNRNKZ.js",
+    "name": "iuran_rt",
+    "src": "resources/js/utility/iuran_rt.js",
+    "isEntry": true
+  },
+  "resources/js/utility/jadwal_angkut.js": {
+    "file": "assets/jadwal_angkut-B7hTEwO8.js",
+    "name": "jadwal_angkut",
+    "src": "resources/js/utility/jadwal_angkut.js",
+    "isEntry": true,
+    "imports": [
+      "_index-DV-XWUlF.js"
+    ]
+  },
+  "resources/js/utility/laporan_pengeluaran.js": {
+    "file": "assets/laporan_pengeluaran-CjB5gkQB.js",
+    "name": "laporan_pengeluaran",
+    "src": "resources/js/utility/laporan_pengeluaran.js",
+    "isEntry": true
+  },
+  "resources/js/utility/navbar_iuran.js": {
+    "file": "assets/navbar_iuran-C9F6N6FE.js",
+    "name": "navbar_iuran",
+    "src": "resources/js/utility/navbar_iuran.js",
+    "isEntry": true
+  },
+  "resources/js/utility/navbar_lapor_sampah.js": {
+    "file": "assets/navbar_lapor_sampah-Du9cUj5M.js",
+    "name": "navbar_lapor_sampah",
+    "src": "resources/js/utility/navbar_lapor_sampah.js",
+    "isEntry": true
+  },
+  "resources/js/utility/profile.js": {
+    "file": "assets/profile-BaY213J0.js",
+    "name": "profile",
+    "src": "resources/js/utility/profile.js",
+    "isEntry": true
   }
 }
