@@ -6,7 +6,7 @@
     },
     "routes": [
         {
-            "src": "/(css|js|images|storage|svg)/(.*)",
+            "src": "/(build|css|js|images|storage|svg|favicon.ico/(.*)",
             "dest": "/public/$1/$2"
         },
         {
@@ -26,6 +26,6 @@
         "VIEW_COMPILED_PATH": "/tmp",
         "CACHE_DRIVER": "array",
         "LOG_CHANNEL": "stderr",
-        "SESSION_DRIVER": "database"
+        "SESSION_DRIVER": "cookie"
     }
 }
