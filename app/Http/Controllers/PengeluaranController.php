@@ -190,7 +190,7 @@ class PengeluaranController extends Controller
 
         $path = null;
         if ($request->hasFile('bukti_foto')) {
-            $path = $request->file('bukti_foto')->store('bukti_pengeluaran', 'public');
+            $path = $request->file('bukti_foto')->store('bukti_pengeluaran', 'cloudinary');
         }
 
         LaporanKeuangan::create([

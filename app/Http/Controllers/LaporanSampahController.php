@@ -41,7 +41,7 @@ class LaporanSampahController extends Controller
         $laporans = LaporanSampah::with('warga')
             ->where('rt_id', $rtId)
             ->orderBy('created_at', 'desc')
-            ->paginate(10); 
+            ->paginate(10);
 
         return view('rt_page.laporan_sampah', compact('laporans'));
     }
@@ -74,7 +74,7 @@ class LaporanSampahController extends Controller
         // Upload Foto
         $path = null;
         if ($request->hasFile('foto_bukti')) {
-            $path = $request->file('foto_bukti')->store('bukti_laporan', 'public');
+            $path = $request->file('foto_bukti')->store('bukti_laporan', 'cloudinary');
         }
 
         // Simpan ke Database

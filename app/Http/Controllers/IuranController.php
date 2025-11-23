@@ -137,7 +137,7 @@ class IuranController extends Controller
 
         $path = null;
         if ($request->hasFile('bukti_pembayaran')) {
-            $path = $request->file('bukti_pembayaran')->store('bukti_iuran', 'public');
+            $path = $request->file('bukti_pembayaran')->store('bukti_iuran', 'cloudinary');
         }
 
         $nominal = $warga->rt->biaya_iuran;
