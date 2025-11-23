@@ -72,7 +72,7 @@
 
                             <!-- Kolom Aksi -->
                             <td class="text-center">
-                                <button onclick="openModal('{{ $laporan->id }}', '{{ $laporan->warga->nama }}', '{{ $laporan->deskripsi }}', '{{ $laporan->alamat }}', '{{ $laporan->status }}', '{{ asset('storage/'.$laporan->foto_bukti) }}')"
+                                <button onclick="openModal('{{ $laporan->id }}', '{{ $laporan->warga->nama }}', '{{ $laporan->deskripsi }}', '{{ $laporan->alamat }}', '{{ $laporan->status }}', '{{ asset($laporan->foto_bukti_url) }}')"
                                     class="btn btn-sm btn-ghost text-purple-600 hover:bg-purple-50 tooltip" data-tip="Lihat Detail">
                                     Lihat Detail
                                 </button>

@@ -76,8 +76,8 @@
                         </td>
                         <td class="font-mono font-bold text-red-500">- Rp {{ number_format($item->jumlah, 0, ',', '.') }}</td>
                         <td>
-                            @if($item->bukti_foto)
-                                <a href="{{ asset('storage/'.$item->bukti_foto) }}" target="_blank" class="btn btn-xs btn-ghost text-blue-500">Lihat Nota</a>
+                            @if($item->bukti_foto_url)
+                                <a href="{{ asset($item->bukti_foto_url) }}" target="_blank" class="btn btn-xs btn-ghost text-blue-500">Lihat Nota</a>
                             @else
                                 <span class="text-xs text-gray-300">-</span>
                             @endif

@@ -131,8 +131,8 @@
                                 <td class="align-top py-4">
                                     <div class="avatar">
                                         <div class="w-16 h-16 rounded-xl ring-1 ring-gray-200">
-                                            <a href="{{ asset('storage/' . $laporan->foto_bukti) }}" target="_blank">
-                                                <img src="{{ asset('storage/' . $laporan->foto_bukti) }}" alt="Bukti"
+                                            <a href="{{ asset($laporan->foto_bukti_url) }}" target="_blank">
+                                                <img src="{{ asset($laporan->foto_bukti_url) }}" alt="Bukti"
                                                     class="object-cover" />
                                             </a>
                                         </div>

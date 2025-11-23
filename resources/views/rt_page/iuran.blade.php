@@ -139,7 +139,7 @@
                                     <td class="text-sm text-gray-500">{{ $iuran->created_at->format('d M Y H:i') }}</td>
                                     <td class="text-center">
                                         <button
-                                            onclick="openVerifyModal({{ json_encode($iuran) }}, '{{ asset('storage/' . $iuran->bukti_pembayaran) }}')"
+                                            onclick="openVerifyModal({{ json_encode($iuran) }}, '{{ asset($iuran->bukti_pembayaran_url) }}')"
                                             class="btn btn-sm btn-outline btn-primary border-[#016B61] text-[#016B61] hover:bg-[#016B61] hover:text-white">
                                             Periksa Bukti
                                         </button>

@@ -313,8 +313,8 @@
                                             - Rp {{ number_format($item->jumlah, 0, ',', '.') }}
                                         </span>
 
-                                        @if ($item->bukti_foto)
-                                            <a href="{{ asset('storage/' . $item->bukti_foto) }}" target="_blank"
+                                        @if ($item->bukti_foto_url)
+                                            <a href="{{ asset($item->bukti_foto_url) }}" target="_blank"
                                                 class="p-2 rounded-xl bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700 transition-all hover:scale-105 hover:shadow-sm"
                                                 title="Lihat Bukti Foto">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
