@@ -33,7 +33,7 @@
                             data-delay="200">
                             Sistem Pengelolaan Sampah RT
                         </h1>
-                        <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-[#828d66] mb-4"
+                        <h2 class="text-xl md:text-2xl lg:text-3xl font-semibold text-(--text-secondary) mb-4"
                             data-animasi="fade-right" data-delay="400">Desa Mendalo Indah</h2>
                         <p class="font-medium text-md md:text-lg text-black/70" data-animasi="fade-right" data-delay="600">
                             Lacak jadwal angkut, laporkan tumpukan sampah, dan pantau iuran warga dalam satu
@@ -46,7 +46,6 @@
                             Lihat Volume Sampah
                         </a>
                     </div>
-                    <div class="mr-auto lg:mx-auto">ASOMASO</div>
                 </div>
             </div>
             <div class="absolute -bottom-px left-0 w-full z-0">

@@ -25,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
     Chart.defaults.font.family = "'Inter', sans-serif";
     Chart.defaults.color = '#64748b'; // Slate-500
 
-    // Palet Warna (Sesuai Dashboard kamu: Organik=Merah, Non=Biru, B3=Hijau)
     const colors = {
         organik: {
             border: '#ef4444', // Red-500

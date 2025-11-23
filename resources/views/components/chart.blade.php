@@ -36,7 +36,7 @@
                     }
                 }
             @endphp
-            <div class="h-fit lg:h-96 aspect-auto bg-white rounded-xl shadow-lg p-4 md:p-6" id="chart-card"
+            <div class="h-80 lg:h-96 aspect-auto bg-white rounded-xl shadow-lg p-4 md:p-6" id="chart-card"
                 data-animasi="zoom-in">
                 <div class="flex justify-between items-center gap-2">
                     <div class="font-semibold text-xl">
@@ -54,12 +54,14 @@
                         </div>
                     </div>
                 </div>
-                <canvas id="line-chart" data-labels="{{ json_encode($chartLabels) }}"
-                    data-organik="{{ json_encode($dataOrganik) }}" data-anorganik="{{ json_encode($dataNonOrganik) }}"
-                    data-b3="{{ json_encode($dataB3) }}">
-                </canvas>
+                <div class="relative w-full h-full">
+                    <canvas id="line-chart" data-labels="{{ json_encode($chartLabels) }}"
+                        data-organik="{{ json_encode($dataOrganik) }}" data-anorganik="{{ json_encode($dataNonOrganik) }}"
+                        data-b3="{{ json_encode($dataB3) }}">
+                    </canvas>
+                </div>
             </div>
-            <div class="h-fit overflow-hidden lg:h-96 aspect-auto bg-white rounded-xl shadow-lg flex p-4 md:p-6"
+            <div class="h-80 overflow-hidden lg:h-96 aspect-auto bg-white rounded-xl shadow-lg flex p-4 md:p-6"
                 id="pie-card" data-animasi="zoom-in" data-delay="200">
                 <canvas id="pie-chart"></canvas>
             </div>
