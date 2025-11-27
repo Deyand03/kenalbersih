@@ -36,7 +36,7 @@ class DataWargaController extends Controller
         $warga = Warga::where('id', $id)->where('rt_id', $rt_id)->firstOrFail();
 
         // Switch Status
-        $newStatus = $warga->status == 'Aktif' ? 'Nonaktif' : 'Aktif';
+        $newStatus = $warga->status == 'Aktif' ? 'Non-aktif' : 'Aktif';
         $warga->update(['status' => $newStatus]);
 
 
