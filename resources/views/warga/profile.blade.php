@@ -21,8 +21,7 @@
         <div
             class="absolute inset-0 opacity-30 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJYdWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjY1IiBudW1PY3RhdmVzPSIzIiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI2EpIi8+PC9zdmc+')] mix-blend-overlay">
         </div>
-        <div
-            class="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-emerald-200/40 to-transparent">
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-emerald-200/40 to-transparent">
         </div>
     </div>
 
@@ -33,18 +32,33 @@
         <div class="flex flex-col md:flex-row items-center justify-between mb-16 gap-8 animate-fade-in-up">
             <!-- Text -->
             <div class="text-center md:text-left space-y-4 max-w-2xl text-white">
-                <div
-                    class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-emerald-50 text-xs font-bold tracking-wider mb-2 shadow-sm">
-                    <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
-                    WARGA AKTIF
-                </div>
-                <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight drop-shadow-lg">
-                    Halo, <span class="text-emerald-200">{{ explode(' ', $warga->nama)[0] }}</span>! 👋
-                </h1>
-                <p class="text-emerald-50 text-lg leading-relaxed opacity-90 max-w-xl mx-auto md:mx-0 font-light">
-                    Selamat datang di pusat kontrol profil Anda. Pantau status keanggotaan dan kelola data diri dengan
-                    mudah.
-                </p>
+                @if (Auth::user()->warga->status == 'Aktif')
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-emerald-50 text-xs font-bold tracking-wider mb-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-emerald-300 animate-pulse"></span>
+                        WARGA AKTIF
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight drop-shadow-lg">
+                        Halo, <span class="text-emerald-200">{{ explode(' ', $warga->nama)[0] }}</span>! 👋
+                    </h1>
+                    <p class="text-emerald-50 text-lg leading-relaxed opacity-90 max-w-xl mx-auto md:mx-0 font-light">
+                        Selamat datang di pusat kontrol profil Anda. Pantau status keanggotaan dan kelola data diri dengan
+                        mudah.
+                    </p>
+                @else
+                    <div
+                        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md border border-white/20 text-emerald-50 text-xs font-bold tracking-wider mb-2 shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-red-300 animate-pulse"></span>
+                        WARGA TIDAK AKTIF
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight drop-shadow-lg">
+                        Halo, <span class="text-red-200">{{ explode(' ', $warga->nama)[0] }}</span>! 👋
+                    </h1>
+                    <p class="text-emerald-50 text-lg leading-relaxed opacity-90 max-w-xl mx-auto md:mx-0 font-light">
+                        Selamat datang di pusat kontrol profil Anda. Pantau status keanggotaan dan kelola data diri dengan
+                        mudah.
+                    </p>
+                @endif
             </div>
 
             <!-- Hero Stats (Hidden on small mobile, Flex on md up) -->
