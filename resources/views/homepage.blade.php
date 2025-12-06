@@ -27,7 +27,7 @@
             style="background-image: url({{ asset('svg/Bg-homepage.svg') }})">
             <div class="relative z-10 h-full">
                 <div
-                    class="flex flex-col md:flex-row pt-20 px-16 max-w-8xl mx-auto items-center min-h-[70vh] pb-32 md:pb-48">
+                    class="flex flex-col md:flex-row pt-8 md:pt-20 px-8 md:px-16 max-w-8xl mx-auto items-center min-h-[70vh] pb-32 md:pb-48">
                     <div class="text-black/80 md:w-1/2 flex flex-col">
                         <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold mb-8 leading-tight" data-animasi="fade-right"
                             data-delay="200">

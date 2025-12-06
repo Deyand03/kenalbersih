@@ -1,4 +1,4 @@
-<div class="navbar fixed bg-transparent px-18 z-50 text-black navbar-custom">
+<div class="navbar fixed bg-transparent md:px-18 z-50 text-black navbar-custom">
     <div class="navbar-start">
         {{-- Tombol Mobile --}}
         <div class="dropdown translate-y-1">
