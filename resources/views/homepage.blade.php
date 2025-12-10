@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="absolute -bottom-px left-0 w-full z-0">
-                <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
+                <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full shadow-2xl">
                     <path
                         d="M0 48C144 48 288 96 432 96C576 96 720 48 864 48C1008 48 1152 96 1296 96C1368 96 1440 48 1440 48V120H0V48Z"
                         fill="#F1FCFF" />
