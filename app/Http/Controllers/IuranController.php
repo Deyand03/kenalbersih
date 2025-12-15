@@ -10,7 +10,8 @@ use Illuminate\Support\Str;
 
 class IuranController extends Controller
 {
-    public function index_warga(){
+    public function index_warga()
+    {
         $user = Auth::user();
 
         // 1. Security Check
@@ -31,7 +32,8 @@ class IuranController extends Controller
 
         return view('warga.iuran', compact('warga', 'rt', 'riwayats'));
     }
-    public function index_rt(){
+    public function index_rt()
+    {
         $rt = Auth::user()->rt;
         $rtId = $rt->id;
 
@@ -95,6 +97,7 @@ class IuranController extends Controller
             'jumlah_pembayaran' => 'required|numeric|min:1000',
             'periode' => 'required|string',
         ]);
+        dd($request->all());
 
         Iuran::create([
             'warga_id' => $request->warga_id,
@@ -126,7 +129,8 @@ class IuranController extends Controller
         return response()->json(['success' => true, 'message' => $message]);
     }
 
-    public function storeWarga(Request $request){
+    public function storeWarga(Request $request)
+    {
         $user = Auth::user();
         $warga = $user->warga;
 
@@ -141,7 +145,6 @@ class IuranController extends Controller
         }
 
         $nominal = $warga->rt->biaya_iuran;
-
         // 3. Simpan Data
         Iuran::create([
             'warga_id' => $warga->id,

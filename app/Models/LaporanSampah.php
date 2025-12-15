@@ -22,7 +22,7 @@ protected $fillable = [
     public function rt(){
         return $this->belongsTo(Rt::class, 'rt_id', 'id');
     }
-    public function getBuktiFotoUrlAttribute()
+    public function getFotoBuktiUrlAttribute()
     {
         // 1. Kalau gak ada foto, return null (atau gambar placeholder)
         if (!$this->foto_bukti) {
