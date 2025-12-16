@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ChatbotController;
 use App\Http\Controllers\DataWargaController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\IuranController;
@@ -72,7 +73,7 @@ Route::middleware(['auth', 'role:rt'])->group(function () {
     });
 });
 
-
+Route::post('/chatbot/ask', [ChatbotController::class, 'chat'])->name('chatbot.ask');
 
 require __DIR__ . '/auth.php';
 
