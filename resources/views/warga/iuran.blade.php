@@ -193,7 +193,7 @@
                                                 </div>
                                             </td>
                                             <td class="text-gray-500 text-xs">
-                                                {{ $iuran->created_at->translatedFormat('d M Y H:i') }}
+                                                {{ $iuran->created_at->translatedFormat('d M Y') }}
                                             </td>
                                         </tr>
                                     @empty

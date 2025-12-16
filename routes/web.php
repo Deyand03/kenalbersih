@@ -72,5 +72,22 @@ Route::middleware(['auth', 'role:rt'])->group(function () {
     });
 });
 
+// Pesan Otomatis
+Route::get('/cron/run-reminder', function (Request $request) {
+
+    if ($request->query('key') !== env('CRON_PASS')) {
+        abort(403, 'Unauthorized');
+    }
+
+    $exitCode = Artisan::call('jadwal:send-reminder');
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Scheduler executed',
+        'output' => Artisan::output(),
+        'exit_code' => $exitCode
+    ]);
+});
+
 require __DIR__ . '/auth.php';
 
