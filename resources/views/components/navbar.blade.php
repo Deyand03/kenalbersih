@@ -1,4 +1,4 @@
-<div class="navbar fixed bg-transparent px-0 md:px-24 z-50 text-black navbar-custom">
+<div class="navbar fixed bg-transparent px-3 md:px-24 z-50 text-black navbar-custom">
     <div class="navbar-start">
         {{-- Tombol Mobile --}}
         <div class="dropdown translate-y-1">
@@ -111,9 +111,14 @@
 
     <div class="navbar-end">
         @guest
+        <div class="flex items-center gap-4">
             <a href="{{ route('login') }}"
-                class="text-navbar translate-y-1 btn bg-(--bg-tertiary) hover:scale-104 active:scale-100 active:bg-(--bg-secondary) hover:shadow-md shadow-none rounded-2xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span
+                class="text-navbar translate-y-1 btn bg-(--bg-tertiary) hover:scale-104 active:scale-100 active:bg-(--bg-secondary) hover:shadow-md shadow-sm rounded-xl transform-gpu transition-all duration-300 ease-in-out will-change-transform"><span
                     class="font-semibold text-white">Login</span></a>
+                <a href="{{ route('register.warga') }}" class="text-navbar translate-y-1 btn hover:scale-104 active:scale-100 hover:shadow-md shadow-sm rounded-xl transform-gpu transition-all duration-300 ease-in-out will-change-transform">
+                    <span class="font-semibold">Daftar</span>
+                </a>
+        </div>
         @endguest
         @auth
             <div class="dropdown dropdown-end">

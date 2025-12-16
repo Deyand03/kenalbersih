@@ -17,12 +17,14 @@ Route::get('/about', [AboutController::class, 'about'])->name('about');
 Route::get('/pengeluaran', [PengeluaranController::class, 'index_warga'])->name('pengeluaran');
 
 Route::middleware(['auth'])->group(function () {
-    // Laporan sampah
-    Route::get('/laporan-sampah', [LaporanSampahController::class, 'index_warga'])->name('laporan_sampah');
-    Route::post('/laporan-sampah/store', [LaporanSampahController::class, 'store'])->name('laporan_sampah.store');
-    // Iuran
-    Route::get('/iuran', [IuranController::class, 'index_warga'])->name('iuran');
-    Route::post('/iuran/store', [IuranController::class, 'storeWarga'])->name('iuran.store');
+    Route::middleware(['warga.active'])->group(function(){
+        // Laporan sampah
+        Route::get('/laporan-sampah', [LaporanSampahController::class, 'index_warga'])->name('laporan_sampah');
+        Route::post('/laporan-sampah/store', [LaporanSampahController::class, 'store'])->name('laporan_sampah.store');
+        // Iuran
+        Route::get('/iuran', [IuranController::class, 'index_warga'])->name('iuran');
+        Route::post('/iuran/store', [IuranController::class, 'storeWarga'])->name('iuran.store');
+    });
     // Profile Warga
     Route::get('/profile', [ProfileController::class, 'index_warga'])->name('profile');
     Route::put('/profile/update', [ProfileController::class, 'update_warga'])->name('profile.update');

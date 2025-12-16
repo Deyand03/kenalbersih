@@ -26,9 +26,14 @@ class DataWargaController extends Controller
 
         // Statistik Ringkas
         $totalWarga = Warga::where('rt_id', $rt_id)->count();
-        $wargaAktif = Warga::where('rt_id', $rt_id)->where('status', 'Aktif')->count();
+        $status = Warga::where('rt_id', $rt_id);
+        $stats = [
+            "wargaAktif" => $status->clone()->where('status', 'Aktif')->count(),
+            "wargaNonaktif" => $status->clone()->where('status', 'Non-aktif')->count(),
+            "wargaPending" => $status->clone()->where('status', 'Pending')->count(),
+        ];
 
-        return view('rt_page.data_warga', compact('wargas', 'totalWarga', 'wargaAktif'));
+        return view('rt_page.data_warga', compact('wargas', 'totalWarga', 'stats'));
     }
     public function toggleStatus($id)
     {

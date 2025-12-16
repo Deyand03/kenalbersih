@@ -8,6 +8,7 @@
     <title>Masuk - KenalBersih</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="icon" href="{{ asset('img/logo.png') }}" type="image/png">
 
     {{-- Fonts --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">

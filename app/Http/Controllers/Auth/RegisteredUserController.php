@@ -90,7 +90,7 @@ class RegisteredUserController extends Controller
      */
     public function storeWarga(Request $request): RedirectResponse
     {
-        // Validasi untuk Warga (sesuai tabel 'wargas' Anda)
+        // Validasi untuk Warga
         $request->validate([
             // Data untuk tabel 'wargas'
             'name' => ['required', 'string', 'max:255'],
@@ -104,7 +104,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        // 1. Buat User (untuk data login, TANPA 'name')
+        // 1. Buat User (untuk data login)
         $user = User::create([
             'email' => $request->email,
             'password' => Hash::make($request->password),
@@ -115,7 +115,7 @@ class RegisteredUserController extends Controller
         $warga = Warga::create([
             'user_id' => $user->id, // Penghubung ke tabel 'users'
             'rt_id' => $request->rt_id, // Penghubung ke tabel 'rts'
-            'nama' => $request->name, // <-- 'name' disimpan di sini
+            'nama' => $request->name,
             'jenis_kelamin' => $request->jenis_kelamin,
             'alamat_rumah' => $request->alamat_rumah,
             'no_hp' => $request->no_hp,
@@ -123,6 +123,6 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
         Auth::login($user);
-        return redirect(route('homepage', absolute: false));
+        return redirect(route('profile', absolute: false))->with('warning', 'Registrasi Berhasil!, Silahkan Menunggu Aktivasi dari RT Anda.');
     }
 }

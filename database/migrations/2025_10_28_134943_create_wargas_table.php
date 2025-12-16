@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan']);
             $table->string('alamat_rumah');
             $table->string('no_hp')->unique();
-            $table->enum('status', ['Aktif', 'Non-aktif'])->default('Aktif');
+            $table->enum('status', ['Aktif', 'Non-aktif', 'Pending'])->default('Pending');
             $table->timestamps();
         });
     }
