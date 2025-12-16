@@ -7,6 +7,7 @@ use App\Models\JadwalAngkut;
 use App\Models\Warga;
 use App\Services\FonnteService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class SendJadwalReminder extends Command
 {
@@ -54,11 +55,10 @@ class SendJadwalReminder extends Command
                 . "Terima kasih atas kerjasamanya menjaga kebersihan lingkungan kita! 🌱\n"
                 . "- Pengurus KenalBersih";
 
-            $target = implode(',', $nomorWarga); // "0812...,0813...,0815..."
+            $target = implode(',', $nomorWarga);
 
             $this->info("Mengirim ke warga RT {$rtId}...");
             $response = FonnteService::send($target, $pesan);
-
             if ($response && isset($response['status']) && $response['status']) {
                 $this->info("Sukses kirim ke RT {$rtId}");
             } else {

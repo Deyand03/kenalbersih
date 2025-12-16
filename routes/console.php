@@ -7,5 +7,5 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 Schedule::command('jadwal:send-reminder')
-    ->dailyAt('06:00')
+    ->daily()
     ->timezone('Asia/Jakarta');
