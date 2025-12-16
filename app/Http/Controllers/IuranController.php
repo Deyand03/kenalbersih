@@ -97,7 +97,6 @@ class IuranController extends Controller
             'jumlah_pembayaran' => 'required|numeric|min:1000',
             'periode' => 'required|string',
         ]);
-        dd($request->all());
 
         Iuran::create([
             'warga_id' => $request->warga_id,

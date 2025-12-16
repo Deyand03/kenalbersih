@@ -274,11 +274,10 @@
 
                 <div class="form-control w-full mb-4">
                     <label class="label"><span class="label-text">Untuk Pembayaran</span></label>
-                    <select name="periode" class="select select-bordered w-full h-12 max-h-12" required>
                         @php
                             $currentMonth = now()->translatedFormat('F Y');
                             $currentYear = now()->translatedFormat('Y');
-                            $year = [
+                            $months = [
                                 'Januari',
                                 'Februari',
                                 'Maret',
@@ -293,15 +292,16 @@
                                 'Desember',
                             ];
                         @endphp
+                    <select name="periode" class="select select-bordered w-full h-12 max-h-12" required>
                         <option value="" disabled selected>-- Pilih Periode --</option>
                         @if (Auth::user()->rt->jenis_iuran == 'Mingguan')
                             @for ($i = 1; $i <= 5; $i++)
                                 <option value="{{ $currentMonth }} - Minggu {{ $i }}">
                                     {{ $currentMonth }} - Minggu {{ $i }}</option>
                             @endfor
-                        @else
+                        @elseif(Auth::user()->rt->jenis_iuran == 'Bulanan')
                             @for ($i = 0; $i < 12; $i++)
-                                <option value="{{ `$year[$i] $currentYear` }}">{{ $year[$i] }}</option>
+                                <option value="{{ $months[$i] }} {{ $currentYear }}">{{ $months[$i] }}</option>
                             @endfor
                         @endif
                     </select>
