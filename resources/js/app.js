@@ -2,22 +2,13 @@
 import 'aos/dist/aos.css';
 import './bootstrap';
 import Alpine from 'alpinejs';
+import { inject } from '@vercel/analytics';
+
+inject();
 
 window.Alpine = Alpine;
 
 Alpine.start();
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     Aos.init({
-//         once: false,
-//         duration: 1000
-//     });
-// })
-// if (import.meta.hot) {
-//     import.meta.hot.on('vite:afterUpdate', () => {
-//         Aos.refresh();
-//     });
-// }
 
 document.addEventListener('DOMContentLoaded', () => {
     const ATRIBUT_NAMA = 'data-animasi';
