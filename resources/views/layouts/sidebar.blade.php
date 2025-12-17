@@ -265,7 +265,8 @@
 
                     {{-- 5. Profile --}}
                     <li>
-                        <a href="{{ route('rt.profile') }}" class="hover:text-[#016B61]">
+                        <a href="{{ route('rt.profile') }}"
+                            class="{{ request()->routeIs('rt.profile') ? 'active' : 'hover:text-[#016B61]' }}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
                                 fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                 <path

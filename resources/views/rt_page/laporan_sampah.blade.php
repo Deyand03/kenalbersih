@@ -179,7 +179,7 @@
             const noFotoEl = document.getElementById('modal-no-foto');
 
             // Handle Foto (cegah broken image kalau null)
-            if (fotoUrl && !fotoUrl.includes('storage//')) { // Basic validation check
+            if (fotoUrl && !fotoUrl.includes('storage//')) { 
                 imgEl.src = fotoUrl;
                 imgEl.classList.remove('hidden');
                 linkEl.classList.remove('hidden');
