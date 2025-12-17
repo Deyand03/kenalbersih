@@ -33,7 +33,7 @@
                 <div class="flex items-center gap-2">
                     <img src="{{ asset('img/logo.png') }}" class="w-8 rounded-full bg-white/20" alt="">
                     <div>
-                        <h3 class="font-bold text-sm">Tanya KenalBersih</h3>
+                        <h3 class="font-bold text-sm">Tanya KenalBot</h3>
                         <p class="text-[10px] opacity-80">Powered by Gemini AI</p>
                     </div>
                 </div>
@@ -50,14 +50,17 @@
                     </div>
                 </div>
 
-                <!-- Loop Messages -->
                 <template x-for="msg in messages">
                     <div :class="msg.sender === 'user' ? 'flex justify-end' : 'flex justify-start'">
                         <div :class="msg.sender === 'user' ?
                             'bg-[#016B61] text-white rounded-2xl rounded-tr-none' :
                             'bg-white border border-slate-200 text-slate-700 rounded-2xl rounded-tl-none'"
                             class="py-2 px-3 text-sm shadow-sm max-w-[85%]">
-                            <span x-text="msg.text"></span>
+
+                            <span x-show="msg.sender === 'bot'" x-html="msg.text"
+                                class="prose prose-sm max-w-none"></span>
+                            <span x-show="msg.sender === 'user'" x-text="msg.text"></span>
+
                         </div>
                     </div>
                 </template>
