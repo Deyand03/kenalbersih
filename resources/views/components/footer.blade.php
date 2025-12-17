@@ -94,10 +94,10 @@
             <div>
                 <h3 class="font-bold text-lg mb-4 text-emerald-50">Tautan Cepat</h3>
                 <ul class="space-y-3 text-sm text-emerald-100/80">
-                    <li><a href="#" class="hover:text-white hover:pl-2 transition-all duration-300 block">Beranda</a></li>
-                    <li><a href="#" class="hover:text-white hover:pl-2 transition-all duration-300 block">Tentang Kami</a></li>
-                    <li><a href="#" class="hover:text-white hover:pl-2 transition-all duration-300 block">Transparansi</a></li>
-                    <li><a href="#" class="hover:text-white hover:pl-2 transition-all duration-300 block">Login Pengurus</a></li>
+                    <li><a href="{{ route('homepage') }}" class="hover:text-white hover:pl-2 transition-all duration-300 block">Beranda</a></li>
+                    <li><a href="{{ route('about') }}" class="hover:text-white hover:pl-2 transition-all duration-300 block">Tentang Kami</a></li>
+                    <li><a href="{{ route('pengeluaran') }}" class="hover:text-white hover:pl-2 transition-all duration-300 block">Transparansi</a></li>
+                    <li><a href="{{ route('login') }}" class="hover:text-white hover:pl-2 transition-all duration-300 block">Login Pengurus</a></li>
                 </ul>
             </div>
 
