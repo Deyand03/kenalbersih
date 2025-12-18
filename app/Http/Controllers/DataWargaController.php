@@ -8,7 +8,8 @@ use Illuminate\Support\Facades\Auth;
 
 class DataWargaController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $rt_id = Auth::user()->rt->id;
 
         $query = Warga::where('rt_id', $rt_id)->with('user'); // Eager load user untuk ambil email
@@ -41,6 +42,13 @@ class DataWargaController extends Controller
         $warga = Warga::where('id', $id)->where('rt_id', $rt_id)->firstOrFail();
 
         // Switch Status
+        if ($warga->status == 'Pending') {
+            $newStatus = $warga->status == 'Pending' ? 'Aktif' : 'Aktif';
+            $warga->update(['status' => $newStatus]);
+            $message = $newStatus == 'Pending' ? 'Warga Disetujui' : 'Warga Disetujui';
+            return redirect()->back()->with('success', $message);
+        }
+
         $newStatus = $warga->status == 'Aktif' ? 'Non-aktif' : 'Aktif';
         $warga->update(['status' => $newStatus]);
 
