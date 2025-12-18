@@ -32,9 +32,9 @@ class ChatbotController extends Controller
         $memberLinks = [];
         if ($user && $user->role === 'warga' && $user->warga && $user->warga->status === 'Aktif') {
             $memberLinks = [
-                'lapor_sampah' => '<a href="' . route('laporan_sampah') . '" class="text-blue-600 underline font-bold hover:text-blue-800" target="_blank">Form Lapor Sampah</a>',
-                'bayar_iuran' => '<a href="' . route('iuran') . '" class="text-blue-600 underline font-bold hover:text-blue-800" target="_blank">Bayar Iuran</a>',
-                'profil' => '<a href="' . route('profile') . '" class="text-blue-600 underline font-bold hover:text-blue-800" target="_blank">Profil Saya</a>',
+                'lapor_sampah' => '<a href="' . route('laporan_sampah') . '" class="text-blue-600 underline font-bold hover:text-blue-800">Form Lapor Sampah</a>',
+                'bayar_iuran' => '<a href="' . route('iuran') . '" class="text-blue-600 underline font-bold hover:text-blue-800">Bayar Iuran</a>',
+                'profil' => '<a href="' . route('profile') . '" class="text-blue-600 underline font-bold hover:text-blue-800">Profil Saya</a>',
             ];
         }
 
